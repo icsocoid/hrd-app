@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_root"
+    android:background="@color/alabaster_fafafa"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_absensi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="@+id/layout_root"
+            app:layout_constraintStart_toStartOf="@+id/layout_root" />
+
+        <ImageView
+            android:id="@+id/image_empty_state"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            app:layout_constraintBottom_toTopOf="@+id/text_empty_state"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:srcCompat="@mipmap/ic_empty"/>
+        <TextView
+            android:textColor="@color/dusty_gray_9b9b9b"
+            android:id="@+id/text_empty_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_padding_margin_xx"
+            android:text="@string/absensi_kosong"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_empty_state"/>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_empty_state"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="image_empty_state,text_empty_state"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

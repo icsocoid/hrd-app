@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/main_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/manage_list_product_main_platform_fragment"
+        android:background="@drawable/border_layout_left_right_back_white_fa"
+        android:focusableInTouchMode="true"
+        android:descendantFocusability="beforeDescendants"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/general_outer_layout_margin_left_right"
+        android:layout_marginRight="@dimen/general_outer_layout_margin_left_right">
+        <FrameLayout
+            android:id="@+id/frame_progress_indicator"
+            android:padding="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ProgressBar
+                android:visibility="gone"
+                android:id="@+id/manage_product_list_progress_bar_refresh"
+                android:paddingTop="0dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-7dp"
+                android:indeterminate="true"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+        </FrameLayout>
+        <LinearLayout
+            android:id="@+id/filter_tanggal_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19.7dp"
+            android:layout_marginRight="19.7dp"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frame_progress_indicator">
+
+            <com.harrywhewell.scrolldatepicker.DayScrollDatePicker
+                android:id="@+id/day_date_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f9f9f9" />
+
+
+        </LinearLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filter_tanggal_layout"
+            app:layout_constraintVertical_bias="0">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:orientation="vertical"
+                    android:id="@+id/absensi_list_recycler"
+                    android:scrollbars="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/manage_absensi_list_platform_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/manage_absensi_list_image_empty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_empty"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.3" />
+                    <TextView
+                        android:textSize="14sp"
+                        android:textColor="@color/dusty_gray_9b9b9b"
+                        android:id="@+id/manage_absensi_list_text_caption_empty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/absensi_kosong"
+                        android:textAlignment="center"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/manage_absensi_list_image_empty"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

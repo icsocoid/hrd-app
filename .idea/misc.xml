@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/bg_badge.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/bg_circle_blue.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/button_pressed.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/circle.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/custom_spinner.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/fab_label_background.xml" value="0.105" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_absen.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_account1.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_add_black_24dp.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_arrow_right.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_bell.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_book1.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_filter.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_help.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_info.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_kawn_text.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_lock.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_notif.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_order_list.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_order_white.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_outline_remove.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_outline_remove_24.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_person.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/ic_save.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/drawable/orange_circle.xml" value="0.146" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/account_profile.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/activity_account.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/activity_login.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/activity_main.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/activity_main_mail.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/activity_profile.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/activity_splash.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/dialog_filter.xml" value="0.1331521739130435" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/element_email.xml" value="0.16666666666666666" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/element_floating_action_menu.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_add_izin.xml" value="0.16666666666666666" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_admin_izin.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_calender.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_camera.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_detail.xml" value="0.3333333333333333" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_email_main.xml" value="0.18333333333333332" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_folder.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_history.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_inbox.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_izin.xml" value="0.1331521739130435" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_izin_detail.xml" value="0.1331521739130435" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_karyawan.xml" value="0.1331521739130435" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_menu_admin.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_new_add_izin.xml" value="0.22" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_new_home.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_new_rekap_absensi.xml" value="0.1331521739130435" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_notifikasi.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_pengajuan_absensi.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_pengajuan_absensi_detail.xml" value="0.16666666666666666" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_rekap_absensi.xml" value="0.1331521739130435" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_smartbox.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_terlambat.xml" value="0.22" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_terlambat_masuk.xml" value="0.22" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_terlambat_pulang.xml" value="0.1331521739130435" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/fragment_verification.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/item_loading.xml" value="0.1331521739130435" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/list_izin.xml" value="0.1331521739130435" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/list_terlambat.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/login_email_fragment.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/reject_dialog.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/row_absensi.xml" value="0.22" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/row_admin_izin.xml" value="0.22" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/row_izin.xml" value="0.16666666666666666" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/row_jenis_izin.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/row_jenis_terlambat.xml" value="0.21532846715328466" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/row_karyawan.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/row_menu.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/row_notifikasi.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/row_office.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/row_partner_pengajuan.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/row_pengajuan_absensi.xml" value="0.16666666666666666" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/row_rekap.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/sheet_izin_list.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/sheet_pengajuan_list.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/tool_bar.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/layout/toolbar.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/menu/compose_menu.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/menu/fragment_folder_menu.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/menu/fragment_inbox_menu.xml" value="0.184375" />
+        <entry key="..\:/aplikasi-hrd/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.146" />
+        <entry key="app/src/main/res/drawable/ic_arrow_right.xml" value="0.215625" />
+        <entry key="app/src/main/res/drawable/ic_help.xml" value="0.215625" />
+        <entry key="app/src/main/res/drawable/ic_home.xml" value="0.215625" />
+        <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.215625" />
+        <entry key="app/src/main/res/drawable/ic_news.xml" value="0.215625" />
+        <entry key="app/src/main/res/drawable/ic_person.xml" value="0.215625" />
+        <entry key="app/src/main/res/drawable/ic_swap_vert.xml" value="0.215625" />
+        <entry key="app/src/main/res/drawable/ic_sync.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/account_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.17119565217391305" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.12817028985507245" />
+        <entry key="app/src/main/res/layout/fragment_new_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_qrcode.xml" value="0.1403985507246377" />
+        <entry key="app/src/main/res/layout/fragment_verification.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/nav_view.xml" value="0.12817028985507245" />
+        <entry key="app/src/main/res/layout/row_office.xml" value="0.12817028985507245" />
+        <entry key="app/src/main/res/layout/row_rekap.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.12817028985507245" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

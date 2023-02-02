@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="80dp">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rectangle">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/clock_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="14:53:08"
+                        android:textColor="@color/lochmara_0288d1"
+                        android:textSize="23dp" />
+
+                    <TextView
+                        android:id="@+id/tanggal_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kamis, 15 Desember 2020"
+                        android:textSize="13dp"
+                        android:textColor="@color/subTextColor"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.7dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="#cccdce"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:text="Hadir"
+                            android:background="@color/sky_blue"
+                            android:textColor="@color/white_solid_ffffff"
+                            android:textSize="15dp"/>
+
+                        <TextView
+                            android:id="@+id/hadir_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="24dp"
+                            android:layout_marginTop="11dp"
+                            android:textColor="@color/sky_blue"/>
+
+                        <TextView
+                            android:id="@+id/status_masuk_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Orang"
+                            android:textSize="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/subTextColor"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:text="Sakit"
+                            android:background="@color/colorOrange"
+                            android:textColor="@color/white_solid_ffffff"
+                            android:textSize="15dp"/>
+
+                        <TextView
+                            android:id="@+id/sakit_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="24dp"
+                            android:layout_marginTop="11dp"
+                            android:textColor="@color/colorOrange"/>
+                        <TextView
+                            android:id="@+id/status_pulang_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Orang"
+                            android:textSize="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/subTextColor"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:text="Izin"
+                            android:background="@color/orange"
+                            android:textColor="@color/white_solid_ffffff"
+                            android:textSize="15dp"/>
+
+                        <TextView
+                            android:id="@+id/ijin_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="24dp"
+                            android:layout_marginTop="11dp"
+                            android:textColor="@color/orange"/>
+                        <TextView
+                            android:id="@+id/ijin_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Orang"
+                            android:textSize="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/subTextColor"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:text="Cuti"
+                            android:background="@color/green"
+                            android:textColor="@color/white_solid_ffffff"
+                            android:textSize="15dp"/>
+
+                        <TextView
+                            android:id="@+id/cuti_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="24dp"
+                            android:layout_marginTop="11dp"
+                            android:textColor="@color/green"/>
+                        <TextView
+                            android:id="@+id/cuti_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Orang"
+                            android:textSize="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/subTextColor"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:text="Alpha"
+                            android:background="@color/active_color"
+                            android:textColor="@color/white_solid_ffffff"
+                            android:textSize="15dp"/>
+
+                        <TextView
+                            android:id="@+id/alpha_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="24dp"
+                            android:layout_marginTop="11dp"
+                            android:textColor="@color/active_color"/>
+                        <TextView
+                            android:id="@+id/alpha_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Orang"
+                            android:textSize="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/subTextColor"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/karyawan_btn"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_employee"/>
+
+
+                    <TextView
+                        android:id="@+id/karyawan_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/txt_color"
+                        android:textSize="12sp"
+                        android:text="Karyawan"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="3dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/absen_btn"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_absen"/>
+
+
+                    <TextView
+                        android:id="@+id/absensi_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/txt_color"
+                        android:textSize="12sp"
+                        android:text="Absensi"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="3dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/request_btn"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_request"/>
+
+
+                    <TextView
+                        android:id="@+id/izin_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/txt_color"
+                        android:textSize="12sp"
+                        android:text="Izin"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="3dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/kalender_btn"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_calender"/>
+
+
+                    <TextView
+                        android:id="@+id/kalender_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/txt_color"
+                        android:textSize="12sp"
+                        android:text="Kalender Izin"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="3dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/news_btn"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_news"/>
+
+
+                    <TextView
+                        android:id="@+id/pengumuan_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/txt_color"
+                        android:textSize="12sp"
+                        android:text="Pengumuman"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="3dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/account_btn"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_account"/>
+
+
+                    <TextView
+                        android:id="@+id/account_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/txt_color"
+                        android:textSize="12sp"
+                        android:text="Account"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="3dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/kantor_btn"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_office"/>
+
+
+                    <TextView
+                        android:id="@+id/kantor_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/txt_color"
+                        android:textSize="12sp"
+                        android:text="Lokasi"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="3dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

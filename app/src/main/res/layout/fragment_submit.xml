@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="60dp"
+    >
+
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/avatar" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/picture_btn"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="Ambil Foto"
+            android:textSize="11sp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="7.5dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:background="@drawable/grey_rect"/>
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="7.5dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Submit"
+            android:textSize="11sp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:background="@drawable/red_rect"/>
+    </LinearLayout>
+
+</RelativeLayout>

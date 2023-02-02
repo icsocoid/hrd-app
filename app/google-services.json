@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "536510239453",
+    "firebase_url": "https://pojectabsen.firebaseio.com",
+    "project_id": "pojectabsen",
+    "storage_bucket": "pojectabsen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536510239453:android:152e1e8ce2853e1fed0134",
+        "android_client_info": {
+          "package_name": "com.sia.als"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536510239453-52lolhqs4tb91fu216p00t8ugkdikfek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNbik3gZ9ycfpX2Evf5DAh4Hcqjzdkp68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536510239453-52lolhqs4tb91fu216p00t8ugkdikfek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

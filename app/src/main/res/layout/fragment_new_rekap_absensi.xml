@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="75dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <cz.kinst.jakub.view.StatefulLayout
+        android:id="@+id/stateful_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/manage_list_product_main_platform_fragment"
+            android:background="@drawable/border_layout_left_right_back_white_fa"
+            android:focusableInTouchMode="true"
+            android:descendantFocusability="beforeDescendants"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/general_outer_layout_margin_left_right"
+            android:layout_marginRight="@dimen/general_outer_layout_margin_left_right">
+            <FrameLayout
+                android:id="@+id/frame_progress_indicator"
+                android:padding="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/manage_product_list_progress_bar_refresh"
+                    android:paddingTop="0dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-7dp"
+                    android:indeterminate="true"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+            </FrameLayout>
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:id="@+id/filter_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/filter_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
+                        app:cardBackgroundColor="@android:color/white"
+                        app:cardElevation="@dimen/card_elevation"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/main_padding_smaller"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:id="@+id/layoutJournalChooseDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.5"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/date_layout_padding">
+
+                                <ImageView
+                                    android:layout_width="@dimen/ic_filter_mini_size"
+                                    android:layout_height="@dimen/ic_filter_mini_size"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginRight="@dimen/standard_marginRight"
+                                    android:src="@drawable/ic_calendar_fil" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="9"
+                                    android:orientation="vertical"
+                                    android:visibility="visible">
+
+                                    <TextView
+                                        android:id="@+id/lblDateTextJournal"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:maxLines="1"
+                                        android:text="All Time"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/font_size_small" />
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:id="@+id/img_choose_date"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:clickable="true"
+                                    android:src="@drawable/ic_arrow_down_thin" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/filter_card">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/absensi_list_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </cz.kinst.jakub.view.StatefulLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

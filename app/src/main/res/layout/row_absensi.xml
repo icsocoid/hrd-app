@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/retangle"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_place_masuk"/>
+
+            <LinearLayout
+                android:id="@+id/masuk"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/departure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffcc00"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/absen_masuk"/>
+
+
+                <TextView
+                    android:id="@+id/jam_masuk_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="07:00"
+                    android:textSize="16dp"
+                    android:textColor="#2d2d2d"
+                    android:layout_marginTop="3dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/status_masuk_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textColor="#b2b2b2"
+                    android:text="Ontime" />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_place_keluar"/>
+
+            <LinearLayout
+                android:id="@+id/pulang"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/departure1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffcc00"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/absen_pulang"/>
+
+
+                <TextView
+                    android:id="@+id/jam_pulang_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16:30"
+                    android:textSize="16dp"
+                    android:textColor="#2d2d2d"
+                    android:layout_marginTop="3dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/status_pulang_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textColor="#b2b2b2"
+                    android:text="Ontime" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#E3E3E3"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/clock"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_clock"/>
+
+            <TextView
+                android:id="@+id/time_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="#b2b2b2"
+                android:layout_gravity="center"
+
+                android:text="Kamis, 12 Januari 2020"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

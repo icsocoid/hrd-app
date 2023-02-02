@@ -1,0 +1,296 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_marginBottom="80dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview_form_product"
+        android:background="@drawable/border_layout_left_right_back_white_fa"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginStart="@dimen/general_outer_layout_margin_left_right"
+        android:layout_marginEnd="@dimen/general_outer_layout_margin_left_right"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:id="@+id/share_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_solid_ffffff"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20.3dp"
+                    android:text="Detail Pengajuan ABSENSI"
+                    android:letterSpacing="0.0425"
+                    android:textColor="@color/black"
+                    android:textSize="16.7sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12.8dp"
+                    android:background="@color/graydark" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ID Pengajuan : "
+                        android:textColor="@color/graydark"
+                        android:textSize="12.7sp" />
+
+                    <TextView
+                        android:id="@+id/pengajuan_id_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="0001"
+                        android:textColor="@color/blue"
+                        android:textSize="12.7sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15.5dp"
+                    android:background="@color/graylight" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tanggal Pengajuan :"
+                        android:textColor="@color/graydark"
+                        android:textSize="12.7sp" />
+
+                    <TextView
+                        android:id="@+id/tanggal_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="10 April 2020"
+                        android:textColor="@color/blacklight"
+                        android:textSize="12.7sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15.5dp"
+                    android:background="@color/graylight" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jenis Pengajuan :"
+                        android:textColor="@color/graydark"
+                        android:textSize="12.7sp" />
+
+                    <TextView
+                        android:id="@+id/jenis_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="Tidak Absen Masuk"
+                        android:textColor="@color/blacklight"
+                        android:textSize="12.7sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15.5dp"
+                    android:background="@color/graylight" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tgl Absensi :"
+                        android:textColor="@color/graydark"
+                        android:textSize="12.7sp" />
+
+                    <TextView
+                        android:id="@+id/tanggal_absensi_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="20 April 2020"
+                        android:textColor="@color/blacklight"
+                        android:textSize="12.7sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15.5dp"
+                    android:background="@color/graylight" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Alasan Tidak Absensi :"
+                        android:textColor="@color/graydark"
+                        android:textSize="12.7sp" />
+
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/alasan_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Lupa absen karena hp ketinggalan"
+                    android:textColor="@color/blacklight"
+                    android:textSize="12.7sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15.5dp"
+                    android:background="@color/graylight" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status Pengajuan :"
+                        android:textColor="@color/graydark"
+                        android:textSize="12.7sp" />
+
+                    <TextView
+                        android:id="@+id/status_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="Pending"
+                        android:textColor="@color/blacklight"
+                        android:textSize="12.7sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15.5dp"
+                    android:background="@color/graylight" />
+
+                <LinearLayout
+                    android:id="@+id/lay_ditolak"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Alasan Ditolak :"
+                        android:textColor="@color/active_color"
+                        android:textSize="12.7sp" />
+
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/alasan_tolak_txt"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="masih ada kerjaan"
+                    android:textColor="@color/blacklight"
+                    android:textSize="12.7sp" />
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_share"
+        android:visibility="gone"
+        android:layout_width="@dimen/default_icon_size_xxx"
+        android:layout_height="@dimen/default_icon_size_xxx"
+        android:layout_margin="@dimen/default_padding_margin_xh"
+        app:layout_anchor="@+id/scrollview_form_product"
+        app:layout_anchorGravity="bottom|right"
+        app:srcCompat="@drawable/ic_share"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="160dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="16dp"
+        android:visibility="invisible"
+        app:backgroundTint="@color/active_color"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_reject"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="90dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="16dp"
+        android:visibility="invisible"
+        app:elevation="6dp"
+        app:backgroundTint="@color/green"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_done" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:elevation="6dp"
+        app:backgroundTint="@color/colorAccent"
+        app:pressedTranslationZ="12dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

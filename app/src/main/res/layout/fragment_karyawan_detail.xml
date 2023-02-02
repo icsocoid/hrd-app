@@ -1,0 +1,62 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_profile_koor"
+    android:paddingBottom="80dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/profile">
+
+    </include>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="210dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="16dp"
+        android:visibility="invisible"
+        app:backgroundTint="@color/active_color"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_reject"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="150dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="16dp"
+        android:visibility="invisible"
+        app:backgroundTint="@color/sky_blue"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_restore_black_24dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="90dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="16dp"
+        android:visibility="invisible"
+        app:elevation="6dp"
+        app:backgroundTint="@color/green"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_done" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:elevation="6dp"
+        app:backgroundTint="@color/colorAccent"
+        app:pressedTranslationZ="12dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

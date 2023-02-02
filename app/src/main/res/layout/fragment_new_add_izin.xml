@@ -1,0 +1,304 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:background="@drawable/border_layout_left_right_back_white_fa"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview_form_product"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginStart="@dimen/general_outer_layout_margin_left_right"
+        android:layout_marginEnd="@dimen/general_outer_layout_margin_left_right"
+        android:layout_marginBottom="60dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/add_product_constraint"
+            android:padding="@dimen/default_padding_margin_large"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_variant_product_form"
+                android:background="@drawable/custom_border_white_bg"
+                android:clipToPadding="false"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_padding_margin_large"
+                app:layout_constraintEnd_toEndOf="@+id/add_product_constraint"
+                app:layout_constraintStart_toStartOf="@+id/add_product_constraint"
+                app:layout_constraintTop_toTopOf="@+id/add_product_constraint">
+                <TextView
+                    android:textSize="14sp"
+                    android:textColor="@color/dove_gray_636363"
+                    android:id="@+id/text_title_product_variant"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Detail Izin"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    app:layout_constraintEnd_toEndOf="@+id/constraint_variant_product_form"
+                    app:layout_constraintStart_toStartOf="@+id/constraint_variant_product_form"
+                    app:layout_constraintTop_toTopOf="@+id/constraint_variant_product_form"/>
+                <View
+                    android:id="@+id/view_divider_variant_form"
+                    android:background="@color/alto_d6d6d6"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_title_product_variant"
+                    app:layout_constraintStart_toStartOf="@+id/text_title_product_variant"
+                    app:layout_constraintTop_toBottomOf="@+id/text_title_product_variant"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="19.7dp"
+                    android:layout_marginRight="19.7dp"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="@+id/text_title_product_variant"
+                    app:layout_constraintStart_toStartOf="@+id/text_title_product_variant"
+                    app:layout_constraintTop_toBottomOf="@+id/view_divider_variant_form">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16.7dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="14.7dp"
+                            android:layout_weight="1"
+                            android:text="Tanggal Awal"
+                            android:textColor="@color/graydark"
+                            android:textSize="12.5sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="28.7dp"
+                            android:text="Tanggal Akhir"
+                            android:textColor="@color/graydark"
+                            android:textSize="12.5sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/rect_gray_border"
+                        android:orientation="horizontal"
+                        android:padding="13dp">
+
+                        <LinearLayout
+                            android:id="@+id/calender1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/today1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3.5dp"
+                                android:text="06/04/2020"
+                                android:textColor="@color/text_medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="16.5dp"
+                            android:layout_height="16.5dp"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/smallcalendar" />
+
+                        <LinearLayout
+                            android:id="@+id/calender2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="06/04/2020"
+                                android:textColor="@color/text_medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16.7dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="14.7dp"
+                            android:layout_weight="1"
+                            android:text="Jenis Izin"
+                            android:textColor="@color/graydark"
+                            android:textSize="12.5sp" />
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp">
+                            <EditText
+                                android:textSize="14sp"
+                                android:textColor="@color/black"
+                                android:id="@+id/pilihan_izin_txt"
+                                android:paddingLeft="0dp"
+                                android:paddingRight="0dp"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:enabled="false"
+                                android:clickable="true"
+                                android:hint=""
+                                android:lines="4"
+                                android:inputType="text"
+                                android:layout_gravity="left"
+                                android:backgroundTint="@color/grey_light"/>
+                            <ImageButton
+                                android:id="@+id/pilihan_izin_btn"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.2"
+                                android:layout_gravity="right"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_menu"
+                                android:layout_marginStart="8dp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14.7dp"
+                        android:layout_marginTop="16.7dp"
+                        android:text="Keterangan"
+                        android:textColor="@color/graydark"
+                        android:textSize="12.5sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6.7dp"
+                        android:background="@drawable/rect_gray_border"
+                        android:orientation="horizontal"
+                        android:padding="13dp">
+
+
+                        <EditText
+                            android:id="@+id/keterangan_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@color/transferent"
+                            android:inputType="text|textMultiLine"
+                            android:layout_weight="1"
+                            android:textColor="@color/text_medium"
+                            android:textSize="13.3sp" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_form_product"
+                android:background="@drawable/custom_border_white_bg"
+                android:padding="@dimen/default_padding_margin_large"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_padding_margin_large"
+                app:layout_constraintEnd_toEndOf="@+id/constraint_variant_product_form"
+                app:layout_constraintStart_toStartOf="@+id/constraint_variant_product_form"
+                app:layout_constraintTop_toBottomOf="@+id/constraint_variant_product_form">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imageview_product_picture"
+                    android:background="@drawable/custom_imageview_placeholder_rounded"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:layout_width="122dp"
+                    android:layout_height="92dp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="@dimen/default_padding_margin_large"
+                    app:layout_constraintStart_toStartOf="@+id/constraint_form_product"
+                    app:layout_constraintTop_toTopOf="@+id/constraint_form_product"
+                    app:riv_border_color="@color/alto_dddddd"
+                    app:riv_border_width="2dp"
+                    app:riv_corner_radius="5dp"
+                    style="?attr/selectableItemBackground"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_add_picture_placeholder"
+                    android:background="@drawable/custom_border_white_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageview_product_picture"
+                    app:layout_constraintEnd_toEndOf="@+id/imageview_product_picture"
+                    app:layout_constraintStart_toStartOf="@+id/imageview_product_picture"
+                    app:layout_constraintTop_toTopOf="@+id/imageview_product_picture">
+                    <ImageView
+                        android:id="@+id/imageview_add_picture_placeholder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/constraint_add_picture_placeholder"
+                        app:layout_constraintEnd_toEndOf="@+id/constraint_add_picture_placeholder"
+                        app:layout_constraintStart_toStartOf="@+id/constraint_add_picture_placeholder"
+                        app:layout_constraintTop_toTopOf="@+id/constraint_add_picture_placeholder"
+                        app:srcCompat="@drawable/ic_camera"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/imageview_change_picture_placeholder"
+                    android:visibility="gone"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="@dimen/default_padding_margin"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageview_product_picture"
+                    app:layout_constraintEnd_toEndOf="@+id/imageview_product_picture"
+                    app:srcCompat="@drawable/ic_camera_rounded"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+    <FrameLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lay_bottom"
+        app:layout_behavior="@string/bottom_sheet_behavior" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

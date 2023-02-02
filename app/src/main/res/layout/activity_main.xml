@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:elevation="0dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/toolbar_constraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageButton
+                        android:id="@+id/button_back"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/toolbar_constraint"
+                        app:layout_constraintLeft_toLeftOf="@+id/toolbar_constraint"
+                        app:layout_constraintTop_toTopOf="@+id/toolbar_constraint"
+                        style="@style/StyleActionBarButtonBack"/>
+                    <TextView
+                        android:id="@+id/text_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="0dp"
+                        android:text="@string/nav_home"
+                        app:layout_constraintBottom_toBottomOf="@+id/toolbar_constraint"
+                        app:layout_constraintHorizontal_bias="@+id/toolbar_constraint"
+                        app:layout_constraintLeft_toRightOf="@+id/button_back"
+                        app:layout_constraintRight_toLeftOf="@+id/button_general"
+                        app:layout_constraintTop_toTopOf="@+id/toolbar_constraint"
+                        style="@style/StyleActionBarTitle"/>
+
+                    <Button
+                        android:id="@+id/button_general"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="16dp"
+                        android:minHeight="16dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:layout_marginEnd="12dp"
+                        android:gravity="center"
+                        android:text=""
+                        app:layout_constraintBottom_toBottomOf="@+id/toolbar_constraint"
+                        app:layout_constraintRight_toRightOf="@+id/toolbar_constraint"
+                        app:layout_constraintTop_toTopOf="@+id/toolbar_constraint" />
+
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+        <FrameLayout
+            android:id="@+id/m_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/tab_home"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:padding="@dimen/spacing_smlarge"
+                    app:tint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_home" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/tab_history"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:padding="@dimen/spacing_smlarge"
+                    app:tint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_statistics" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="2" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/tab_absen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:tint="@android:color/white"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:elevation="2dp"
+                    app:fabSize="mini"
+                    app:rippleColor="@android:color/white"
+                    app:srcCompat="@drawable/ic_add" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="2" />
+
+                <ImageView
+                    android:id="@+id/tab_izin"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:padding="@dimen/spacing_smlarge"
+                    app:tint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_book1" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/tab_account"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:padding="@dimen/spacing_smlarge"
+                    app:tint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_account1" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

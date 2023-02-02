@@ -1,0 +1,175 @@
+<resources>
+    <string name="app_name">ALS</string>
+    <string name="nav_home">Home</string>
+    <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="hint_email">Masukkan Email</string>
+    <string name="hint_password">Masukkan Kata Sandi Baru</string>
+    <string name="lbl_sign_in">Masuk</string>
+    <string name="forgot_password_instruction">Lupa kata sandi?</string>
+    <string name="login_register_instruction">Belum punya akun? Daftar di sini</string>
+    <string name="t_order_summary">Ringkasan Order</string>
+    <string name="h_product_search">Pencarian berdasarkan nama produk</string>
+    <string name="la_search"></string>
+    <string name="connection_time_out" translatable="false">Connection Time out</string>
+    <string name="nama_karyawan">Nama</string>
+    <string name="data_diri">Data Diri</string>
+    <string name="data_alamat">Data Alamat Tinggal</string>
+    <string name="data_alamat_ktp">Data Alamat Sesuai KTP</string>
+    <string name="id_ktp">KTP</string>
+    <string name="npwp">npwp</string>
+    <string name="email">email@email.com</string>
+    <string name="phone">no telp</string>
+    <string name="alamat_rumah">Alamat Rumah</string>
+    <string name="alamat_maps">Alamat Map</string>
+    <string name="auth">Authentikasi</string>
+    <string name="hit_passwd">Password</string>
+    <string name="hint_konf_password">Konfirmasi Kata Sandi Baru</string>
+    <string name="absen_sukses">Absensi Berhasil</string>
+    <string name="absen_masuk">Absensi Masuk</string>
+    <string name="absen_pulang">Absensi Pulang</string>
+    <string name="absensi_kosong">Histori Absensi Masih Kosong</string>
+    <string name="karyawan_kosong">Daftar Karyawan Masih Kosong</string>
+    <string name="kantor_kosong">Daftar Kantor Masih Kosong</string>
+    <string name="izin_kosong">Masih Belum Ada Data Izin</string>
+    <string name="tambah_izin">Ajukan Izin</string>
+    <string name="tambah_kantor">Tambah Lokasi</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="search_employee">Cari karyawan</string>
+    <string name="search_office">Cari Lokasi</string>
+    <string name="search_employee_no">Cari karyawan / No Izin</string>
+    <string name="caption_search_placeholder">Cari…</string>
+    <string name="rt">RT</string>
+    <string name="rw">RW</string>
+    <string name="kelurahan">Kelurahan</string>
+    <string name="kecamatan">Kecamatan</string>
+    <string name="kota">Kota</string>
+    <string name="kode_pos">Kode Pos</string>
+    <string name="propinsi">Propinsi</string>
+    <string name="alasan_tolak">Alasan Tolak</string>
+    <string name="retry">Coba Lagi</string>
+    <string name="toolbar_layout">Notif</string>
+
+
+    <string name="webmail_domain">als.holdings</string>
+    <string name="developer_email">bhardwaj.rish@gmail.com</string>
+    <string name="release_notes_1">We\'ve changed the entire structure of the application. Material UI + you\'ll receive notifications, smoother than ever! I\'m really thankful to all those that contributed. Send, and delete will show up soon too. :D</string>
+    <string name="release_notes_2">Send\nDelete\nMultiple Accounts\nUI overhaul.\nDAWebmail.\nIt\'s never been better.</string>
+
+    <string name="contribute_1">DAWebmail needs you! This is a risky step I am willing to take. DAWebmail may lose most of its downloads. But please do stick around if you have found this application useful so far!\n\nWith the new Webmail version in place, the script I wrote to scrape webmails does not work. I\'d love all the Android developers in DA to contribute, and fix the scraping issue, and possibly contribute further! \n\nBonus. The entire interface now follows Material Design guidelines!</string>
+    <string name="contribute_2">DAWebmail needs you!\nThe app is now better than ever. I\'ve put in a lot of effort in cleaning the code, making it as modular and readable as possible. All class and variables names are self explanatory, and you will find code under packages you\'d expect them to be.\n\nToDos\nThe issues page on the Github repo contains a list of ToDos under the label feature-request. A short list is:\n\n-Search Bar\n-Send to multiple users\n-Auto Delete/Trash\n-Share Webmails\n-Write unit tests!\n-Better UI?</string>
+    <string name="github_repo">https://github.com/CreaRo/DAWebmail</string>
+    <string name="blog_link">http://bhardwajrish.blogspot.in/2016/01/contributing-to-dawebmail.html</string>
+
+    <!-- General Mail Strings -->
+    <string name="inbox">Inbox</string>
+    <string name="sent">Sent</string>
+    <string name="trash">Trash</string>
+    <string name="compose">Compose</string>
+
+    <!-- Error Strings -->
+    <string name="error_connect_to_view_email"><html><head></head><body>Connect to the Internet to download content</body></html></string>
+    <string name="error_something_went_wrong">Something went wrong</string>
+
+    <!-- Date Utils -->
+    <string name="recent_webmails">Recently, </string>
+    <string name="hour_ago_webmails">One Hour Ago, </string>
+
+    <!-- Message ActionRequests SOAP-API -->
+    <string name="msg_action_read">read</string>
+    <string name="msg_action_unread">!read</string>
+    <string name="msg_action_trash">trash</string>
+    <string name="msg_action_delete">delete</string>
+
+    <!-- RestAPI URLs -->
+    <string name="rest_url_login">https://mail.als.holdings/service/home/~/inbox.rss?limit=1</string>
+    <string name="rest_url_inbox">https://mail.als.holdings/home/~/inbox.json</string>
+    <string name="rest_url_sent">https://mail.als.holdings/home/~/sent.json</string>
+    <string name="rest_url_trash">https://mail.als.holdings/home/~/trash.json</string>
+    <string name="rest_url_view_webmail">https://mail.als.holdings/home/~/?id=</string>
+
+    <!-- SOAP API URLs -->
+    <string name="soap_url">https://mail.als.holdings/service/soap</string>
+
+    <!-- Notifs -->
+    <string name="notification_ticker_new_webmail">New Webmail!</string>
+    <string name="notification_ticker_new_webmails">New Webmails!</string>
+    <string name="notification_swipe_to_view">Swipe down to view webmails!</string>
+
+    <!-- Snackbars -->
+    <string name="snackbar_login_user_exist">This user already exists - logging in</string>
+    <string name="snackbar_login_attempting">Attempting Login.</string>
+    <string name="snackbar_login_successful">Login Successful!</string>
+    <string name="snackbar_login_failed">Login Failed</string>
+    <string name="snackbar_new_webmail_zero">No New Webmail</string>
+    <string name="snackbar_new_webmail_one">1 New Webmail</string>
+    <string name="snackbar_new_webmail_many"> New Webmails</string>
+    <string name="snackbar_webmail_zero">No Webmails</string>
+    <string name="snackbar_webmail_one">One Webmail</string>
+    <string name="snackbar_webmail_many"> Webmails</string>
+    <string name="snackbar_deleting">Deleting</string>
+    <string name="snackbar_trashing">Moving To Trash</string>
+    <string name="snackbar_marking_unread">Marking Unread</string>
+    <string name="snackbar_marking_read">Marking Read</string>
+    <string name="snackbar_delete_unsuccessful">Delete Unsuccessful :(</string>
+    <string name="snackbar_delete_successful">Delete Successful</string>
+    <string name="snackbar_trash_unsuccessful">Unable To Move To Trash :(</string>
+    <string name="snackbar_trash_successful">Moved To Trash</string>
+    <string name="snackbar_read_unsuccessful">Unable To Mark Read :(</string>
+    <string name="snackbar_read_successful">Marked Read</string>
+    <string name="snackbar_unread_unsuccessful">Unable to Mark Unread :(</string>
+    <string name="snackbar_unread_successful">Marked Unread</string>
+    <string name="snackbar_logging_out">Logging Out!</string>
+    <string name="snackbar_search_pressed">Yet to implement - Help &amp; contribute on Github!</string>
+    <string name="snackbar_attachment_pressed">Yet to implement - Help &amp; contribute on Github!</string>
+    <string name="snackbar_sending">Sending...</string>
+    <string name="snackbar_sending_successful">Sent Successfully</string>
+    <string name="snackbar_sending_unsuccesful">Unable to send. Make Sure you are connected to the net, and have written a valid sender ID</string>
+
+    <!-- Progress Dialogs -->
+    <string name="dialog_msg_logging_in">Logging In</string>
+    <string name="dialog_msg_loading">Please wait while we load your content</string>
+    <string name="dialog_msg_attempting_action">Requesting Action</string>
+    <string name="dialog_title_logout">Log Out?</string>
+    <string name="dialog_msg_logout_multi">Since you are logged in through another account, we\'ll open your other account\'s inbox.</string>
+    <string name="dialog_msg_logout_single">KThxBye</string>
+    <string name="dialog_btn_logout">Log out</string>
+    <string name="dialog_msg_fetching_content">Fetching Content</string>
+    <string name="dialog_title_permanently_delete">Confirm Delete</string>
+    <string name="dialog_msg_permanently_delete">This will permanently delete your messages - they will not be moved to trash.\nPress back to cancel.</string>
+    <string name="dialog_btn_positive_permanently_delete">Delete</string>
+    <string name="dialog_btn_negative_permanently_delete">Move To Trash</string>
+    <string name="dialog_title_toggle_data">Confirm Disable?</string>
+    <string name="dialog_msg_toggle_data">You will not receive notifications.\nRecommended : Keep Enabled.</string>
+    <string name="dialog_btn_positive_toggle_data">Disable</string>
+    <string name="dialog_btn_negative_toggle_data">Enable</string>
+    <string name="dialog_title_confirm_send">Confirm Send</string>
+    <string name="dialog_msg_confirm_send">Sending an important webmail?\nWe highly recommend you to use the desktop version to send important webmails.</string>
+    <string name="dialog_btn_positive_confirm_send">Send</string>
+    <string name="dialog_btn_negative_confirm_send">Cancel</string>
+    <string name="dialog_title_save_draft">Hold On!</string>
+    <string name="dialog_msg_save_draft">We don\'t save messages as drafts yet. Are you sure you want to go back?</string>
+    <string name="dialog_btn_positive_save_draft">Go Back</string>
+    <string name="dialog_btn_negative_save_draft">Cancel</string>
+    <string name="dialog_title_updates_1">In a club or committee?</string>
+    <string name="dialog_msg_updates_1">Keep your webmail synced. Create multiple accounts by clicking the \'+\' in the navigation drawer.</string>
+    <string name="dialog_btn_positive_updates_1">Got It!</string>
+
+    <!-- Navigation Drawer Items -->
+    <string name="drawer_inbox">Inbox</string>
+    <string name="drawer_sent">Sent</string>
+    <string name="drawer_trash">Trash</string>
+    <string name="drawer_smartbox">SmartBox</string>
+    <string name="drawer_settings">Settings</string>
+    <string name="drawer_feedback">Feedback</string>
+    <string name="drawer_contribute">Contribute</string>
+    <string name="drawer_new_account">+ Account</string>
+
+    <!-- FloatingActionButtons -->
+    <string name="fab_sent_to_trash">Trash</string>
+    <string name="fab_sent_to_delete">Delete</string>
+    <string name="fab_sent_to_mark_read">Mark Read</string>
+    <string name="fab_sent_to_mark_unread">Mark Unread</string>
+
+    <string name="firebase_url">https://dawebmailv2.firebaseio.com/</string>
+    <string name="privacy_policy">http://www.rish.space/dawebmail/privacy-policy</string>
+</resources>

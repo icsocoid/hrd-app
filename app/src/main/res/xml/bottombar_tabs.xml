@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/ic_homeorange"
+        activeColor="@color/active_color"
+        inActiveColor="@color/inactive_color"
+        title="Home" />
+
+    <tab
+        id="@+id/tab_history"
+        icon="@drawable/ic_statistics"
+        activeColor="@color/active_color"
+        inActiveColor="@color/inactive_color"
+        title="History" />
+    <tab
+        id="@+id/tab_absen"
+        icon="@drawable/ic_absen"
+        activeColor="@color/active_color"
+        inActiveColor="@color/inactive_color"
+        title="Absen" />
+
+    <tab
+        id="@+id/account"
+        icon="@drawable/ic_book1"
+        activeColor="@color/active_color"
+        inActiveColor="@color/inactive_color"
+        title="Pengajuan" />
+
+    <tab
+        id="@+id/tab_account"
+        icon="@drawable/ic_account1"
+        activeColor="@color/active_color"
+        inActiveColor="@color/inactive_color"
+        title="Account" />
+
+</tabs>
