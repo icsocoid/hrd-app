@@ -1,6 +1,7 @@
 package com.sia.als;
 
 import android.app.Application;
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
@@ -20,10 +21,18 @@ public class AppController extends Application {
 
     private static AppController mInstance;
 
+    private static Context context;
+
     @Override
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        AppController.context = getApplicationContext();
+    }
+
+    public static Context getAppContext()
+    {
+        return AppController.context;
     }
 
 

@@ -33,9 +33,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.sdsmdg.tastytoast.TastyToast;
 import com.sia.als.AppController;
 import com.sia.als.MainActivity;
 import com.sia.als.R;
+import com.sia.als.activity.KodePerusahaanActivity;
 import com.sia.als.activity.LoginActivity;
 import com.sia.als.adapter.HistoryAbsensiAdapter;
 import com.sia.als.adapter.NotifikasiAdapter;
@@ -194,85 +196,94 @@ public class HomeFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 swipeRefreshLayout.setRefreshing(false);
                 try {
-
                     statefulLayout.setState(Config.STATE_EMPTY);
-
                     Boolean status = response.getBoolean("status");
                     if (status) {
-                        statefulLayout.setState(StatefulLayout.State.CONTENT);
-                        String jamMasuk = response.getString("jam_masuk");
-                        String jamPulang = response.getString("jam_pulang");
-                        String statusMasuk = response.getString("status_masuk");
-                        String statusPulang = response.getString("status_pulang");
-
-                        jamMasukTxt.setText(jamMasuk);
-                        jamPulangTxt.setText(jamPulang);
-                        statusMasukTxt.setText(statusMasuk);
-                        statusPulangTxt.setText(statusPulang);
-                        String cuti = response.getString("cuti");
-                        if(cuti.equals("0"))
+                        JSONObject karyawan = response.getJSONObject("karyawan");
+                        int statusKaryawan = karyawan.getInt("status_employee");
+                        if (statusKaryawan == 1)
                         {
-                            cutiLay.setVisibility(View.GONE);
-                        }
-                        else
-                        {
-                            JSONObject objCuti = response.getJSONObject("cuti");
-                            cutiTxt.setText(objCuti.getString("jumlah_cuti"));
-                            sisaCutiTxt.setText(objCuti.getString("sisa"));
-                            cutiBersamaTxt.setText(objCuti.getString("cuti_bersama"));
-                        }
-                        //List<Izin> data = new ArrayList<>();
-                        try {
-                            JSONArray Jarray = response.getJSONArray("izin");
-                            for (int i = 0; i < Jarray.length(); i++) {
-                                JSONObject json_data = Jarray.getJSONObject(i);
-                                Izin izin = new Izin();
-                                izin.setId(json_data.getString("id_izin"));
-                                izin.setNamaIzin(json_data.getString("nama_izin"));
-                                izin.setJumlah(json_data.getInt("jumlah_izin"));
-                                data.add(izin);
+                            statefulLayout.setState(StatefulLayout.State.CONTENT);
+                            String jamMasuk = response.getString("jam_masuk");
+                            String jamPulang = response.getString("jam_pulang");
+                            String statusMasuk = response.getString("status_masuk");
+                            String statusPulang = response.getString("status_pulang");
 
-                            }
-                            if(rekapHomeAdapter == null)
+                            jamMasukTxt.setText(jamMasuk);
+                            jamPulangTxt.setText(jamPulang);
+                            statusMasukTxt.setText(statusMasuk);
+                            statusPulangTxt.setText(statusPulang);
+                            String cuti = response.getString("cuti");
+                            if(cuti.equals("0"))
                             {
-                                // isFirst = false;
-                                isFirst = false;
-                                rekapHomeAdapter = new RekapHomeAdapter(getContext(),data);
-                                rekapHomeAdapter.setOnItemClickListener(new RekapHomeAdapter.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(View view, Izin obj, int position) {
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("id_izin",String.valueOf(obj.getId()));
-                                        Log.i("homeIzin", String.valueOf(obj.getId()));
-                                        RekapIzinFragment rekapIzinFragment = new RekapIzinFragment();
-                                        rekapIzinFragment.setArguments(bundle);
-                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                        fragmentManager.beginTransaction()
-                                                .replace(R.id.m_frame, rekapIzinFragment)
-                                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                                .commit();
-                                    }
-                                });
-
-
-
-//                                Log.i("data_rekap", String.valueOf(data.size()));
-//                                rekapHomeAdapter = new RekapHomeAdapter(getContext(),data);
-                                rvData.setAdapter(rekapHomeAdapter);
-//                                rvData.refreshDrawableState();
-                                rvData.smoothScrollToPosition(0);
-//                                rvData.setVisibility(View.VISIBLE);
-
+                                cutiLay.setVisibility(View.GONE);
                             }
                             else
                             {
-                                rekapHomeAdapter.notifyDataSetChanged();
+                                JSONObject objCuti = response.getJSONObject("cuti");
+                                cutiTxt.setText(objCuti.getString("jumlah_cuti"));
+                                sisaCutiTxt.setText(objCuti.getString("sisa"));
+                                cutiBersamaTxt.setText(objCuti.getString("cuti_bersama"));
                             }
-                            isLoading = false;
+                            //List<Izin> data = new ArrayList<>();
+                            try {
+                                JSONArray Jarray = response.getJSONArray("izin");
+                                for (int i = 0; i < Jarray.length(); i++) {
+                                    JSONObject json_data = Jarray.getJSONObject(i);
+                                    Izin izin = new Izin();
+                                    izin.setId(json_data.getString("id_izin"));
+                                    izin.setNamaIzin(json_data.getString("nama_izin"));
+                                    izin.setJumlah(json_data.getInt("jumlah_izin"));
+                                    data.add(izin);
+
+                                }
+                                if(rekapHomeAdapter == null)
+                                {
+                                    // isFirst = false;
+                                    isFirst = false;
+                                    rekapHomeAdapter = new RekapHomeAdapter(getContext(),data);
+                                    rekapHomeAdapter.setOnItemClickListener(new RekapHomeAdapter.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(View view, Izin obj, int position) {
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString("id_izin",String.valueOf(obj.getId()));
+                                            Log.i("homeIzin", String.valueOf(obj.getId()));
+                                            RekapIzinFragment rekapIzinFragment = new RekapIzinFragment();
+                                            rekapIzinFragment.setArguments(bundle);
+                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                            fragmentManager.beginTransaction()
+                                                    .replace(R.id.m_frame, rekapIzinFragment)
+                                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                                    .commit();
+                                        }
+                                    });
+
+//                                rekapHomeAdapter = new RekapHomeAdapter(getContext(),data);
+                                    rvData.setAdapter(rekapHomeAdapter);
+//                                rvData.refreshDrawableState();
+                                    rvData.smoothScrollToPosition(0);
+//                                rvData.setVisibility(View.VISIBLE);
+
+                                }
+                                else
+                                {
+                                    rekapHomeAdapter.notifyDataSetChanged();
+                                }
+                                isLoading = false;
 
 
-                        } catch (JSONException e) {
-                            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                            } catch (JSONException e) {
+                                TastyToast.makeText(getContext(), "" + e, TastyToast.LENGTH_LONG,TastyToast.CONFUSING).show();
+                            }
+                        }
+                        else
+                        {
+                            sessionManagement.logoutSession();
+                            Intent logout = new Intent(getActivity(), KodePerusahaanActivity.class);
+                            logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            // Add new Flag to start new Activity
+                            logout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(logout);
                         }
 
                     }
@@ -293,7 +304,6 @@ public class HomeFragment extends Fragment {
                             makeDataRequest();
                         }
                     });
-                    //dialog.hide();
                 }
             }
         }, new Response.ErrorListener() {
@@ -305,7 +315,7 @@ public class HomeFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     statefulLayout.setState(Config.STATE_NO_CONNECTION);
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    TastyToast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), TastyToast.LENGTH_SHORT, TastyToast.ERROR).show();
                 }
 
             }
@@ -351,18 +361,14 @@ public class HomeFragment extends Fragment {
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
         SharedPreferences.Editor editor = pref.edit();
         String token = pref.getString("regId", null);
-        Log.i("token_database", token);
-        Log.i("firebase_token", firebaseId);
         if(!token.equals(firebaseId)) {
             sessionManagement.logoutSession();
             editor.clear();
             editor.commit();
             Intent logout = new Intent(getActivity(), LoginActivity.class);
             logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
             // Add new Flag to start new Activity
             logout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
             startActivity(logout);
         }
 

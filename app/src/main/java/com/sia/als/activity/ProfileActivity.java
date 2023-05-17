@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.sia.als.R;
+import com.sia.als.fragment.AccountFragment;
 import com.sia.als.fragment.ProfileFragment;
 
 public class ProfileActivity extends AppCompatActivity {

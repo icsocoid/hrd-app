@@ -34,6 +34,7 @@ public class CameraFragment extends Fragment {
     private View view;
     SubmitFragment submitFragment;
     AccountFragment accountFragment;
+    ProfileFragment profileFragment;
 
     Bitmap bitmap;
     private static final String TAG = CameraFragment.class.getSimpleName();
@@ -49,6 +50,13 @@ public class CameraFragment extends Fragment {
     {
         CameraFragment st = new CameraFragment();
         st.accountFragment = accountFragment;
+        return st;
+    }
+
+    public static CameraFragment newInstance(ProfileFragment profileFragment)
+    {
+        CameraFragment st = new CameraFragment();
+        st.profileFragment = profileFragment;
         return st;
     }
 
@@ -144,6 +152,16 @@ public class CameraFragment extends Fragment {
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     fragmentManager.beginTransaction()
                             .replace(R.id.m_data_frame, accountFragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            .commit();
+                }
+
+                if(profileFragment != null)
+                {
+                    profileFragment.setArguments(bundle);
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.m_data_frame, profileFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .commit();
                 }

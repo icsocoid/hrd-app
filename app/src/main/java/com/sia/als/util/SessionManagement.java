@@ -1,10 +1,9 @@
 package com.sia.als.util;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.sia.als.activity.LoginActivity;
+import com.sia.als.AppController;
 import com.sia.als.config.Config;
 
 import java.util.HashMap;
@@ -33,6 +32,17 @@ public class SessionManagement {
         editor.putString(Config.KEY_IS_ADMIN, isAdmin);
         editor.putString(Config.KEY_MAC, macAddress);
         editor.commit();
+    }
+
+    public void createInitSession(String namaSubdomain)
+    {
+        editor.putString(Config.KEY_SUBDOMAIN, namaSubdomain);
+        editor.commit();
+    }
+
+    public String getSubdomainSession()
+    {
+        return prefs.getString(Config.KEY_SUBDOMAIN, null);
     }
 
     public HashMap<String, String> getUserDetails() {
@@ -65,5 +75,11 @@ public class SessionManagement {
         {
             return false;
         }
+    }
+
+    public static String getNamaSubdomain()
+    {
+        SessionManagement sess = new SessionManagement(AppController.getAppContext());
+        return sess.getSubdomainSession();
     }
 }

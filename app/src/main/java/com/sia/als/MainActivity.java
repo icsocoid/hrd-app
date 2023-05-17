@@ -1,5 +1,6 @@
 package com.sia.als;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
 import com.google.android.ads.mediationtestsuite.activities.HomeActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -32,7 +38,10 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.sia.als.activity.KodePerusahaanActivity;
 import com.sia.als.activity.LoginActivity;
+import com.sia.als.activity.ResetDeviceActivity;
+import com.sia.als.adapter.PtkpAdapter;
 import com.sia.als.config.Config;
 import com.sia.als.fragment.AbsensiFragment;
 import com.sia.als.fragment.AdminHomeFragment;
@@ -46,9 +55,17 @@ import com.sia.als.fragment.NotifikasiPengajuanAbsensiFragment;
 import com.sia.als.fragment.ProfileFragment;
 import com.sia.als.fragment.QrCodeFragment;
 import com.sia.als.fragment.ReadQrCodeFragment;
+import com.sia.als.model.Ptkp;
 import com.sia.als.util.ConnectivityReceiver;
+import com.sia.als.util.CustomVolleyJsonRequest;
 import com.sia.als.util.NoInternetConnection;
 import com.sia.als.util.SessionManagement;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
@@ -355,31 +372,24 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
         if(sessionManagement.isAdmin())
         {
             txtAkun.setText("Admin");
-            AdminHomeFragment qrCodeFragment = new AdminHomeFragment();
+            AdminHomeFragment adminFragment = new AdminHomeFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.m_frame, qrCodeFragment)
+                    .replace(R.id.m_frame, adminFragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit();
         }
         else
         {
-//            ProfileFragment qrCodeFragment = new ProfileFragment();
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            fragmentManager.beginTransaction()
-//                    .replace(R.id.m_frame, qrCodeFragment)
-//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-//                    .commit();
 
-            NewProfileFragment qrCodeFragment = new NewProfileFragment();
+            NewProfileFragment profileFragment = new NewProfileFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.m_frame, qrCodeFragment)
+                    .replace(R.id.m_frame, profileFragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit();
         }
     }
-
 
     @Override
 
@@ -398,20 +408,29 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
     private void autoLogout()
     {
         String mac = sessionManagement.getUserDetails().get(Config.KEY_MAC);
+
         if(mac != null){
             if(mac.equals(""))
             {
                 sessionManagement.logoutSession();
-                Intent logout = new Intent(MainActivity.this, LoginActivity.class);
+                Intent logout = new Intent(MainActivity.this, KodePerusahaanActivity.class);
                 logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
                 // Add new Flag to start new Activity
                 logout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
                 startActivity(logout);
             }
         }
 
+        if (sessionManagement.getSubdomainSession() == null)
+        {
+            sessionManagement.logoutSession();
+            Intent logout = new Intent(MainActivity.this, KodePerusahaanActivity.class);
+            logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            // Add new Flag to start new Activity
+            logout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(logout);
+        }
 
     }
+
 }

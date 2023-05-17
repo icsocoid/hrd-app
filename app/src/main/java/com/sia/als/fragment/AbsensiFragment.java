@@ -3,6 +3,7 @@ package com.sia.als.fragment;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,7 +36,10 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.sia.als.AppController;
+import com.sia.als.MainActivity;
 import com.sia.als.R;
+import com.sia.als.activity.KodePerusahaanActivity;
+import com.sia.als.activity.LoginActivity;
 import com.sia.als.adapter.HistoryAbsensiAdapter;
 import com.sia.als.adapter.PengajuanAdapter;
 import com.sia.als.adapter.PtkpAdapter;
@@ -103,7 +107,6 @@ public class AbsensiFragment extends Fragment {
 //        notif.setBackgroundResource(R.drawable.ic_notif);
         setDariTanggal("");
         setSampaiTanggal("");
-        //saveBtn.setVisibility(View.GONE);//buat apa?
         toolbarTitle = (TextView) getActivity().findViewById(R.id.text_title);
         toolbarTitle.setText("Histori Absensi");
         backButton.setVisibility(View.GONE);
@@ -357,9 +360,6 @@ public class AbsensiFragment extends Fragment {
         return sampaiTanggal;
     }
 
-//    private void attemptData() {
-//    }
-
     //init buat endless scroll
     private void initScrollListener()
     {
@@ -386,11 +386,6 @@ public class AbsensiFragment extends Fragment {
     }
 
     public void makeDataRequest(int halaman) {
-
-//        final ProgressDialog dialog = new ProgressDialog(getActivity());
-//        dialog.setMessage("please wait...");
-//        dialog.show();
-
         if(isFirst)
         {
             statefulLayout.setState(Config.STATE_PROGRESS);
@@ -417,73 +412,71 @@ public class AbsensiFragment extends Fragment {
 
                     Boolean status = response.getBoolean("status");
                     if (status) {
+                        JSONObject karyawan = response.getJSONObject("karyawan");
+                        int statusKaryawan = karyawan.getInt("status_employee");
+                        if (statusKaryawan == 1)
+                        {
+                            statefulLayout.setState(StatefulLayout.State.CONTENT);
+                            try {
+                                JSONArray Jarray = response.getJSONArray("absensi");
+                                for (int i = 0; i < Jarray.length(); i++) {
+                                    JSONObject json_data = Jarray.getJSONObject(i);
+                                    Absensi absensi = new Absensi();
+                                    absensi.setId(json_data.getString("id"));
+                                    absensi.setJam_masuk(json_data.getString("jam_masuk"));
+                                    absensi.setJam_pulang(json_data.getString("jam_pulang"));
+                                    absensi.setStatus_masuk(json_data.getString("status_masuk"));
+                                    absensi.setStatus_pulang(json_data.getString("status_pulang"));
+                                    absensi.setTanggal(json_data.getString("tanggal"));
+                                    data.add(absensi);
+                                }
+                                if(historyAbsensiAdapter == null)
+                                {
+                                    isFirst = false;
+                                    historyAbsensiAdapter = new HistoryAbsensiAdapter(getContext(),data);
+                                    historyAbsensiAdapter.setOnItemClickListener(new HistoryAbsensiAdapter.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(View view, Absensi obj, int position) {
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString("absen_id",obj.getId());
+                                            DetailAbsensiFragment detailAbsensiFragment = new DetailAbsensiFragment();
+                                            detailAbsensiFragment.setArguments(bundle);
+                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                            fragmentManager.beginTransaction()
+                                                    .replace(R.id.m_frame, detailAbsensiFragment)
+                                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                                    .commit();
+                                        }
+                                    });
 
-                        statefulLayout.setState(StatefulLayout.State.CONTENT);
-                        try {
-                            JSONArray Jarray = response.getJSONArray("absensi");
-                            for (int i = 0; i < Jarray.length(); i++) {
-                                JSONObject json_data = Jarray.getJSONObject(i);
-                                Absensi absensi = new Absensi();
-                                absensi.setId(json_data.getString("id"));
-                                //absensi.setAlamat_maps_masuk(json_data.getString("alamat_maps_masuk"));
-                                //absensi.setAlamat_maps_pulang(json_data.getString("alamat_maps_pulang"));
-                                //absensi.setAls_employee_id(json_data.getString("als_employee_id"));
-                               // absensi.setDevice_id_masuk(json_data.getString("device_id_masuk"));
-                               // absensi.setDevice_id_pulang(json_data.getString("device_id_pulang"));
-                                absensi.setJam_masuk(json_data.getString("jam_masuk"));
-                                absensi.setJam_pulang(json_data.getString("jam_pulang"));
-                              //  absensi.setJenis(json_data.getString("jenis"));
-                              //  absensi.setNote(json_data.getString("note"));
-                               // absensi.setQrcode_masuk(json_data.getString("qrcode_masuk"));
-                              //  absensi.setQrcode_pulang(json_data.getString("qrcode_pulang"));
-                                absensi.setStatus_masuk(json_data.getString("status_masuk"));
-                                absensi.setStatus_pulang(json_data.getString("status_pulang"));
-                               // absensi.setPhoto_masuk(json_data.getString("photo_masuk"));
-                              //  absensi.setPhoto_pulang(json_data.getString("photo_pulang"));
-                              //  absensi.setMac_address_masuk(json_data.getString("mac_address_masuk"));
-                              //  absensi.setMac_address_pulang(json_data.getString("mac_address_pulang"));
-                               // absensi.setLatitude_pulang(json_data.getString("latitude_pulang"));
-                               // absensi.setLatitude_masuk(json_data.getString("latitude_masuk"));
-                               // absensi.setLongitude_masuk(json_data.getString("longitude_masuk"));
-                              //  absensi.setLongitude_pulang(json_data.getString("longitude_pulang"));
-                                absensi.setTanggal(json_data.getString("tanggal"));
-                                data.add(absensi);
+                                    rvAbsensi.setAdapter(historyAbsensiAdapter);
+                                    //rvAbsensi.refreshDrawableState();
+                                    //swipeRefreshLayout.setRefreshing(false);
+                                    rvAbsensi.smoothScrollToPosition(0);
+
+                                }
+                                else
+                                {
+                                    historyAbsensiAdapter.notifyDataSetChanged();
+                                }
+                                isLoading = false;
+                                //getData(page,limit);
+
+                            } catch (JSONException e) {
+                                String error = response.getString("message");
+                                TastyToast.makeText(getActivity(), "" + error, TastyToast.LENGTH_LONG,TastyToast.CONFUSING).show();
                             }
-                            if(historyAbsensiAdapter == null)
-                            {
-                                isFirst = false;
-                                historyAbsensiAdapter = new HistoryAbsensiAdapter(getContext(),data);
-                                historyAbsensiAdapter.setOnItemClickListener(new HistoryAbsensiAdapter.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(View view, Absensi obj, int position) {
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("absen_id",obj.getId());
-                                        DetailAbsensiFragment detailAbsensiFragment = new DetailAbsensiFragment();
-                                        detailAbsensiFragment.setArguments(bundle);
-                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                        fragmentManager.beginTransaction()
-                                                .replace(R.id.m_frame, detailAbsensiFragment)
-                                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                                .commit();
-                                    }
-                                });
-
-                                rvAbsensi.setAdapter(historyAbsensiAdapter);
-                                //rvAbsensi.refreshDrawableState();
-                                //swipeRefreshLayout.setRefreshing(false);
-                                rvAbsensi.smoothScrollToPosition(0);
-
-                            }
-                            else
-                            {
-                                historyAbsensiAdapter.notifyDataSetChanged();
-                            }
-                            isLoading = false;
-                            //getData(page,limit);
-
-                        } catch (JSONException e) {
-                            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                         }
+                        else
+                        {
+                            sessionManagement.logoutSession();
+                            Intent logout = new Intent(getActivity(), KodePerusahaanActivity.class);
+                            logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            // Add new Flag to start new Activity
+                            logout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(logout);
+                        }
+
                     }
                     else
                     {
@@ -506,7 +499,6 @@ public class AbsensiFragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    //dialog.hide();
                     statefulLayout.setState(Config.STATE_ERROR);
                     retryBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -514,6 +506,7 @@ public class AbsensiFragment extends Fragment {
                             makeDataRequest(0);
                         }
                     });
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -524,7 +517,7 @@ public class AbsensiFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     statefulLayout.setState(Config.STATE_NO_CONNECTION);
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    TastyToast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), TastyToast.LENGTH_SHORT, TastyToast.ERROR).show();
                 }
 
             }

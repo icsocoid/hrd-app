@@ -53,6 +53,7 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.sdsmdg.tastytoast.TastyToast;
 import com.sia.als.AppController;
 import com.sia.als.BuildConfig;
 import com.sia.als.MainActivity;
@@ -223,11 +224,13 @@ public class SubmitFragment extends Fragment {
         params.put("alamat_map", alamat);
         params.put("status_fake", String.valueOf(jenisFake));
         params.put("qr_code", Config.RES_QRCODE);
+        Log.i("cek param", params.toString());
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 Config.ABSENSI_URL, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
+                Log.i("info-info", response.toString());
                 dialog.dismiss();
 
                 try {
@@ -237,11 +240,14 @@ public class SubmitFragment extends Fragment {
                         bundle.putString("status","sukses");
                         bundle.putString("page","absensi");
                         bundle.putString("body_message",response.getString("message"));
+
                     } else {
 
                         bundle.putString("status","fail");
                         bundle.putString("page","absensi");
                         bundle.putString("body_message",response.getString("message"));
+
+
 
                     }
                     SuksesFragment suksesFragment = new SuksesFragment();
@@ -254,15 +260,17 @@ public class SubmitFragment extends Fragment {
                 }
                 catch (JSONException e)
                 {
-
+                    Log.i("info-info", response.toString());
                     e.printStackTrace();
                 }
 
             }
         }, new Response.ErrorListener() {
 
+
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.i("info-info", error.getMessage());
                 dialog.dismiss();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();

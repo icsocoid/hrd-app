@@ -135,7 +135,7 @@ public class DetailNotifFragment extends Fragment {
         params.put("notifikasi_id", idNotifikasi);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                Config.DETAIL_NOTIFICATION, params, new Response.Listener<JSONObject>() {
+                Config.DETAIL_NOTIFICATION_URL, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                  dialog.dismiss();

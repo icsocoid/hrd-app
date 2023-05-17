@@ -1,9 +1,11 @@
 package com.sia.als.fragment;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
@@ -13,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +34,7 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -52,6 +56,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.sia.als.AppController;
 import com.sia.als.R;
+import com.sia.als.activity.LoginActivity;
 import com.sia.als.adapter.BottomIzinAdapter;
 import com.sia.als.adapter.IzinAdapter;
 import com.sia.als.adapter.PengajuanAdapter;
@@ -101,7 +106,7 @@ public class AddIzinFragment extends Fragment {
     int REQUEST_CAMERA = 100;
     int REQUEST_GALLERY = 20;
     int bitmap_size = 60; // range 1 - 100
-    SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     EditText keteranganTxt;
     private String jenisIzinId;
     private BottomSheetBehavior mBehavior;
@@ -138,7 +143,7 @@ public class AddIzinFragment extends Fragment {
         today1 = view.findViewById(R.id.today1);
         keteranganTxt = view.findViewById(R.id.keterangan_txt);
         today1.setText(simpleDateFormat.format(new Date()));
-        calender1 =  view.findViewById(R.id.calender1);
+        calender1 = view.findViewById(R.id.calender1);
         calender1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,17 +157,17 @@ public class AddIzinFragment extends Fragment {
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                               // today1.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                                int month= monthOfYear+1;
-                                String fm=""+month;
-                                String fd=""+dayOfMonth;
-                                if(month<10){
-                                    fm ="0"+month;
+                                // today1.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                int month = monthOfYear + 1;
+                                String fm = "" + month;
+                                String fd = "" + dayOfMonth;
+                                if (month < 10) {
+                                    fm = "0" + month;
                                 }
-                                if (dayOfMonth<10){
-                                    fd="0"+dayOfMonth;
+                                if (dayOfMonth < 10) {
+                                    fd = "0" + dayOfMonth;
                                 }
-                                today1.setText( year+ "-" + fm + "-" + fd);
+                                today1.setText(year + "-" + fm + "-" + fd);
 
                             }
                         }, mYear, mMonth, mDay);
@@ -174,7 +179,7 @@ public class AddIzinFragment extends Fragment {
         });
 
         /*calender open onclick*/
-        calender2 =  view.findViewById(R.id.calender2);
+        calender2 = view.findViewById(R.id.calender2);
         date = view.findViewById(R.id.date);
         date.setText(simpleDateFormat.format(new Date()));
         calender2.setOnClickListener(new View.OnClickListener() {
@@ -190,16 +195,16 @@ public class AddIzinFragment extends Fragment {
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                int month= monthOfYear+1;
-                                String fm=""+month;
-                                String fd=""+dayOfMonth;
-                                if(month<10){
-                                    fm ="0"+month;
+                                int month = monthOfYear + 1;
+                                String fm = "" + month;
+                                String fd = "" + dayOfMonth;
+                                if (month < 10) {
+                                    fm = "0" + month;
                                 }
-                                if (dayOfMonth<10){
-                                    fd="0"+dayOfMonth;
+                                if (dayOfMonth < 10) {
+                                    fd = "0" + dayOfMonth;
                                 }
-                                date.setText(year+ "-" + fm + "-" + fd);
+                                date.setText(year + "-" + fm + "-" + fd);
 
                             }
                         }, mYear, mMonth, mDay);
@@ -212,7 +217,7 @@ public class AddIzinFragment extends Fragment {
         loadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddImageDialog(REQUEST_CAMERA,REQUEST_GALLERY);
+                showAddImageDialog(REQUEST_CAMERA, REQUEST_GALLERY);
             }
         });
         notif.setOnClickListener(new View.OnClickListener() {
@@ -261,30 +266,34 @@ public class AddIzinFragment extends Fragment {
                 .commit();
     }
 
-    private void attemptData()
-    {
-        if(TextUtils.isEmpty(keteranganTxt.getText().toString()))
-        {
+    private void attemptData() {
+        if (TextUtils.isEmpty(keteranganTxt.getText().toString())) {
             keteranganTxt.setTextColor(getResources().getColor(R.color.active_color));
             keteranganTxt.requestFocus();
-        }
-        else
-        {
+        } else {
             FusedLocationProviderClient mFusedLocation = LocationServices.getFusedLocationProviderClient(getActivity());
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             mFusedLocation.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
-                    if (location != null){
+                    if (location != null) {
                         double lat = location.getLatitude();
                         double lang = location.getLongitude();
 
                         //String alamatMaps = location.get(0)+ ", " + location.getLocality() + ", " + address.getAdminArea() + ", " + address.getCountryName()+ ", " +address.getPostalCode();
-                        makeRequestSubmitData(lat,lang);
+                        makeRequestSubmitData(lat, lang);
 
-                    }
-                    else
-                    {
-                        TastyToast.makeText(getActivity(), "Gagal mendapatkan lokasi Anda..", Toast.LENGTH_LONG,TastyToast.ERROR).show();
+                    } else {
+                        TastyToast.makeText(getActivity(), "Gagal mendapatkan lokasi Anda..", Toast.LENGTH_LONG, TastyToast.ERROR).show();
                     }
                 }
             });
@@ -319,25 +328,25 @@ public class AddIzinFragment extends Fragment {
 
             @Override
             public void onResponse(JSONObject response) {
-
                 dialog.dismiss();
                 try {
+
                     Boolean status = response.getBoolean("status");
                     if (status) {
-
                         SuksesDialog suksesDialog = new SuksesDialog(AddIzinFragment.this);
                         suksesDialog.show(getFragmentManager(),"");
+
                     } else {
 
                         String error = response.getString("message");
-                        TastyToast.makeText(getActivity(), "" + error, Toast.LENGTH_LONG,TastyToast.ERROR).show();
+                        TastyToast.makeText(getActivity(), "" + error, Toast.LENGTH_LONG,TastyToast.CONFUSING).show();
 
                     }
                 }
                 catch (JSONException e)
                 {
-
                     e.printStackTrace();
+                    TastyToast.makeText(getActivity(), "" + e, Toast.LENGTH_LONG,TastyToast.CONFUSING).show();
                 }
 
             }
@@ -347,7 +356,7 @@ public class AddIzinFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 dialog.dismiss();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    TastyToast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), TastyToast.LENGTH_SHORT, TastyToast.ERROR).show();
                 }
             }
         });
