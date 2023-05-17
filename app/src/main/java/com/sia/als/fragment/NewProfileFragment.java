@@ -42,6 +42,7 @@ import com.android.volley.VolleyError;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.sia.als.AppController;
 import com.sia.als.R;
+import com.sia.als.activity.KodePerusahaanActivity;
 import com.sia.als.activity.LoginActivity;
 import com.sia.als.adapter.IzinAdapter;
 import com.sia.als.adapter.KaryawanAdapter;
@@ -125,19 +126,7 @@ public class NewProfileFragment extends Fragment {
                 btnSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(inputPasswordTxt.getText().toString().equals(konfPasswordTxt.getText().toString()))
-                        {
-                            //    if (ConnectivityReceiver.isConnected()) {
-                            makeSubmitRequest();
-                            dialog.dismiss();
-                            //   }
-
-                        }
-                        else
-                        {
-                            TastyToast.makeText(getContext(),"Password dan Konfirmasi tidak sama",Toast.LENGTH_LONG,TastyToast.ERROR).show();
-
-                        }
+                        dialogPassword();
                         dialog.dismiss();
                     }
                 });
@@ -150,8 +139,6 @@ public class NewProfileFragment extends Fragment {
                 btnSave = (Button) dialog.findViewById(R.id.bt_simpan);
                 inputPasswordTxt = (EditText) dialog.findViewById(R.id.password_txt);
                 konfPasswordTxt = (EditText) dialog.findViewById(R.id.konf_password_txt);
-                dialogPassword();
-
                 dialog.show();
             }
         });
@@ -189,7 +176,7 @@ public class NewProfileFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     sessionManagement.logoutSession();
-                    Intent logout = new Intent(getActivity(), LoginActivity.class);
+                    Intent logout = new Intent(getActivity(), KodePerusahaanActivity.class);
                     logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                     // Add new Flag to start new Activity
@@ -206,19 +193,6 @@ public class NewProfileFragment extends Fragment {
 
         return view;
 
-    }
-
-    //Email
-    private void showEmail() {
-        EmailFragment emailFragment = new EmailFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.m_frame, emailFragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .commit();
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.setComponent(new ComponentName("com.als.k9","com.als.k9.activity.MessageList"));
-//        startActivity(intent);
     }
 
     //Peraturan
@@ -241,30 +215,38 @@ public class NewProfileFragment extends Fragment {
                 .commit();
     }
 
-
     //Ganti password
     private void dialogPassword() {
         boolean cancel = false;
         View focusView = null;
         String message = "";
-        if(sessionManagement.getUserDetails().get(Config.KEY_ID) == null) {
-
-            if (TextUtils.isEmpty(konfPasswordTxt.getText().toString())) {
-                konfPasswordTxt.setTextColor(getResources().getColor(R.color.active_color));
-                focusView = konfPasswordTxt;
-                cancel = true;
+        if (TextUtils.isEmpty(konfPasswordTxt.getText().toString())) {
+            konfPasswordTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = konfPasswordTxt;
+            cancel = true;
+            message = "Konfirmasi tidak boleh kosong";
+        }
+        if (TextUtils.isEmpty(inputPasswordTxt.getText().toString())) {
+            inputPasswordTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = inputPasswordTxt;
+            cancel = true;
+            message = "Password tidak boleh kosong";
+        }
+        if (cancel) {
+            if (focusView != null) {
+                focusView.requestFocus();
+                cancel = false;
+                TastyToast.makeText(getContext(), message, TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
             }
-            if (TextUtils.isEmpty(inputPasswordTxt.getText().toString())) {
-                inputPasswordTxt.setTextColor(getResources().getColor(R.color.active_color));
-                focusView = inputPasswordTxt;
-                cancel = true;
+        }
+        else {
+            if(inputPasswordTxt.getText().toString().equals(konfPasswordTxt.getText().toString()))
+            {
+                makeSubmitRequest();
             }
-            if (cancel) {
-                if (focusView != null) {
-                    focusView.requestFocus();
-                    cancel = false;
-                    TastyToast.makeText(getContext(), message, TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
-                }
+            else
+            {
+                TastyToast.makeText(getContext(),"Password dan Konfirmasi tidak sama",Toast.LENGTH_LONG,TastyToast.ERROR).show();
             }
         }
     }
@@ -292,26 +274,23 @@ public class NewProfileFragment extends Fragment {
         if(sessionManagement.getUserDetails().get(Config.KEY_ID) != null)
         {
             user_id = sessionManagement.getUserDetails().get(Config.KEY_ID);
-
         }
-
         params.put("user_id", user_id);
-        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                Config.UPDATE_PASSWORD, params, new Response.Listener<JSONObject>() {
 
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                Config.UPDATE_PASSWORD_URL, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 dialog.dismiss();
                 try {
                     Boolean status = response.getBoolean("status");
                     if (status) {
                         String pesan = response.getString("message");
-                        TastyToast.makeText(getActivity(), "" + pesan, Toast.LENGTH_SHORT,TastyToast.SUCCESS).show();
+                        TastyToast.makeText(getActivity(), "" + pesan, TastyToast.LENGTH_SHORT,TastyToast.SUCCESS).show();
 
                     } else {
                         String error = response.getString("message");
-                        TastyToast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT,TastyToast.INFO).show();
+                        TastyToast.makeText(getActivity(), "" + error, TastyToast.LENGTH_SHORT,TastyToast.CONFUSING).show();
 
                     }
                 } catch (JSONException e) {
@@ -324,7 +303,7 @@ public class NewProfileFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 dialog.dismiss();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    TastyToast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT,TastyToast.ERROR).show();
+                    TastyToast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), TastyToast.LENGTH_SHORT,TastyToast.ERROR).show();
                 }
             }
         });
@@ -347,7 +326,6 @@ public class NewProfileFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 dialog.dismiss();
-
                 try {
                     Boolean status = response.getBoolean("status");
                     if (status) {
@@ -355,36 +333,42 @@ public class NewProfileFragment extends Fragment {
                         try {
                             //JSONArray Jarray = response.getJSONArray("karyawan");
                             JSONObject obj = response.getJSONObject("karyawan");
-                            String user_fullname = obj.getString("employee_name");
-                            String jabatan_user = obj.getString("nama_jabatan");
-                            String photo_user = obj.getString("photo");
-                            namaTxt.setText(user_fullname);
-                            if(jabatan_user.equals("null"))
+                            int statusKaryawan = obj.getInt("status_employee");
+                            if (statusKaryawan == 1)
                             {
-                                jabatanTxt.setText("");
+                                JSONObject arr_jabatan = obj.getJSONObject("jabatan");
+                                String user_fullname = obj.getString("employee_name");
+                                String jabatan_user = arr_jabatan.getString("nama_jabatan");
+                                String photo_user = obj.getString("photo");
+                                namaTxt.setText(user_fullname);
+                                if(jabatan_user.equals("null"))
+                                {
+                                    jabatanTxt.setText("");
+                                }
+                                else
+                                {
+                                    jabatanTxt.setText(jabatan_user);
+                                }
+
+                                bitmap = ImageUtil.convert(photo_user);
+                                photoProfile.setImageBitmap(bitmap);
                             }
                             else
                             {
-                                jabatanTxt.setText(jabatan_user);
+                                sessionManagement.logoutSession();
+                                Intent logout = new Intent(getActivity(), KodePerusahaanActivity.class);
+                                logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                // Add new Flag to start new Activity
+                                logout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(logout);
                             }
 
-                            bitmap = ImageUtil.convert(photo_user);
-                            photoProfile.setImageBitmap(bitmap);
-
                         } catch (JSONException e) {
-                            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                            TastyToast.makeText(getActivity(), e.toString(), TastyToast.LENGTH_LONG, TastyToast.CONFUSING).show();
                         }
-//                        JSONObject obj = response.getJSONObject("karyawan");
-//                        String user_fullname = obj.getString("employee_name");
-//                        String jabatan_user = obj.getString("jabatan");
-//                        //String photo_user = obj.getString("photo");
-//                        namaTxt.setText(user_fullname);
-//                        jabatanTxt.setText(jabatan_user);
-                        //bitmap = ImageUtil.convert(photo_user);
-                        //photoProfile.setImageBitmap(bitmap);
                     } else {
                         String error = response.getString("message");
-                        TastyToast.makeText(getActivity(), "" + error, TastyToast.LENGTH_LONG,TastyToast.INFO).show();
+                        TastyToast.makeText(getActivity(), "" + error, TastyToast.LENGTH_LONG,TastyToast.CONFUSING).show();
                     }
 
 

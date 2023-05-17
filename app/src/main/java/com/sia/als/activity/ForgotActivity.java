@@ -16,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.sdsmdg.tastytoast.TastyToast;
 import com.sia.als.AppController;
 import com.sia.als.R;
 import com.sia.als.config.Config;
@@ -68,19 +69,16 @@ public class ForgotActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(JSONObject response) {
-
-
                 try {
                     Boolean status = response.getBoolean("status");
                     if (status) {
                         dialog.hide();
                         SuksesDialog suksesDialog = new SuksesDialog(ForgotActivity.this);
                         suksesDialog.show(getSupportFragmentManager(),"");
-                       // suksesDialog.bodyTxt.setText(response.getString("message"));
                     } else {
                         dialog.hide();
                         String error = response.getString("message");
-                        Toast.makeText(null, "" + error, Toast.LENGTH_SHORT).show();
+                        TastyToast.makeText(ForgotActivity.this, "" + error, TastyToast.LENGTH_SHORT, TastyToast.CONFUSING).show();
 
                     }
                 }
@@ -88,6 +86,8 @@ public class ForgotActivity extends AppCompatActivity {
                 {
                     dialog.hide();
                     e.printStackTrace();
+                    TastyToast.makeText(ForgotActivity.this, "" + e, TastyToast.LENGTH_SHORT, TastyToast.CONFUSING).show();
+
                 }
 
             }
@@ -97,7 +97,7 @@ public class ForgotActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 dialog.hide();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(null, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    TastyToast.makeText(ForgotActivity.this, getResources().getString(R.string.connection_time_out), TastyToast.LENGTH_SHORT, TastyToast.ERROR).show();
                 }
             }
         });

@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.an.deviceinfo.device.model.Device;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -50,29 +51,51 @@ public class LoginActivity extends AppCompatActivity {
     TextView signUpBtn,forgotBtn;
     String newToken;
     String macAddress;
+    SessionManagement sessionManagement;
+    Device empDevice;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
+        sessionManagement = new SessionManagement(getBaseContext());
         usernameTxt = (AppCompatEditText) findViewById(R.id.et_email);
         passwordTxt = (AppCompatEditText) findViewById(R.id.et_password);
         signinBtn = (Button) findViewById(R.id.btn_sign_in);
         signUpBtn = (TextView) findViewById(R.id.daftar_txt);
         forgotBtn = (TextView) findViewById(R.id.forgot_txt);
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                if(!task.isSuccessful()){
+                    return;
+                }
+                newToken = task.getResult().getToken();
+                macAddress = UUID.randomUUID().toString();
+                SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("regId", newToken);
+                editor.commit();
+                Intent registrationComplete = new Intent(Config.REGISTRATION_COMPLETE);
+                registrationComplete.putExtra("token", newToken);
+                LocalBroadcastManager.getInstance(LoginActivity.this).sendBroadcast(registrationComplete);
+            }
+        });
+
         signinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(newToken == null)
                 {
-                    TastyToast.makeText(LoginActivity.this, "" + "Tidak dapat mengambil firebase token", Toast.LENGTH_LONG,TastyToast.ERROR);
+                    TastyToast.makeText(LoginActivity.this, "" + "Tidak dapat mengambil firebase token", TastyToast.LENGTH_LONG,TastyToast.ERROR).show();
                 }
                 else
                 {
                     if(usernameTxt.getText().toString().equals("") || passwordTxt.getText().toString().equals(""))
                     {
-                        TastyToast.makeText(LoginActivity.this, "" + "Username atau password tidak boleh koosng", Toast.LENGTH_LONG,TastyToast.ERROR);
+                        TastyToast.makeText(LoginActivity.this, "" + "Username atau password tidak boleh koosng", TastyToast.LENGTH_LONG,TastyToast.ERROR).show();
                     }
                     else
                     {
@@ -84,38 +107,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-            @Override
-            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                if(!task.isSuccessful()){
-                    return;
-                }
-                newToken = task.getResult().getToken();
-                macAddress = UUID.randomUUID().toString();
-                Log.i("token", newToken);
-                SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("regId", newToken);
-                editor.commit();
-                Intent registrationComplete = new Intent(Config.REGISTRATION_COMPLETE);
-                registrationComplete.putExtra("token", newToken);
-                LocalBroadcastManager.getInstance(LoginActivity.this).sendBroadcast(registrationComplete);
-            }
-        });
-
-        /*FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( LoginActivity.this,  new OnSuccessListener<InstanceIdResult>() {
-            @Override
-            public void onSuccess(InstanceIdResult instanceIdResult) {
-                newToken = instanceIdResult.getToken();
-                SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("regId", newToken);
-                editor.commit();
-                Intent registrationComplete = new Intent(Config.REGISTRATION_COMPLETE);
-                registrationComplete.putExtra("token", newToken);
-                LocalBroadcastManager.getInstance(LoginActivity.this).sendBroadcast(registrationComplete);
-            }
-        });*/
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(profileIntent);
             }
         });
+
         forgotBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,21 +128,21 @@ public class LoginActivity extends AppCompatActivity {
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setMessage("please wait...");
         dialog.show();
-
         String tag_json_obj = "json_login_req";
+        empDevice = new Device(getBaseContext());
+        String deviceInfo = empDevice.getManufacturer()+" "+empDevice.getHardware()+" "+empDevice.getDevice();
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_email", email);
         params.put("password", password);
         params.put("firebase_id", newToken);
         params.put("mac_address", macAddress);
-//        Log.i("token", newToken);
+        params.put("device_info", deviceInfo);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 Config.LOGIN_URL, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
-                //Log.i("hasil_login",response.toString());
                 dialog.dismiss();
                 try {
                     Boolean status = response.getBoolean("status");
@@ -174,29 +166,30 @@ public class LoginActivity extends AppCompatActivity {
                             {
                                 SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
                                 sessionManagement.createLoginSession(user_id, user_email, user_fullname,is_admin,macAddress);
-                                Intent i = new Intent(LoginActivity.this, ProfileActivity.class);
+                                Intent i = new Intent(LoginActivity.this, ResetDeviceActivity.class);
                                 startActivity(i);
                                 finish();
                             }
-                            else
+                            else if(statusKaryawan == 1)
                             {
-                               // Log.i("tes_lanjut","OK");
                                 SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
                                 sessionManagement.createLoginSession(user_id, user_email, user_fullname,is_admin,macAddress);
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(i);
                                 finish();
                             }
-
-
+                            else
+                            {
+                                String error = response.getString("message");
+                                TastyToast.makeText(LoginActivity.this, "" + error, TastyToast.LENGTH_LONG,TastyToast.CONFUSING).show();
+                            }
 
                         }
 
 
                     } else {
                         String error = response.getString("message");
-                        TastyToast.makeText(LoginActivity.this, "" + error, Toast.LENGTH_LONG,TastyToast.ERROR);
-                      //  Toast.makeText(LoginActivity.this, "" + error, Toast.LENGTH_SHORT).show();
+                        TastyToast.makeText(LoginActivity.this, "" + error, TastyToast.LENGTH_LONG,TastyToast.CONFUSING).show();
 
                     }
                 } catch (JSONException e) {
@@ -209,8 +202,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 dialog.dismiss();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                  //  Toast.makeText(LoginActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
-                    TastyToast.makeText(LoginActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_LONG,TastyToast.CONFUSING);
+                    TastyToast.makeText(LoginActivity.this, getResources().getString(R.string.connection_time_out), TastyToast.LENGTH_LONG,TastyToast.ERROR).show();
                 }
             }
         });

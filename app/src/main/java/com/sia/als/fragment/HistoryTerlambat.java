@@ -3,6 +3,7 @@ package com.sia.als.fragment;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.sia.als.AppController;
 import com.sia.als.R;
+import com.sia.als.activity.LoginActivity;
 import com.sia.als.adapter.HistoryAbsensiAdapter;
 import com.sia.als.adapter.PtkpAdapter;
 import com.sia.als.config.Config;
@@ -94,7 +96,6 @@ public class HistoryTerlambat extends Fragment {
         backButton = (ImageButton) getActivity().findViewById(R.id.button_back);
         setDariTanggal("");
         setSampaiTanggal("");
-        //saveBtn.setVisibility(View.GONE);//buat apa?
         toolbarTitle = (TextView) getActivity().findViewById(R.id.text_title);
         toolbarTitle.setText("Histori Terlambat");
         backButton.setVisibility(View.GONE);
@@ -166,25 +167,6 @@ public class HistoryTerlambat extends Fragment {
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
     }
-
-    private void showPengajuanAbsensiFragment() {
-        PengajuanAbsensiFragment pengajuanAbsensiFragment = new PengajuanAbsensiFragment();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.m_frame, pengajuanAbsensiFragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .commit();
-    }
-
-    private void showNotifikasiPengajuanAbsensiFragment() {
-        NotifikasiPengajuanAbsensiFragment notifikasiPengajuanAbsensiFragment = new NotifikasiPengajuanAbsensiFragment();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.m_frame, notifikasiPengajuanAbsensiFragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .commit();
-    }
-
 
     private void showFilterDialog()
     {
@@ -307,9 +289,6 @@ public class HistoryTerlambat extends Fragment {
         return sampaiTanggal;
     }
 
-//    private void attemptData() {
-//    }
-
     //init buat endless scroll
     private void initScrollListener()
     {
@@ -337,10 +316,6 @@ public class HistoryTerlambat extends Fragment {
 
     public void makeDataRequest(int halaman) {
 
-//        final ProgressDialog dialog = new ProgressDialog(getActivity());
-//        dialog.setMessage("please wait...");
-//        dialog.show();
-
         if(isFirst)
         {
             statefulLayout.setState(Config.STATE_PROGRESS);
@@ -367,35 +342,17 @@ public class HistoryTerlambat extends Fragment {
 
                     Boolean status = response.getBoolean("status");
                     if (status) {
-
                         statefulLayout.setState(StatefulLayout.State.CONTENT);
                         try {
-                            JSONArray Jarray = response.getJSONArray("absensi");
+                            JSONArray Jarray = response.getJSONArray("terlambat");
                             for (int i = 0; i < Jarray.length(); i++) {
                                 JSONObject json_data = Jarray.getJSONObject(i);
                                 Absensi absensi = new Absensi();
                                 absensi.setId(json_data.getString("id"));
-                                //absensi.setAlamat_maps_masuk(json_data.getString("alamat_maps_masuk"));
-                                //absensi.setAlamat_maps_pulang(json_data.getString("alamat_maps_pulang"));
-                                //absensi.setAls_employee_id(json_data.getString("als_employee_id"));
-                                // absensi.setDevice_id_masuk(json_data.getString("device_id_masuk"));
-                                // absensi.setDevice_id_pulang(json_data.getString("device_id_pulang"));
                                 absensi.setJam_masuk(json_data.getString("jam_masuk"));
                                 absensi.setJam_pulang(json_data.getString("jam_pulang"));
-                                //  absensi.setJenis(json_data.getString("jenis"));
-                                //  absensi.setNote(json_data.getString("note"));
-                                // absensi.setQrcode_masuk(json_data.getString("qrcode_masuk"));
-                                //  absensi.setQrcode_pulang(json_data.getString("qrcode_pulang"));
                                 absensi.setStatus_masuk(json_data.getString("status_masuk"));
                                 absensi.setStatus_pulang(json_data.getString("status_pulang"));
-                                // absensi.setPhoto_masuk(json_data.getString("photo_masuk"));
-                                //  absensi.setPhoto_pulang(json_data.getString("photo_pulang"));
-                                //  absensi.setMac_address_masuk(json_data.getString("mac_address_masuk"));
-                                //  absensi.setMac_address_pulang(json_data.getString("mac_address_pulang"));
-                                // absensi.setLatitude_pulang(json_data.getString("latitude_pulang"));
-                                // absensi.setLatitude_masuk(json_data.getString("latitude_masuk"));
-                                // absensi.setLongitude_masuk(json_data.getString("longitude_masuk"));
-                                //  absensi.setLongitude_pulang(json_data.getString("longitude_pulang"));
                                 absensi.setTanggal(json_data.getString("tanggal"));
                                 data.add(absensi);
                             }
@@ -404,8 +361,6 @@ public class HistoryTerlambat extends Fragment {
                                 isFirst = false;
                                 historyAbsensiAdapter = new HistoryAbsensiAdapter(getContext(),data);
                                 rvAbsensi.setAdapter(historyAbsensiAdapter);
-                                //rvAbsensi.refreshDrawableState();
-                                //swipeRefreshLayout.setRefreshing(false);
                                 rvAbsensi.smoothScrollToPosition(0);
 
                             }
@@ -417,8 +372,10 @@ public class HistoryTerlambat extends Fragment {
                             //getData(page,limit);
 
                         } catch (JSONException e) {
-                            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                            String error = response.getString("message");
+                            TastyToast.makeText(getContext(), "" + error, TastyToast.LENGTH_LONG,TastyToast.CONFUSING).show();
                         }
+
                     }
                     else
                     {
@@ -459,7 +416,7 @@ public class HistoryTerlambat extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     statefulLayout.setState(Config.STATE_NO_CONNECTION);
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    TastyToast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), TastyToast.LENGTH_SHORT, TastyToast.ERROR).show();
                 }
 
             }

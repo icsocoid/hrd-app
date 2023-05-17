@@ -106,7 +106,7 @@ public class PrivacyPolicyFragment extends Fragment {
         //params.put(null, "");
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                Config.PRIVACY_POLICY, params, new Response.Listener<JSONObject>() {
+                Config.PRIVACY_POLICY_URL, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 dialog.dismiss();

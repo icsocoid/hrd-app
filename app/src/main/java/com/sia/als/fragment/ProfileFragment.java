@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ import com.sia.als.model.Ptkp;
 import com.sia.als.util.ConnectivityReceiver;
 import com.sia.als.util.CustomVolleyJsonRequest;
 import com.sia.als.util.ImageUtil;
+import com.sia.als.util.NumberTextWatcher;
 import com.sia.als.util.SessionManagement;
 import com.smartlib.addresspicker.AddressPickerActivity;
 import com.smartlib.addresspicker.MyLatLng;
@@ -147,18 +149,14 @@ public class ProfileFragment extends Fragment {
         propinsiKtpTxt = (EditText) view.findViewById(R.id.propinsi_ktp_txt);
         ptkpCmb = (Spinner) view.findViewById(R.id.spinner_ptkp);
 
-
         sessionManagement = new SessionManagement(getContext());
-       // npwpTxt.addTextChangedListener(new NumberTextWatcher(npwpTxt));
+//        npwpTxt.addTextChangedListener(new NumberTextWatcher(npwpTxt));
         pinLocBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadLocation();
             }
         });
-
-
-
 
         if(getArguments() != null)
         {
@@ -196,7 +194,7 @@ public class ProfileFragment extends Fragment {
         {
             FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams)profileScroll.getLayoutParams();
 
-            lp.bottomMargin = 160;
+            lp.bottomMargin = 50;
             profileScroll.setLayoutParams(lp);
 
             makeDataRequest();
@@ -232,7 +230,6 @@ public class ProfileFragment extends Fragment {
         addPictureDialogFragment.show(fm, getTag());
     }
 
-
     private void attempSendingData()
     {
         boolean cancel = false;
@@ -244,138 +241,30 @@ public class ProfileFragment extends Fragment {
                 konfPasswordTxt.setTextColor(getResources().getColor(R.color.active_color));
                 focusView = konfPasswordTxt;
                 cancel = true;
+                message = "Konfirmasi password tidak boleh kosong";
             }
             if (TextUtils.isEmpty(passwordTxt.getText().toString())) {
                 passwordTxt.setTextColor(getResources().getColor(R.color.active_color));
                 focusView = passwordTxt;
                 cancel = true;
+                message = "Password tidak boleh kosong";
             }
         }
-        if(TextUtils.isEmpty(propinsiKtpTxt.getText().toString()))
+
+
+        if(TextUtils.isEmpty(namaTxt.getText().toString()))
         {
-            propinsiKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = propinsiKtpTxt;
+            namaTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = namaTxt;
             cancel = true;
-            message = "Propinsi KTP tidak boleh kosong";
+            message = "Nama tidak boleh kosong";
         }
-        if(TextUtils.isEmpty(kodePosKtpTxt.getText().toString()))
+        if(TextUtils.isEmpty(npwpTxt.getText().toString()))
         {
-            kodePosKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = kodePosKtpTxt;
+            npwpTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = npwpTxt;
             cancel = true;
-            message = "Kode pos KTP tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(kotaKtpTxt.getText().toString()))
-        {
-            kotaKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = kotaKtpTxt;
-            cancel = true;
-            message = "Kota KTP tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(kecamatanKtpTxt.getText().toString()))
-        {
-            kecamatanKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = kecamatanKtpTxt;
-            cancel = true;
-            message = "Kecamatan KTP tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(kelurahanKtpTxt.getText().toString()))
-        {
-            kelurahanKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = kelurahanKtpTxt;
-            cancel = true;
-            message = "Kelurahan KTP tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(rwKtpTxt.getText().toString()))
-        {
-            rwKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = rwKtpTxt;
-            cancel = true;
-            message = "RW KTP tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(rtKtpTxt.getText().toString()))
-        {
-            rtKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = rtKtpTxt;
-            cancel = true;
-            message = "RT KTP tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(alamatKtpTxt.getText().toString()))
-        {
-            alamatKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = alamatKtpTxt;
-            cancel = true;
-            message = "Alamat KTP tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(propinsiTxt.getText().toString()))
-        {
-            propinsiTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = propinsiTxt;
-            cancel = true;
-            message = "Propinsi tempat tinggal tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(kodePosTxt.getText().toString()))
-        {
-            kodePosTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = kodePosTxt;
-            cancel = true;
-            message = "Kode pos tempat tinggal tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(kotaTxt.getText().toString()))
-        {
-            kotaTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = kotaTxt;
-            cancel = true;
-            message = "Kota tempat tinggal tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(kecamatanTxt.getText().toString()))
-        {
-            kecamatanTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = kecamatanTxt;
-            cancel = true;
-            message = "Kecamatan tempat tinggal tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(kelurahanTxt.getText().toString()))
-        {
-            kelurahanTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = kelurahanTxt;
-            cancel = true;
-            message = "Kelurahan tempat tinggal tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(rwTxt.getText().toString()))
-        {
-            rwTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = rwTxt;
-            cancel = true;
-            message = "RW tempat tinggal tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(rtTxt.getText().toString()))
-        {
-            rtTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = rtTxt;
-            cancel = true;
-            message = "RT tempat tinggal tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(alamatMapTxt.getText().toString()))
-        {
-            alamatMapTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = alamatMapTxt;
-            cancel = true;
-            message = "Alamat pin point tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(alamatTxt.getText().toString()))
-        {
-            alamatTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = alamatTxt;
-            cancel = true;
-            message = "Alamat tempat tinggal tidak boleh kosong";
-        }
-        if(TextUtils.isEmpty(phoneTxt.getText().toString()))
-        {
-            phoneTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = phoneTxt;
-            cancel = true;
-            message = "No Telp tidak boleh kosong";
+            message = "NPWP tidak boleh kosong";
         }
         if(TextUtils.isEmpty(emailTxt.getText().toString()))
         {
@@ -384,6 +273,13 @@ public class ProfileFragment extends Fragment {
             message = "Email tidak boleh kosong";
             cancel = true;
         }
+        if(TextUtils.isEmpty(phoneTxt.getText().toString()))
+        {
+            phoneTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = phoneTxt;
+            cancel = true;
+            message = "No Telp tidak boleh kosong";
+        }
         if(TextUtils.isEmpty(ktpTxt.getText().toString()))
         {
             ktpTxt.setTextColor(getResources().getColor(R.color.active_color));
@@ -391,13 +287,126 @@ public class ProfileFragment extends Fragment {
             cancel = true;
             message = "No KTP tidak boleh kosong";
         }
-        if(TextUtils.isEmpty(namaTxt.getText().toString()))
+        if(TextUtils.isEmpty(alamatTxt.getText().toString()))
         {
-            namaTxt.setTextColor(getResources().getColor(R.color.active_color));
-            focusView = namaTxt;
+            alamatTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = alamatTxt;
             cancel = true;
-            message = "Nama tidak boleh kosong";
+            message = "Alamat tempat tinggal tidak boleh kosong";
         }
+        if(TextUtils.isEmpty(rtTxt.getText().toString()))
+        {
+            rtTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = rtTxt;
+            cancel = true;
+            message = "RT tempat tinggal tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(rwTxt.getText().toString()))
+        {
+            rwTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = rwTxt;
+            cancel = true;
+            message = "RW tempat tinggal tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(kelurahanTxt.getText().toString()))
+        {
+            kelurahanTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = kelurahanTxt;
+            cancel = true;
+            message = "Kelurahan tempat tinggal tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(kecamatanTxt.getText().toString()))
+        {
+            kecamatanTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = kecamatanTxt;
+            cancel = true;
+            message = "Kecamatan tempat tinggal tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(kotaTxt.getText().toString()))
+        {
+            kotaTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = kotaTxt;
+            cancel = true;
+            message = "Kota tempat tinggal tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(kodePosTxt.getText().toString()))
+        {
+            kodePosTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = kodePosTxt;
+            cancel = true;
+            message = "Kode pos tempat tinggal tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(propinsiTxt.getText().toString()))
+        {
+            propinsiTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = propinsiTxt;
+            cancel = true;
+            message = "Propinsi tempat tinggal tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(alamatMapTxt.getText().toString()))
+        {
+            alamatMapTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = alamatMapTxt;
+            cancel = true;
+            message = "Alamat pin point tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(alamatKtpTxt.getText().toString()))
+        {
+            alamatKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = alamatKtpTxt;
+            cancel = true;
+            message = "Alamat KTP tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(rtKtpTxt.getText().toString()))
+        {
+            rtKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = rtKtpTxt;
+            cancel = true;
+            message = "RT KTP tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(rwKtpTxt.getText().toString()))
+        {
+            rwKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = rwKtpTxt;
+            cancel = true;
+            message = "RW KTP tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(kelurahanKtpTxt.getText().toString()))
+        {
+            kelurahanKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = kelurahanKtpTxt;
+            cancel = true;
+            message = "Kelurahan KTP tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(kecamatanKtpTxt.getText().toString()))
+        {
+            kecamatanKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = kecamatanKtpTxt;
+            cancel = true;
+            message = "Kecamatan KTP tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(kotaKtpTxt.getText().toString()))
+        {
+            kotaKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = kotaKtpTxt;
+            cancel = true;
+            message = "Kota KTP tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(kodePosKtpTxt.getText().toString()))
+        {
+            kodePosKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = kodePosKtpTxt;
+            cancel = true;
+            message = "Kode pos KTP tidak boleh kosong";
+        }
+        if(TextUtils.isEmpty(propinsiKtpTxt.getText().toString()))
+        {
+            propinsiKtpTxt.setTextColor(getResources().getColor(R.color.active_color));
+            focusView = propinsiKtpTxt;
+            cancel = true;
+            message = "Propinsi KTP tidak boleh kosong";
+        }
+
         if (cancel) {
             if (focusView != null)
             {
@@ -411,7 +420,6 @@ public class ProfileFragment extends Fragment {
             {
                 if(bitmap == null || bitmapKtp == null)
                 {
-                    //Toast.makeText(getContext(),"Anda belum melakukan pengambilan photo atau upload KTP",Toast.LENGTH_LONG).show();
                     TastyToast.makeText(getContext(),"Anda belum melakukan pengambilan photo atau upload KTP",TastyToast.LENGTH_LONG,TastyToast.ERROR).show();
                 }
                 else
@@ -424,7 +432,7 @@ public class ProfileFragment extends Fragment {
             }
             else
             {
-                TastyToast.makeText(getContext(),"Password dan Konfirmasi tidak sama",Toast.LENGTH_LONG,TastyToast.ERROR).show();
+                TastyToast.makeText(getContext(),"Password dan Konfirmasi password tidak sama",TastyToast.LENGTH_LONG,TastyToast.ERROR).show();
 
             }
 
@@ -450,11 +458,12 @@ public class ProfileFragment extends Fragment {
                     Boolean status = response.getBoolean("status");
                     if (status) {
                         JSONObject obj = response.getJSONObject("karyawan");
+                        JSONObject obj_address = obj.getJSONObject("addressdetail");
                         String user_fullname = obj.getString("employee_name");
                         String email = obj.getString("email");
                         String ktp = obj.getString("ktp");
                         String pin_address = obj.getString("pin_address");
-                        String address = obj.getString("alamat_tinggal");
+                        String address = obj.getString("address");
                         String phone = obj.getString("phone");
                         String npwp = obj.getString("npwp");
                         String photo = obj.getString("photo");
@@ -470,21 +479,21 @@ public class ProfileFragment extends Fragment {
                         ktpTxt.setText(ktp);
                         imageViewPlaceholder.setImageBitmap(bitmap);
                         imageViewKTPPlaceholder.setImageBitmap(bitmapKtp);
-                        alamatKtpTxt.setText(obj.getString("alamat_ktp"));
-                        rtTxt.setText(obj.getString("rt_tinggal"));
-                        rwTxt.setText(obj.getString("rw_tinggal"));
-                        kelurahanTxt.setText(obj.getString("kelurahan_tinggal"));
-                        kecamatanTxt.setText(obj.getString("kecamatan_tinggal"));
-                        kotaTxt.setText(obj.getString("kota_tinggal"));
-                        kodePosTxt.setText(obj.getString("kode_pos_tinggal"));
-                        propinsiTxt.setText(obj.getString("propinsi_tinggal"));
-                        rtKtpTxt.setText(obj.getString("rt_ktp"));
-                        rwKtpTxt.setText(obj.getString("rw_ktp"));
-                        kelurahanKtpTxt.setText(obj.getString("keluarahan_ktp"));
-                        kecamatanKtpTxt.setText(obj.getString("kecamatan_ktp"));
-                        kotaKtpTxt.setText(obj.getString("kota_ktp"));
-                        kodePosKtpTxt.setText(obj.getString("kode_pos_ktp"));
-                        propinsiKtpTxt.setText(obj.getString("propinsi_ktp"));
+                        alamatKtpTxt.setText(obj_address.getString("alamat_ktp"));
+                        rtTxt.setText(obj_address.getString("rt_tinggal"));
+                        rwTxt.setText(obj_address.getString("rw_tinggal"));
+                        kelurahanTxt.setText(obj_address.getString("kelurahan_tinggal"));
+                        kecamatanTxt.setText(obj_address.getString("kecamatan_tinggal"));
+                        kotaTxt.setText(obj_address.getString("kota_tinggal"));
+                        kodePosTxt.setText(obj_address.getString("kode_pos_tinggal"));
+                        propinsiTxt.setText(obj_address.getString("propinsi_tinggal"));
+                        rtKtpTxt.setText(obj_address.getString("rt_ktp"));
+                        rwKtpTxt.setText(obj_address.getString("rw_ktp"));
+                        kelurahanKtpTxt.setText(obj_address.getString("kelurahan_ktp"));
+                        kecamatanKtpTxt.setText(obj_address.getString("kecamatan_ktp"));
+                        kotaKtpTxt.setText(obj_address.getString("kota_ktp"));
+                        kodePosKtpTxt.setText(obj_address.getString("kode_pos_ktp"));
+                        propinsiKtpTxt.setText(obj_address.getString("propinsi_ktp"));
                         imageKTP.setVisibility(View.VISIBLE);
                         if(ptkpList.size() > 0)
                         {
@@ -497,7 +506,7 @@ public class ProfileFragment extends Fragment {
                         }
                     } else {
                         String error = response.getString("message");
-                        TastyToast.makeText(getActivity(), "" + error, TastyToast.LENGTH_LONG,TastyToast.INFO).show();
+                        TastyToast.makeText(getActivity(), "" + error, TastyToast.LENGTH_LONG,TastyToast.CONFUSING).show();
 
                     }
 
@@ -526,24 +535,21 @@ public class ProfileFragment extends Fragment {
         final ProgressDialog dialog = new ProgressDialog(getActivity());
         dialog.setMessage("please wait...");
         dialog.show();
-        String tag_json_obj = "json_profile_req";
+        String tag_json_obj = "json_profile_reset_req";
 
-        String deviceInfo = empDevice.getManufacturer()+" "+empDevice.getHardware()+" "+empDevice.getDevice();
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
         String regId = pref.getString("regId", null);
         int pos = ptkpCmb.getSelectedItemPosition();
         Map<String, String> params = new HashMap<String, String>();
         params.put("photo", ImageUtil.convert(bitmap));
-        params.put("photo_ktp", ImageUtil.convert(bitmapKtp));
         params.put("nama", namaTxt.getText().toString());
-        params.put("ktp", ktpTxt.getText().toString());
-        params.put("email", emailTxt.getText().toString());
         params.put("npwp", npwpTxt.getText().toString());
+        params.put("email", emailTxt.getText().toString());
+        params.put("ptkp_id", ptkpList.get(pos).getId());
         params.put("phone", phoneTxt.getText().toString());
+        params.put("ktp", ktpTxt.getText().toString());
+        params.put("photo_ktp", ImageUtil.convert(bitmapKtp));
         params.put("alamat", alamatTxt.getText().toString());
-        params.put("alamat_map", alamatMapTxt.getText().toString());
-        params.put("password", passwordTxt.getText().toString());
-        params.put("alamat_ktp", alamatKtpTxt.getText().toString());
         params.put("rt", rtTxt.getText().toString());
         params.put("rw", rwTxt.getText().toString());
         params.put("kelurahan", kelurahanTxt.getText().toString());
@@ -551,6 +557,8 @@ public class ProfileFragment extends Fragment {
         params.put("kota", kotaTxt.getText().toString());
         params.put("kode_pos", kodePosTxt.getText().toString());
         params.put("propinsi", propinsiTxt.getText().toString());
+        params.put("alamat_map", alamatMapTxt.getText().toString());
+        params.put("alamat_ktp", alamatKtpTxt.getText().toString());
         params.put("rt_ktp", rtKtpTxt.getText().toString());
         params.put("rw_ktp", rwKtpTxt.getText().toString());
         params.put("kelurahan_ktp", kelurahanKtpTxt.getText().toString());
@@ -558,51 +566,31 @@ public class ProfileFragment extends Fragment {
         params.put("kota_ktp", kotaKtpTxt.getText().toString());
         params.put("kode_pos_ktp", kodePosKtpTxt.getText().toString());
         params.put("propinsi_ktp", propinsiKtpTxt.getText().toString());
+        params.put("password", passwordTxt.getText().toString());
         params.put("latitude", String.valueOf(getMapsLatitude()));
         params.put("longitude", String.valueOf(getMapsLongitude()));
-        params.put("device", deviceInfo);
-        params.put("firebase_id", regId);
-        params.put("ptkp_id", ptkpList.get(pos).getId());
-        String user_id = "0";
-        if(sessionManagement.getUserDetails().get(Config.KEY_ID) != null)
-        {
-           user_id = sessionManagement.getUserDetails().get(Config.KEY_ID);
-           String mac = sessionManagement.getUserDetails().get(Config.KEY_MAC);
-           if(mac.equals(""))
-           {
-               String macAddress = UUID.randomUUID().toString();
-               params.put("mac_address", macAddress);
-           }
-        }
-        else
-        {
-           // WifiManager manager = (WifiManager) getActivity().getApplicationContext().getSystemService(getContext().WIFI_SERVICE);
-            //WifiInfo info = manager.getConnectionInfo();
-            String macAddress = UUID.randomUUID().toString();
-            params.put("mac_address", macAddress);
-        }
-        params.put("user_id", user_id);
+
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 Config.INSERT_URL, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
-
                 dialog.dismiss();
                 try {
                     Boolean status = response.getBoolean("status");
                     if (status) {
                         JSONObject karyawan = response.getJSONObject("karyawan");
+                        Log.i("cek data", karyawan.toString());
                         if(sessionManagement.getUserDetails().get(Config.KEY_ID) == null) {
                             //redirect ke halaman verifikasi
                             int karyawanId = karyawan.getInt("id");
                             Bundle bundle = new Bundle();
                             bundle.putString("user_id",String.valueOf(karyawanId));
-                            VerificationFragment suksesFragment = new VerificationFragment();
-                            suksesFragment.setArguments(bundle);
+                            VerificationFragment verificationFragment = new VerificationFragment();
+                            verificationFragment.setArguments(bundle);
                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                             fragmentManager.beginTransaction()
-                                    .replace(R.id.m_data_frame, suksesFragment)
+                                    .replace(R.id.m_data_frame, verificationFragment)
                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                                     .commit();
                         }
@@ -625,7 +613,7 @@ public class ProfileFragment extends Fragment {
 
                     } else {
                         String error = response.getString("message");
-                        TastyToast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT,TastyToast.INFO).show();
+                        TastyToast.makeText(getActivity(), "" + error, TastyToast.LENGTH_SHORT,TastyToast.CONFUSING).show();
 
                     }
                 } catch (JSONException e) {
@@ -638,7 +626,7 @@ public class ProfileFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 dialog.dismiss();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    TastyToast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT,TastyToast.ERROR).show();
+                    TastyToast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), TastyToast.LENGTH_SHORT,TastyToast.ERROR).show();
                 }
             }
         });
@@ -648,27 +636,6 @@ public class ProfileFragment extends Fragment {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
-
-
-//    public void launchSelfieCam(){
-//
-//        int id = getFrontCameraId();
-//
-//
-//        if(id==-1){
-//
-//
-//        }else {
-//            CameraFragment cameraFragment = CameraFragment.newInstance(this);
-//            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//            fragmentManager.beginTransaction()
-//                    .replace(R.id.m_data_frame, cameraFragment)
-//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-//                    .commit();
-//        }
-//
-//
-//    }
 
     int getFrontCameraId(){
 
@@ -794,7 +761,6 @@ public class ProfileFragment extends Fragment {
                             }
                             ptkpAdapter = new PtkpAdapter(getContext(),ptkpList);
                             ptkpCmb.setAdapter(ptkpAdapter);
-                            // izinAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                         }

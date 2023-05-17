@@ -12,7 +12,9 @@ import androidx.fragment.app.DialogFragment;
 
 import com.sia.als.R;
 import com.sia.als.activity.ForgotActivity;
+import com.sia.als.activity.ResetDeviceActivity;
 import com.sia.als.fragment.AbsensiFragment;
+import com.sia.als.fragment.AccountFragment;
 import com.sia.als.fragment.AddIzinFragment;
 import com.sia.als.fragment.AddOfficeFragment;
 import com.sia.als.fragment.AddTerlambatFragment;
@@ -30,6 +32,7 @@ public class SuksesDialog extends DialogFragment {
     AddOfficeFragment addOfficeFragment;
     AbsensiFragment absensiFragment;
     AddTerlambatFragment addTerlambatFragment;
+    AccountFragment accountFragment;
 
     public SuksesDialog(AddIzinFragment addIzinFragment)
     {
@@ -50,6 +53,10 @@ public class SuksesDialog extends DialogFragment {
     public SuksesDialog(AddOfficeFragment addOfficeFragment)
     {
         this.addOfficeFragment = addOfficeFragment;
+    }
+    public SuksesDialog(AccountFragment accountFragment)
+    {
+        this.accountFragment = accountFragment;
     }
 
     public SuksesDialog(ForgotActivity forgotActivity)
@@ -86,6 +93,10 @@ public class SuksesDialog extends DialogFragment {
                 if(addTerlambatFragment != null)
                 {
                     addTerlambatFragment.showListTerlambat();
+                }
+                if(accountFragment != null)
+                {
+                    accountFragment.showAccount();
                 }
                 SuksesDialog.this.dismiss();
             }

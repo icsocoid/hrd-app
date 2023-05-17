@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -387,10 +388,12 @@ public class DetailIzinFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 dialog.dismiss();
                 try {
+
                     Boolean status = response.getBoolean("status");
                     if (status) {
                         JSONObject obj = response.getJSONObject("izin");
-                        String namaIzin = obj.getString("nama_izin");
+                        JSONObject objIzin = obj.getJSONObject("jenis_izin");
+                        String namaIzin = objIzin.getString("nama_izin");
                         String tanggal = obj.getString("tanggal");
                         String tanggalAwal = obj.getString("tanggal_awal");
                         String tanggalAkhir = obj.getString("tanggal_akhir");
