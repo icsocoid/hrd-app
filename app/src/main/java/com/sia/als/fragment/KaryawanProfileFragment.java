@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -585,18 +586,21 @@ public class KaryawanProfileFragment extends Fragment {
                     Boolean status = response.getBoolean("status");
                     if (status) {
                         JSONObject obj = response.getJSONObject("karyawan");
-                        String user_fullname = obj.getString("employee_name");
+                        Log.i("info_account", obj.toString());
+
+                        JSONObject objAlamat = obj.getJSONObject("addressdetail");
+//                        String user_fullname = obj.getString("employee_name");
                         String email = obj.getString("email");
                         String ktp = obj.getString("ktp");
                         String pin_address = obj.getString("pin_address");
-                        String address = obj.getString("alamat_tinggal");
+                        String address = objAlamat.getString("alamat_tinggal");
                         String phone = obj.getString("phone");
                         String npwp = obj.getString("npwp");
                         String photo = obj.getString("photo");
                         String photoKtp = obj.getString("photo_ktp");
                         bitmap = ImageUtil.convert(photo);
                         bitmapKtp = ImageUtil.convert(photoKtp);
-                        namaTxt.setText(user_fullname);
+//                        namaTxt.setText(user_fullname);
                         emailTxt.setText(email);
                         npwpTxt.setText(npwp);
                         phoneTxt.setText(phone);
@@ -605,21 +609,21 @@ public class KaryawanProfileFragment extends Fragment {
                         ktpTxt.setText(ktp);
                         imageViewPlaceholder.setImageBitmap(bitmap);
                         imageViewKTPPlaceholder.setImageBitmap(bitmapKtp);
-                        alamatKtpTxt.setText(obj.getString("alamat_ktp"));
-                        rtTxt.setText(obj.getString("rt_tinggal"));
-                        rwTxt.setText(obj.getString("rw_tinggal"));
-                        kelurahanTxt.setText(obj.getString("kelurahan_tinggal"));
-                        kecamatanTxt.setText(obj.getString("kecamatan_tinggal"));
-                        kotaTxt.setText(obj.getString("kota_tinggal"));
-                        kodePosTxt.setText(obj.getString("kode_pos_tinggal"));
-                        propinsiTxt.setText(obj.getString("propinsi_tinggal"));
-                        rtKtpTxt.setText(obj.getString("rt_ktp"));
-                        rwKtpTxt.setText(obj.getString("rw_ktp"));
-                        kelurahanKtpTxt.setText(obj.getString("keluarahan_ktp"));
-                        kecamatanKtpTxt.setText(obj.getString("kecamatan_ktp"));
-                        kotaKtpTxt.setText(obj.getString("kota_ktp"));
-                        kodePosKtpTxt.setText(obj.getString("kode_pos_ktp"));
-                        propinsiKtpTxt.setText(obj.getString("propinsi_ktp"));
+                        alamatKtpTxt.setText(objAlamat.getString("alamat_ktp"));
+                        rtTxt.setText(objAlamat.getString("rt_tinggal"));
+                        rwTxt.setText(objAlamat.getString("rw_tinggal"));
+                        kelurahanTxt.setText(objAlamat.getString("kelurahan_tinggal"));
+                        kecamatanTxt.setText(objAlamat.getString("kecamatan_tinggal"));
+                        kotaTxt.setText(objAlamat.getString("kota_tinggal"));
+                        kodePosTxt.setText(objAlamat.getString("kode_pos_tinggal"));
+                        propinsiTxt.setText(objAlamat.getString("propinsi_tinggal"));
+                        rtKtpTxt.setText(objAlamat.getString("rt_ktp"));
+                        rwKtpTxt.setText(objAlamat.getString("rw_ktp"));
+                        kelurahanKtpTxt.setText(objAlamat.getString("keluarahan_ktp"));
+                        kecamatanKtpTxt.setText(objAlamat.getString("kecamatan_ktp"));
+                        kotaKtpTxt.setText(objAlamat.getString("kota_ktp"));
+                        kodePosKtpTxt.setText(objAlamat.getString("kode_pos_ktp"));
+                        propinsiKtpTxt.setText(objAlamat.getString("propinsi_ktp"));
                         imageKTP.setVisibility(View.VISIBLE);
 
                     } else {
@@ -707,6 +711,7 @@ public class KaryawanProfileFragment extends Fragment {
             params.put("mac_address", macAddress);
         }
         params.put("user_id", user_id);
+
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 Config.INSERT_URL, params, new Response.Listener<JSONObject>() {
 

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.sia.als.activity.KodePerusahaanActivity;
 import com.sia.als.activity.LoginActivity;
 import com.sia.als.util.SessionManagement;
 
@@ -110,12 +111,19 @@ public class SplashActivity extends AppCompatActivity {
 
     public void go_next() {
 
-       if (sessionManagement.isLoggedIn()) {
+        if (sessionManagement.isLoggedIn()) {
             Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(startmain);
         } else {
-            Intent startmain = new Intent(SplashActivity.this, LoginActivity.class);
-            startActivity(startmain);
+            if(SessionManagement.getNamaSubdomain() == null)
+            {
+                Intent startmain = new Intent(SplashActivity.this, KodePerusahaanActivity.class);
+                startActivity(startmain);
+            }
+            else {
+                Intent startmain = new Intent(SplashActivity.this, LoginActivity.class);
+                startActivity(startmain);
+            }
         }
         finish();
     }

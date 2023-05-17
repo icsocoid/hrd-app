@@ -1,5 +1,6 @@
 package com.sia.als.fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,6 +36,7 @@ import com.android.volley.VolleyError;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sia.als.AppController;
 import com.sia.als.R;
+import com.sia.als.activity.LoginActivity;
 import com.sia.als.adapter.HistoryAbsensiAdapter;
 import com.sia.als.adapter.IzinAdapter;
 import com.sia.als.adapter.NotifikasiAdapter;
@@ -183,7 +185,7 @@ public class NotifikasiFragment extends Fragment {
         params.put("halaman", String.valueOf(halaman));
         params.put("limit", String.valueOf(limit));
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                Config.NOTIFICATION, params, new Response.Listener<JSONObject>() {
+                Config.NOTIFICATION_URL, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 swipeRefreshLayout.setRefreshing(false);
@@ -195,9 +197,12 @@ public class NotifikasiFragment extends Fragment {
 
                     Boolean status = response.getBoolean("status");
                     if (status) {
-
-                        statefulLayout.setState(StatefulLayout.State.CONTENT);
-                        try {
+                        JSONObject karyawan = response.getJSONObject("karyawan");
+                        int statusKaryawan = karyawan.getInt("status_employee");
+                        if (statusKaryawan == 1)
+                        {
+                            statefulLayout.setState(StatefulLayout.State.CONTENT);
+                            try {
                                 JSONArray Jarray = response.getJSONArray("data");
                                 for (int i = 0; i < Jarray.length(); i++) {
                                     JSONObject json_data = Jarray.getJSONObject(i);
@@ -212,40 +217,51 @@ public class NotifikasiFragment extends Fragment {
                                     notifikasi.setTanggal(json_data.getString("tanggal"));
                                     data.add(notifikasi);
                                 }
-                            if(notifikasiAdapter == null)
-                            {
-                                isFirst = false;
-                                notifikasiAdapter = new NotifikasiAdapter(getContext(),data);
-                                notifikasiAdapter.setOnItemClickListener(new NotifikasiAdapter.OnItemClickListener(){
-                                    @Override
-                                    public void onItemClick(View view, Notifikasi obj, int position) {
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("notifikasi_id",String.valueOf(obj.getId()));
-                                        DetailNotifFragment detailNotifFragment = new DetailNotifFragment();
-                                        detailNotifFragment.setArguments(bundle);
-                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                        fragmentManager.beginTransaction()
-                                                .replace(R.id.m_frame, detailNotifFragment)
-                                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                                .commit();
-                                    }
-                                });
-                                rvNotif.setAdapter(notifikasiAdapter);
-                                //rvAbsensi.refreshDrawableState();
-                                //swipeRefreshLayout.setRefreshing(false);
-                                rvNotif.smoothScrollToPosition(0);
+                                if(notifikasiAdapter == null)
+                                {
+                                    isFirst = false;
+                                    notifikasiAdapter = new NotifikasiAdapter(getContext(),data);
+                                    notifikasiAdapter.setOnItemClickListener(new NotifikasiAdapter.OnItemClickListener(){
+                                        @Override
+                                        public void onItemClick(View view, Notifikasi obj, int position) {
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString("notifikasi_id",String.valueOf(obj.getId()));
+                                            DetailNotifFragment detailNotifFragment = new DetailNotifFragment();
+                                            detailNotifFragment.setArguments(bundle);
+                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                            fragmentManager.beginTransaction()
+                                                    .replace(R.id.m_frame, detailNotifFragment)
+                                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                                    .commit();
+                                        }
+                                    });
+                                    rvNotif.setAdapter(notifikasiAdapter);
+                                    //rvAbsensi.refreshDrawableState();
+                                    //swipeRefreshLayout.setRefreshing(false);
+                                    rvNotif.smoothScrollToPosition(0);
 
-                            }
-                            else
-                            {
-                                notifikasiAdapter.notifyDataSetChanged();
-                            }
-                            isLoading = false;
-                            //getData(page,limit);
+                                }
+                                else
+                                {
+                                    notifikasiAdapter.notifyDataSetChanged();
+                                }
+                                isLoading = false;
+                                //getData(page,limit);
 
-                        } catch (JSONException e) {
-                            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                            } catch (JSONException e) {
+                                Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                            }
                         }
+                        else
+                        {
+                            sessionManagement.logoutSession();
+                            Intent logout = new Intent(getActivity(), LoginActivity.class);
+                            logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            // Add new Flag to start new Activity
+                            logout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(logout);
+                        }
+
                     }
                     else
                     {

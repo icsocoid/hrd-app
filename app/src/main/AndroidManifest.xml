@@ -68,13 +68,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity" android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".activity.KodePerusahaanActivity" android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity android:name=".MainActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.ProfileActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.ForgotActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.NotifyActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.LoginActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.ResetDeviceActivity" android:theme="@style/AppTheme.NoActionBar" />
         <service
             android:name=".service.MyFirebaseMessagingService"
             android:enabled="true"

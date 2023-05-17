@@ -110,7 +110,7 @@ public class PeraturanFragment extends Fragment {
         //params.put("peraturan_id", idPeraturan);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                Config.PERATURAN, params, new Response.Listener<JSONObject>() {
+                Config.PERATURAN_URL, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 dialog.dismiss();

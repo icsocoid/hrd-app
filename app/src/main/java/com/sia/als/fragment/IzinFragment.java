@@ -2,6 +2,7 @@ package com.sia.als.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,8 +32,10 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.sdsmdg.tastytoast.TastyToast;
 import com.sia.als.AppController;
 import com.sia.als.R;
+import com.sia.als.activity.LoginActivity;
 import com.sia.als.adapter.IzinAdapter;
 import com.sia.als.adapter.PengajuanAdapter;
 import com.sia.als.config.Config;
@@ -374,14 +377,9 @@ public class IzinFragment extends Fragment {
                                 JSONObject json_data = Jarray.getJSONObject(i);
                                 Pengajuan izin = new Pengajuan();
                                 izin.setId(json_data.getString("id"));
-                              //  izin.setAls_employee_id(json_data.getString("als_employee_id"));
-                                //izin.setAls_hrm_izin_id(json_data.getString("als_hrm_izin_id"));
                                 izin.setNama_izin(json_data.getString("nama_izin"));
                                 izin.setTanggal_awal(json_data.getString("tanggal_awal"));
                                 izin.setTanggal_akhir(json_data.getString("tanggal_akhir"));
-                            //    izin.setPhoto(json_data.getString("photo"));
-                             //   izin.setLatitude(json_data.getString("latitude"));
-                            //    izin.setLongitude(json_data.getString("longitude"));
                                 izin.setTanggal(json_data.getString("tanggal"));
                                 izin.setKeterangan(json_data.getString("keterangan"));
                                 izin.setStatus_izin(json_data.getString("status_izin"));
@@ -389,29 +387,29 @@ public class IzinFragment extends Fragment {
                             }
                             if(pengajuanAdapter == null)
                             {
-                            isFirst = false;
-                            pengajuanAdapter = new PengajuanAdapter(getContext(),data);
-                            pengajuanAdapter.setOnItemClickListener(new PengajuanAdapter.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(View view, Pengajuan obj, int position) {
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("id_izin",obj.getId());
-                                    DetailIzinFragment detailIzinFragment = new DetailIzinFragment();
-                                    detailIzinFragment.setArguments(bundle);
-                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                    fragmentManager.beginTransaction()
-                                            .replace(R.id.m_frame, detailIzinFragment)
-                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                            .commit();
-                                }
-                            });
-                            //isLoading = false;
-                            //statefulLayout.setState(Config.STATE_EMPTY);
-                            //emptyGroup.setVisibility(View.GONE);
-                            addIzinBtn.show();
-                            rvIzin.setAdapter(pengajuanAdapter);
-                            //rvIzin.refreshDrawableState();
-                            rvIzin.smoothScrollToPosition(0);
+                                isFirst = false;
+                                pengajuanAdapter = new PengajuanAdapter(getContext(),data);
+                                pengajuanAdapter.setOnItemClickListener(new PengajuanAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(View view, Pengajuan obj, int position) {
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("id_izin",obj.getId());
+                                        DetailIzinFragment detailIzinFragment = new DetailIzinFragment();
+                                        detailIzinFragment.setArguments(bundle);
+                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                        fragmentManager.beginTransaction()
+                                                .replace(R.id.m_frame, detailIzinFragment)
+                                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                                .commit();
+                                    }
+                                });
+                                //isLoading = false;
+                                //statefulLayout.setState(Config.STATE_EMPTY);
+                                //emptyGroup.setVisibility(View.GONE);
+                                addIzinBtn.show();
+                                rvIzin.setAdapter(pengajuanAdapter);
+                                //rvIzin.refreshDrawableState();
+                                rvIzin.smoothScrollToPosition(0);
 
                             }else{
                                 pengajuanAdapter.notifyDataSetChanged();
@@ -419,8 +417,10 @@ public class IzinFragment extends Fragment {
                             isLoading = false;
 
                         } catch (JSONException e) {
-                            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                            String error = response.getString("message");
+                            TastyToast.makeText(getActivity(), "" + error, TastyToast.LENGTH_LONG, TastyToast.CONFUSING).show();
                         }
+
                     }
                     else {
                         notif.setOnClickListener(new View.OnClickListener() {
@@ -462,7 +462,7 @@ public class IzinFragment extends Fragment {
                 //dialog.dismiss();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     statefulLayout.setState(Config.STATE_NO_CONNECTION);
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    TastyToast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), TastyToast.LENGTH_SHORT, TastyToast.ERROR).show();
                 }
             }
         });
