@@ -88,7 +88,7 @@ public class NewProfileFragment extends Fragment {
     Spinner ptkpCmb;
     PtkpAdapter ptkpAdapter;
     List<Ptkp> ptkpList;
-    LinearLayout accountTxt, passwordTxt, peraturanTxt, privasiTxt, logoutTxt, emailTxt;
+    LinearLayout accountTxt, passwordTxt, slipTxt, peraturanTxt, privasiTxt, logoutTxt, emailTxt;
     List<Karyawan> karyawanList = new ArrayList<>();
     KaryawanAdapter karyawanAdapter;
     EditText inputPasswordTxt, konfPasswordTxt;
@@ -109,6 +109,7 @@ public class NewProfileFragment extends Fragment {
         jabatanTxt = (TextView) view.findViewById(R.id.jabatan_txt);
         accountTxt = (LinearLayout) view.findViewById(R.id.account_btn);
         passwordTxt = (LinearLayout) view.findViewById(R.id.ganti_password_btn);
+        slipTxt = (LinearLayout) view.findViewById(R.id.slip_gaji_btn);
         peraturanTxt = (LinearLayout) view.findViewById(R.id.peraturan_btn);
         privasiTxt = (LinearLayout) view.findViewById(R.id.privacy_policy_btn);
         logoutTxt = (LinearLayout) view.findViewById(R.id.logout_btn);
@@ -147,6 +148,13 @@ public class NewProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 showAccount();
+            }
+        });
+
+        slipTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSlip();
             }
         });
 
@@ -215,6 +223,16 @@ public class NewProfileFragment extends Fragment {
                 .commit();
     }
 
+    //Slip Gaji
+    private void showSlip() {
+        SlipGajiFragment slipGajiFragment = new SlipGajiFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.m_frame, slipGajiFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+    }
+
     //Ganti password
     private void dialogPassword() {
         boolean cancel = false;
@@ -260,6 +278,8 @@ public class NewProfileFragment extends Fragment {
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
     }
+
+
 
     private void makeSubmitRequest() {
         final ProgressDialog dialog = new ProgressDialog(getActivity());

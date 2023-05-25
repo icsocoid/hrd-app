@@ -62,6 +62,7 @@
     <dimen name="spacing_mlarge">20dp</dimen>
     <dimen name="spacing_small">3dp</dimen>
     <dimen name="spacing_xxlarge">50dp</dimen>
+    <dimen name="spacing_xxxlarge">80dp</dimen>
     <dimen name="spacing_middle">10dp</dimen>
     <dimen name="spacing_mxlarge">25dp</dimen>
     <dimen name="spacing_smlarge">18dp</dimen>

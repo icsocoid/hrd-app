@@ -8,9 +8,9 @@ import com.sia.als.util.SessionManagement;
 
 public class Config {
 
-    public static String BASE_INIT_URL = "http://hrdapi.icso.biz.id/public/api/user/get-code";
+    public static String BASE_INIT_URL = "https://hrdapi.icso.biz.id/public/api/user/get-code";
     public static String NAMADOMAIN = "icso.biz.id";
-    public static String BASE_URL = "http://"+ SessionManagement.getNamaSubdomain() +"."+NAMADOMAIN+"/public/";
+    public static String BASE_URL = "https://"+ SessionManagement.getNamaSubdomain() +"."+NAMADOMAIN+"/public/";
     public static final String PREFS_NAME = "AlsKaryawanData";
     public static final String IS_LOGIN = "isLogin";
     public static final String KEY_NAME = "user_fullname";
