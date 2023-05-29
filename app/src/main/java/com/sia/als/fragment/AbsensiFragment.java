@@ -141,6 +141,7 @@ public class AbsensiFragment extends Fragment {
             }
 
         });
+
         //fungsi munculkan dialog
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
