@@ -1,16 +1,12 @@
 package com.sia.als;
 
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,13 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.volley.NoConnectionError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.google.android.ads.mediationtestsuite.activities.HomeActivity;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
@@ -39,9 +28,6 @@ import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.sia.als.activity.KodePerusahaanActivity;
-import com.sia.als.activity.LoginActivity;
-import com.sia.als.activity.ResetDeviceActivity;
-import com.sia.als.adapter.PtkpAdapter;
 import com.sia.als.config.Config;
 import com.sia.als.fragment.AbsensiFragment;
 import com.sia.als.fragment.AdminHomeFragment;
@@ -55,17 +41,9 @@ import com.sia.als.fragment.NotifikasiPengajuanAbsensiFragment;
 import com.sia.als.fragment.ProfileFragment;
 import com.sia.als.fragment.QrCodeFragment;
 import com.sia.als.fragment.ReadQrCodeFragment;
-import com.sia.als.model.Ptkp;
 import com.sia.als.util.ConnectivityReceiver;
-import com.sia.als.util.CustomVolleyJsonRequest;
 import com.sia.als.util.NoInternetConnection;
 import com.sia.als.util.SessionManagement;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {

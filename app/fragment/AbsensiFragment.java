@@ -307,8 +307,7 @@ public class AbsensiFragment extends Fragment {
                 final DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 int month= monthOfYear+1;
                                 String fm=""+month;
                                 String fd=""+dayOfMonth;

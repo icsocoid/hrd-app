@@ -12,7 +12,6 @@ import androidx.fragment.app.DialogFragment;
 
 import com.sia.als.R;
 import com.sia.als.activity.ForgotActivity;
-import com.sia.als.activity.ResetDeviceActivity;
 import com.sia.als.fragment.AbsensiFragment;
 import com.sia.als.fragment.AccountFragment;
 import com.sia.als.fragment.AddIzinFragment;

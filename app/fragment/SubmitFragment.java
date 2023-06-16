@@ -30,7 +30,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import android.util.Base64;
 import android.graphics.BitmapFactory;
-import java.io.IOException;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
