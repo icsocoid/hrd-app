@@ -65,24 +65,24 @@ import cz.kinst.jakub.view.StatefulLayout;
 
 public class NotifikasiFragment extends Fragment {
     private View view;
-//    ImageButton backButton;
-//    SessionManagement sessionManagement;
-//    TextView toolbarTitle;
-//    RecyclerView rvNotif;
-//    NotifikasiAdapter notifikasiAdapter;
-//    Button notif;
-//    StatefulLayout statefulLayout;
-//    Button retryBtn;
-//    NestedScrollView nestedScrollView;
-//    SwipeRefreshLayout swipeRefreshLayout;
-//    ProgressBar progressBar;
-//    int page = 0;
-//    int limit = 10;
-//    boolean isLoading = false;
-//    boolean isFirst = true;
-//    List<Notifikasi> data = new ArrayList<>();
-//    LinearLayoutManager linearLayoutManager;
-//    SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
+    ImageButton backButton;
+    SessionManagement sessionManagement;
+    TextView toolbarTitle;
+    RecyclerView rvNotif;
+    NotifikasiAdapter notifikasiAdapter;
+    Button notif;
+    StatefulLayout statefulLayout;
+    Button retryBtn;
+    NestedScrollView nestedScrollView;
+    SwipeRefreshLayout swipeRefreshLayout;
+    ProgressBar progressBar;
+    int page = 0;
+    int limit = 10;
+    boolean isLoading = false;
+    boolean isFirst = true;
+    List<Notifikasi> data = new ArrayList<>();
+    LinearLayoutManager linearLayoutManager;
+    SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_development, container, false);

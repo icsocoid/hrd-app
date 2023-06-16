@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.sia.als.MainActivity;
 import com.sia.als.R;
+import com.sia.als.adapter.NotifikasiPengajuanAbsensiAdapter;
 import com.sia.als.config.Config;
 import com.sia.als.fragment.AbsensiFragment;
 import com.sia.als.fragment.AdminHomeFragment;
@@ -21,6 +23,7 @@ import com.sia.als.fragment.NewProfileFragment;
 import com.sia.als.fragment.NotifikasiPengajuanAbsensiFragment;
 import com.sia.als.fragment.NotifyIzinFragment;
 import com.sia.als.fragment.QrCodeFragment;
+import com.sia.als.model.PengajuanAbsensi;
 import com.sia.als.util.SessionManagement;
 
 public class NotifyActivity extends AppCompatActivity {

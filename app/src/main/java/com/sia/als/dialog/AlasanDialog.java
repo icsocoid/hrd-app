@@ -16,6 +16,8 @@ import com.sia.als.fragment.DetailIzinFragment;
 import com.sia.als.fragment.DetailNotifPengajuanAbsensiFragment;
 import com.sia.als.fragment.DetailPengajuanAbsensiFragment;
 
+import org.w3c.dom.Text;
+
 @SuppressLint("ValidFragment")
 public class AlasanDialog extends DialogFragment {
     View view;
