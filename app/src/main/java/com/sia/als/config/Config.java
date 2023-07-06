@@ -60,6 +60,8 @@ public class Config {
     public static String UPDATE_NOTIFICATION = BASE_URL + "api/notifikasi/update-status";
     public static String DETAIL_NOTIFICATION_URL = BASE_URL + "api/notifikasi/detail";
 
+    public static String ADD_TASK_URL = BASE_URL + "api/task/save-data";
+
 
     public static String ADMIN_HOME_URL = BASE_URL + "hrm/hrmapi/admin_home";
     public static String ADMIN_REKAP_ABSENSI_URL = BASE_URL + "hrm/hrmapi/admin_rekap_absensi";

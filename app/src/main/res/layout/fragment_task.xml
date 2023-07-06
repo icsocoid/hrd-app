@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="75dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <cz.kinst.jakub.view.StatefulLayout
+        android:id="@+id/stateful_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/manage_list_product_main_platform_fragment"
+            android:background="@drawable/border_layout_left_right_back_white_fa"
+            android:focusableInTouchMode="true"
+            android:descendantFocusability="beforeDescendants"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/general_outer_layout_margin_left_right"
+            android:layout_marginRight="@dimen/general_outer_layout_margin_left_right">
+            <FrameLayout
+                android:id="@+id/frame_progress_indicator"
+                android:padding="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/manage_product_list_progress_bar_refresh"
+                    android:paddingTop="0dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-7dp"
+                    android:indeterminate="true"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+            </FrameLayout>
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/task_float_buttom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:fab_colorNormal="@color/colorPrimary"
+                app:fab_colorPressed="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:fab_icon="@drawable/ic_button_plus_white"/>
+
+<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                android:id="@+id/task_float_button"-->
+<!--                android:layout_width="@dimen/default_icon_size_xxx"-->
+<!--                android:layout_height="@dimen/default_icon_size_xxx"-->
+<!--                android:layout_margin="@dimen/default_padding_margin_x"-->
+<!--                android:scaleType="center"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:srcCompat="@drawable/ic_button_plus_white"-->
+<!--                style="?android:attr/borderlessButtonStyle"/>-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </cz.kinst.jakub.view.StatefulLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

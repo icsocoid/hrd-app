@@ -82,12 +82,12 @@ public class HistoryAbsensiAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             {
 
             }
-//            holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    mOnItemClickListener.onItemClick(v,mList,position);
-//                }
-//            });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onItemClick(v,mList,position);
+                }
+            });
         }
         else if (holder instanceof LoadingViewHolder) {
             showLoadingView((LoadingViewHolder) holder, position);

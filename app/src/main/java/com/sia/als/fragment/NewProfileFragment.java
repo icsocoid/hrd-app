@@ -88,7 +88,7 @@ public class NewProfileFragment extends Fragment {
     Spinner ptkpCmb;
     PtkpAdapter ptkpAdapter;
     List<Ptkp> ptkpList;
-    LinearLayout accountTxt, passwordTxt, slipTxt, peraturanTxt, privasiTxt, logoutTxt, emailTxt;
+    LinearLayout accountTxt, passwordTxt, taskTxt, slipTxt, peraturanTxt, privasiTxt, logoutTxt, emailTxt;
     List<Karyawan> karyawanList = new ArrayList<>();
     KaryawanAdapter karyawanAdapter;
     EditText inputPasswordTxt, konfPasswordTxt;
@@ -109,6 +109,7 @@ public class NewProfileFragment extends Fragment {
         jabatanTxt = (TextView) view.findViewById(R.id.jabatan_txt);
         accountTxt = (LinearLayout) view.findViewById(R.id.account_btn);
         passwordTxt = (LinearLayout) view.findViewById(R.id.ganti_password_btn);
+        taskTxt = (LinearLayout) view.findViewById(R.id.task_btn);
         slipTxt = (LinearLayout) view.findViewById(R.id.slip_gaji_btn);
         peraturanTxt = (LinearLayout) view.findViewById(R.id.peraturan_btn);
         privasiTxt = (LinearLayout) view.findViewById(R.id.privacy_policy_btn);
@@ -149,6 +150,11 @@ public class NewProfileFragment extends Fragment {
             public void onClick(View view) {
                 showAccount();
             }
+        });
+
+        taskTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { showTask(); }
         });
 
         slipTxt.setOnClickListener(new View.OnClickListener() {
@@ -219,6 +225,16 @@ public class NewProfileFragment extends Fragment {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.m_frame, privacyPolicyFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+    }
+
+    //Task
+    private void showTask(){
+        TaskFragment taskFragment = new TaskFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.m_frame, taskFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
     }
