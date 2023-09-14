@@ -88,7 +88,7 @@ public class NewProfileFragment extends Fragment {
     Spinner ptkpCmb;
     PtkpAdapter ptkpAdapter;
     List<Ptkp> ptkpList;
-    LinearLayout accountTxt, passwordTxt, peraturanTxt, privasiTxt, logoutTxt, emailTxt;
+    LinearLayout accountTxt, passwordTxt, taskTxt, slipTxt, perdinTxt, peraturanTxt, privasiTxt, logoutTxt, emailTxt;
     List<Karyawan> karyawanList = new ArrayList<>();
     KaryawanAdapter karyawanAdapter;
     EditText inputPasswordTxt, konfPasswordTxt;
@@ -109,6 +109,9 @@ public class NewProfileFragment extends Fragment {
         jabatanTxt = (TextView) view.findViewById(R.id.jabatan_txt);
         accountTxt = (LinearLayout) view.findViewById(R.id.account_btn);
         passwordTxt = (LinearLayout) view.findViewById(R.id.ganti_password_btn);
+        taskTxt = (LinearLayout) view.findViewById(R.id.task_btn);
+        slipTxt = (LinearLayout) view.findViewById(R.id.slip_gaji_btn);
+        perdinTxt = (LinearLayout) view.findViewById(R.id.perdin_btn);
         peraturanTxt = (LinearLayout) view.findViewById(R.id.peraturan_btn);
         privasiTxt = (LinearLayout) view.findViewById(R.id.privacy_policy_btn);
         logoutTxt = (LinearLayout) view.findViewById(R.id.logout_btn);
@@ -147,6 +150,25 @@ public class NewProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 showAccount();
+            }
+        });
+
+        taskTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { showTask(); }
+        });
+
+        slipTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSlip();
+            }
+        });
+
+        perdinTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPerdin();
             }
         });
 
@@ -195,6 +217,8 @@ public class NewProfileFragment extends Fragment {
 
     }
 
+
+
     //Peraturan
     private void showPeraturan() {
         PeraturanFragment peraturanFragment = new PeraturanFragment();
@@ -211,6 +235,36 @@ public class NewProfileFragment extends Fragment {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.m_frame, privacyPolicyFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+    }
+
+    //Task
+    private void showTask(){
+        TaskFragment taskFragment = new TaskFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.m_frame, taskFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+    }
+
+    //Slip Gaji
+    private void showSlip() {
+        SlipGajiFragment slipGajiFragment = new SlipGajiFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.m_frame, slipGajiFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+    }
+
+    //Perdin
+    private void showPerdin() {
+        PerdinFragment perdinFragment = new PerdinFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.m_frame, perdinFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
     }
@@ -260,6 +314,8 @@ public class NewProfileFragment extends Fragment {
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
     }
+
+
 
     private void makeSubmitRequest() {
         final ProgressDialog dialog = new ProgressDialog(getActivity());

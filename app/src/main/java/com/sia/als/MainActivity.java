@@ -70,8 +70,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
 
-    private AppUpdateManager mAppUpdateManager;
-    private static final int U_APP_UPDATE = 862;
+//    private AppUpdateManager mAppUpdateManager;
+//    private static final int U_APP_UPDATE = 862;
 
    // public BottomBar bottomBar;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
@@ -176,89 +176,89 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
 
         actionBottomBar();
 
-        AppUpdateManager mAppUpdateManager = AppUpdateManagerFactory.create(this);
-
-        // Returns an intent object that you use to check for an update.
-        Task<AppUpdateInfo> appUpdateInfoTask = mAppUpdateManager.getAppUpdateInfo();
-
-        // Checks that the platform will allow the specified type of update.
-        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                    // This example applies an immediate update. To apply a flexible update
-                    // instead, pass in AppUpdateType.FLEXIBLE
-                    && appUpdateInfo.updatePriority() >= 5
-                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                try {
-                    mAppUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, MainActivity.this
-                            ,U_APP_UPDATE);
-                }catch (IntentSender.SendIntentException e){
-                    e.printStackTrace();
-                }
-            }
-        });
+//        AppUpdateManager mAppUpdateManager = AppUpdateManagerFactory.create(this);
+//
+//        // Returns an intent object that you use to check for an update.
+//        Task<AppUpdateInfo> appUpdateInfoTask = mAppUpdateManager.getAppUpdateInfo();
+//
+//        // Checks that the platform will allow the specified type of update.
+//        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+//            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+//                    // This example applies an immediate update. To apply a flexible update
+//                    // instead, pass in AppUpdateType.FLEXIBLE
+//                    && appUpdateInfo.updatePriority() >= 5
+//                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+//                try {
+//                    mAppUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, MainActivity.this
+//                            ,U_APP_UPDATE);
+//                }catch (IntentSender.SendIntentException e){
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
         //mAppUpdateManager.registerListener(installStateUpdatedListener);
 
     }
 
-    private InstallStateUpdatedListener installStateUpdatedListener = new InstallStateUpdatedListener()
-    {
-        @Override
-        public void onStateUpdate(@NonNull InstallState installState)
-        {
-            if (installState.installStatus() == InstallStatus.DOWNLOADED)
-            {
-                showCompletedUpdate();
-            }
-        }
-    };
+//    private InstallStateUpdatedListener installStateUpdatedListener = new InstallStateUpdatedListener()
+//    {
+//        @Override
+//        public void onStateUpdate(@NonNull InstallState installState)
+//        {
+//            if (installState.installStatus() == InstallStatus.DOWNLOADED)
+//            {
+//                showCompletedUpdate();
+//            }
+//        }
+//    };
 
-    @Override
-    protected void onStop() {
-        //if (mAppUpdateManager!=null) mAppUpdateManager.unregisterListener(installStateUpdatedListener);
-        super.onStop();
-    }
+//    @Override
+//    protected void onStop() {
+//        //if (mAppUpdateManager!=null) mAppUpdateManager.unregisterListener(installStateUpdatedListener);
+//        super.onStop();
+//    }
 
-    private void showCompletedUpdate() {
-        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "New app is ready!",
-                Snackbar.LENGTH_INDEFINITE);
-        snackbar.setAction("Install", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              mAppUpdateManager.completeUpdate();
-            }
-        });
-        snackbar.show();
-    }
+//    private void showCompletedUpdate() {
+//        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "New app is ready!",
+//                Snackbar.LENGTH_INDEFINITE);
+//        snackbar.setAction("Install", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//              mAppUpdateManager.completeUpdate();
+//            }
+//        });
+//        snackbar.show();
+//    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == U_APP_UPDATE && resultCode != RESULT_OK){
-            Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        AppUpdateManager mAppUpdateManager = AppUpdateManagerFactory.create(this);
-
-        // Returns an intent object that you use to check for an update.
-        Task<AppUpdateInfo> appUpdateInfoTask = mAppUpdateManager.getAppUpdateInfo();
-
-        // Checks that the platform will allow the specified type of update.
-        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                try {
-                    mAppUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, MainActivity.this
-                            ,U_APP_UPDATE);
-                }catch (IntentSender.SendIntentException e){
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        if (requestCode == U_APP_UPDATE && resultCode != RESULT_OK){
+//            Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+//        }
+//        super.onActivityResult(requestCode, resultCode, data);
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        AppUpdateManager mAppUpdateManager = AppUpdateManagerFactory.create(this);
+//
+//        // Returns an intent object that you use to check for an update.
+//        Task<AppUpdateInfo> appUpdateInfoTask = mAppUpdateManager.getAppUpdateInfo();
+//
+//        // Checks that the platform will allow the specified type of update.
+//        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+//            if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+//                try {
+//                    mAppUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, MainActivity.this
+//                            ,U_APP_UPDATE);
+//                }catch (IntentSender.SendIntentException e){
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
 
 

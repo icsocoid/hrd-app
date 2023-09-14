@@ -141,6 +141,7 @@ public class AbsensiFragment extends Fragment {
             }
 
         });
+
         //fungsi munculkan dialog
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -306,8 +307,7 @@ public class AbsensiFragment extends Fragment {
                 final DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 int month= monthOfYear+1;
                                 String fm=""+month;
                                 String fd=""+dayOfMonth;
@@ -336,7 +336,6 @@ public class AbsensiFragment extends Fragment {
                 dialog.dismiss();
             }
         });
-
         dialog.show();
     }
 
@@ -400,7 +399,6 @@ public class AbsensiFragment extends Fragment {
         params.put("sampai_tanggal", getSampaiTanggal());
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 Config.HISTORY_URL, params, new Response.Listener<JSONObject>() {
-
             @Override
             public void onResponse(JSONObject response) {
                 swipeRefreshLayout.setRefreshing(false);
@@ -495,8 +493,6 @@ public class AbsensiFragment extends Fragment {
                             isLoading = true;
                         }
                     }
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     statefulLayout.setState(Config.STATE_ERROR);

@@ -111,7 +111,6 @@ public class DetailAbsensiFragment extends Fragment {
         params.put("absen_id", absenId);
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 Config.DETAIL_HISTORY_URL, params, new Response.Listener<JSONObject>() {
-
             @Override
             public void onResponse(JSONObject response) {
                 dialog.dismiss();

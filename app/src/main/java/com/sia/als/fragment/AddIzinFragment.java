@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -73,6 +74,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -365,7 +368,6 @@ public class AddIzinFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
     }
 
     private void showAddImageDialog(int reqCamera,int reqFile) {
@@ -388,7 +390,7 @@ public class AddIzinFragment extends Fragment {
 
         if (requestCode == REQUEST_CAMERA && resultCode == getActivity().RESULT_OK) {
 
-            //mengambil fambar dari Gallery
+            //mengambil fambar dari Camera
             bitmap = (Bitmap) data.getExtras().get("data");
 
             imageAttach.setImageBitmap(bitmap);
@@ -400,8 +402,28 @@ public class AddIzinFragment extends Fragment {
             try {
                 //mengambil fambar dari Gallery
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
+                final int maxSize = 240;
+                int outWidth;
+                int outHeight;
+                int inWidth = bitmap.getWidth();
+                int inHeight = bitmap.getHeight();
+                if (inWidth > inHeight) {
+                    outWidth = maxSize;
+                    outHeight = (inHeight * maxSize) / inWidth;
+                } else {
+                    outHeight = maxSize;
+                    outWidth = (inWidth * maxSize) / inHeight;
+                }
+
+                bitmap = Bitmap.createScaledBitmap(bitmap, outWidth, outHeight,
+                        false);
+
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 40, out);
+
+                Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
                 // 512 adalah resolusi tertinggi setelah image di resize, bisa di ganti.
-                imageAttach.setImageBitmap(bitmap);
+                imageAttach.setImageBitmap(decoded);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -40,7 +40,6 @@
                     android:indeterminate="true"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
             </FrameLayout>
-
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/refresh"
                 android:layout_width="match_parent"
@@ -143,8 +142,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:srcCompat="@drawable/ic_button_plus_white"
+                android:backgroundTint="@color/primary"
                 style="?android:attr/borderlessButtonStyle"/>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </cz.kinst.jakub.view.StatefulLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

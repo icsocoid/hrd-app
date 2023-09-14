@@ -230,7 +230,6 @@ public class SubmitFragment extends Fragment {
 
             @Override
             public void onResponse(JSONObject response) {
-                Log.i("info-info", response.toString());
                 dialog.dismiss();
 
                 try {
@@ -260,7 +259,6 @@ public class SubmitFragment extends Fragment {
                 }
                 catch (JSONException e)
                 {
-                    Log.i("info-info", response.toString());
                     e.printStackTrace();
                 }
 
@@ -270,7 +268,6 @@ public class SubmitFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("info-info", error.getMessage());
                 dialog.dismiss();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();

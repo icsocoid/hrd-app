@@ -580,7 +580,6 @@ public class ProfileFragment extends Fragment {
                     Boolean status = response.getBoolean("status");
                     if (status) {
                         JSONObject karyawan = response.getJSONObject("karyawan");
-                        Log.i("cek data", karyawan.toString());
                         if(sessionManagement.getUserDetails().get(Config.KEY_ID) == null) {
                             //redirect ke halaman verifikasi
                             int karyawanId = karyawan.getInt("id");
@@ -681,7 +680,6 @@ public class ProfileFragment extends Fragment {
 
             //mengambil fambar dari Gallery
             bitmap = (Bitmap) data.getExtras().get("data");
-
             imageViewPlaceholder.setImageBitmap(bitmap);
 
         }

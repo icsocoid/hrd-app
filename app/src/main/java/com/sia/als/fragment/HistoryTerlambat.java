@@ -360,7 +360,24 @@ public class HistoryTerlambat extends Fragment {
                             {
                                 isFirst = false;
                                 historyAbsensiAdapter = new HistoryAbsensiAdapter(getContext(),data);
+                                historyAbsensiAdapter.setOnItemClickListener(new HistoryAbsensiAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(View view, Absensi obj, int position) {
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("absen_id",obj.getId());
+                                        DetailAbsensiFragment detailAbsensiFragment = new DetailAbsensiFragment();
+                                        detailAbsensiFragment.setArguments(bundle);
+                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                        fragmentManager.beginTransaction()
+                                                .replace(R.id.m_frame, detailAbsensiFragment)
+                                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                                .commit();
+                                    }
+                                });
+
                                 rvAbsensi.setAdapter(historyAbsensiAdapter);
+                                //rvAbsensi.refreshDrawableState();
+                                //swipeRefreshLayout.setRefreshing(false);
                                 rvAbsensi.smoothScrollToPosition(0);
 
                             }

@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class PengajuanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     List<Pengajuan> modelList;
     Context context;
     private OnItemClickListener mOnItemClickListener;
@@ -140,7 +139,6 @@ public class PengajuanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             waktuTxt = (TextView) view.findViewById(R.id.time_txt);
             signView = (View) view.findViewById(R.id.sign_status);
             leftView = (View) view.findViewById(R.id.left_view);
-
         }
     }
 
@@ -154,8 +152,5 @@ public class PengajuanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void showLoadingView(LoadingViewHolder viewHolder, int position) {
         //ProgressBar would be displayed
-
     }
-
-
 }
