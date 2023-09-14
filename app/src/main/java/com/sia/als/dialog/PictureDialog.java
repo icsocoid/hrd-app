@@ -12,7 +12,7 @@ import android.widget.Button;
 import androidx.fragment.app.DialogFragment;
 
 import com.sia.als.R;
-import com.sia.als.fragment.ProfileFragment;
+import com.sia.als.adapter.PerdinPenyelesaianAdapter;
 
 @SuppressLint("ValidFragment")
 public class PictureDialog extends DialogFragment {
@@ -58,4 +58,6 @@ public class PictureDialog extends DialogFragment {
         return view;
     }
 
+    public void setTargetFragment(PerdinPenyelesaianAdapter penyelesaianAdapter, int request_camera) {
+    }
 }

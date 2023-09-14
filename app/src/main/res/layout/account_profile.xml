@@ -242,7 +242,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="My Task"
+                            android:text="Program Kerja"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_80" />
 
@@ -276,7 +276,7 @@
                             android:layout_height="@dimen/spacing_xmlarge"
                             android:background="@android:color/transparent"
                             app:tint="@color/grey_40"
-                            app:srcCompat="@drawable/ic_email" />
+                            app:srcCompat="@drawable/ic_payments" />
 
                         <View
                             android:layout_width="@dimen/spacing_small"
@@ -287,6 +287,50 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Slip Gaji"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <ImageButton
+                            android:layout_width="@dimen/spacing_xmlarge"
+                            android:layout_height="@dimen/spacing_xmlarge"
+                            android:background="@android:color/transparent"
+                            app:tint="@color/grey_40"
+                            app:srcCompat="@drawable/ic_arrow_right" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/perdin_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_medium"
+                        android:paddingRight="@dimen/spacing_medium">
+
+                        <ImageButton
+                            android:layout_width="@dimen/spacing_xmlarge"
+                            android:layout_height="@dimen/spacing_xmlarge"
+                            android:background="@android:color/transparent"
+                            app:tint="@color/grey_40"
+                            app:srcCompat="@drawable/ic_car" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_small"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Perjalanan Dinas"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_80" />
 
@@ -443,7 +487,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_large"
                 android:layout_marginLeft="@dimen/spacing_large"
-                android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_middle"
                 android:text=""
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"

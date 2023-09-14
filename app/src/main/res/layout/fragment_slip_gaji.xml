@@ -1,476 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/scrollview_form_product"
-    android:scrollbars="none"
-    android:scrollingCache="true"
-    android:background="@color/white"
-    >
-
-    <LinearLayout
+    android:background="@color/alabaster_fafafa"
+    android:layout_marginBottom="60dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/manage_list_product_main_platform_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey_10"
-        android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/spacing_large"
-        android:paddingRight="@dimen/spacing_large"
-        android:paddingTop="@dimen/spacing_large">
-
-        <LinearLayout
-            android:background="@drawable/button_rounded"
-            android:layout_margin="5dp"
-            android:gravity="center_vertical"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal"
-            android:id="@+id/layoutJournalChooseDate"
-            android:padding="@dimen/date_layout_padding"
-            android:clickable="true"
-            android:paddingTop="@dimen/spacing_large"
-            android:paddingBottom="@dimen/spacing_large"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_gravity="center_vertical"
-                android:layout_width="@dimen/ic_filter_mini_size"
-                android:layout_height="@dimen/ic_filter_mini_size"
-                app:tint="@color/grey_80"
-                android:layout_marginRight="@dimen/standard_marginRight"
-                android:src="@drawable/ic_baseline_calendar_month_24"/>
-            <LinearLayout
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical"
-                android:visibility="visible"
-                android:layout_width="0dp"
+        android:background="@drawable/border_layout_left_right_back_white_fa"
+        android:focusableInTouchMode="true"
+        android:descendantFocusability="beforeDescendants">
+        <FrameLayout
+            android:id="@+id/frame_progress_indicator"
+            android:padding="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ProgressBar
+                android:visibility="gone"
+                android:id="@+id/manage_product_list_progress_bar_refresh"
+                android:paddingTop="0dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="11">
-                <TextView
-                    android:textSize="@dimen/font_size_large"
-                    android:textColor="@color/grey_80"
-                    android:id="@+id/lblDateTextJournal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Maret 2023"
-                    android:textStyle="bold"
-                    android:maxLines="1"/>
-            </LinearLayout>
-            <ImageView
-                android:layout_gravity="center_vertical"
-                android:id="@+id/img_choose_date"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_baseline_arrow_drop_down_24"
-                android:layout_weight="1"/>
-        </LinearLayout>
-
-    </LinearLayout>
-
-
+                android:layout_marginTop="-7dp"
+                android:indeterminate="true"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/spacing_large"
-            android:paddingRight="@dimen/spacing_large"
-            android:paddingTop="@dimen/spacing_large"
-            android:paddingBottom="@dimen/spacing_large"
-            >
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Total Salary"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textColor="@color/grey_80"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RP. 000.000.000"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:textColor="@color/grey_80"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/filter_slip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:cardCornerRadius="0dp"
-            app:cardElevation="2dp">
-
-        </androidx.cardview.widget.CardView>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_middle"
-                android:layout_marginLeft="@dimen/spacing_large"
-                android:layout_marginStart="@dimen/spacing_large"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:text="Detail Salary"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/grey_40" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/slip_penghasilana_card"
+            <cz.kinst.jakub.view.StatefulLayout
+                android:id="@+id/stateful_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:background="@drawable/bg_shadow"
-                app:cardCornerRadius="10dp">
-
-                <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp">
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/refresh"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:orientation="vertical">
-
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="100dp">
                     <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:textSize="8pt"
-                            android:layout_height="wrap_content"
-                            android:text="Penghasilan"
-                            android:textColor="@color/primary"
-                            android:textStyle="bold"
-                            android:layout_marginVertical="@dimen/spacing_large"/>
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/filter_card">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:orientation="vertical"
+                            android:id="@+id/slip_list_recycle"
+                            android:scrollbars="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xxlarge"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/nama_penghasilan_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Nama Gaji"
-                                android:textColor="@color/grey_80"/>
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:id="@+id/jumlah_penghasilan_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp. 0"
-                            android:textColor="@color/grey_80" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xxlarge"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large"
-                        android:background="@color/grey_5">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Jumlah Penghasilan"
-                                android:textStyle="bold"
-                                android:textColor="@color/grey_80"/>
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:id="@+id/total_penghasilan_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp. 0"
-                            android:textColor="@color/grey_80" />
-
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/slip_bonus_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@drawable/bg_shadow"
-                app:cardCornerRadius="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:textSize="8pt"
-                            android:layout_height="wrap_content"
-                            android:text="Bonus"
-                            android:textColor="@color/primary"
-                            android:textStyle="bold"
-                            android:layout_marginVertical="@dimen/spacing_large"
-                            />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xxlarge"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/nama_bonus_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Nama Bonus"
-
-                                android:textColor="@color/grey_80"/>
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:id="@+id/jumlah_bonus_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp. 0"
-                            android:textColor="@color/grey_80" />
-
-                    </LinearLayout>
-
-
-
-                    <LinearLayout
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xxlarge"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large"
-                        android:background="@color/grey_5">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Jumlah Bonus"
-                                android:textStyle="bold"
-                                android:textColor="@color/grey_80"/>
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:id="@+id/total_bonus_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp. 0"
-                            android:textColor="@color/grey_80" />
-
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/slip_potongan_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@drawable/bg_shadow"
-                app:cardCornerRadius="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:textSize="8pt"
-                            android:layout_height="wrap_content"
-                            android:text="Potongan"
-                            android:textColor="@color/primary"
-                            android:textStyle="bold"
-                            android:layout_marginVertical="@dimen/spacing_large" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xxlarge"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/nama_potongan_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Nama Potongan"
-                                android:textColor="@color/grey_80"/>
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:id="@+id/jumlah_potongan_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp. 0"
-                            android:textColor="@color/grey_80" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xxlarge"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large"
-                        android:background="@color/grey_5">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Jumlah Potongan"
-                                android:textStyle="bold"
-                                android:textColor="@color/grey_80"/>
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:id="@+id/total_potongan_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp. 0"
-                            android:textColor="@color/grey_80" />
-
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_xxxlarge" />
-
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            </cz.kinst.jakub.view.StatefulLayout>
         </LinearLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

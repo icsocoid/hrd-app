@@ -3,7 +3,6 @@ package com.sia.als.fragment;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +13,18 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -34,7 +36,7 @@ import com.sia.als.AppController;
 import com.sia.als.R;
 import com.sia.als.adapter.TaskItemAdapter;
 import com.sia.als.config.Config;
-import com.sia.als.model.Izin;
+import com.sia.als.dialog.SuksesDialog;
 import com.sia.als.model.TaskName;
 import com.sia.als.util.CustomVolleyJsonRequest;
 import com.sia.als.util.SessionManagement;
@@ -51,47 +53,44 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cz.kinst.jakub.view.StatefulLayout;
+
 public class AddTaskFragment extends Fragment {
-    private View view, rowView;
-
+    private View view;
     private int mMonth, mYear, mDay;
-
     LinearLayout dateLayout;
     SessionManagement sessionManagement;
     Button buttonAdd, notif;
     ImageButton backButton;
-    EditText taskName;
-    TextView toolbarTitle;
-    TextView dateTaskTxt;
-    String statusId, nameTask, nameTaskArray[];
-    Spinner statusSpin;
+    TextView toolbarTitle, dateTaskTxt;
+    String id;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    List<String> statusTask = new ArrayList<>();
-    ArrayList<String> List = new ArrayList<String>();
     LinearLayoutManager linearLayoutManager;
-
     ArrayList<TaskName> taskList = new ArrayList<>();
     RecyclerView rvList;
     TaskItemAdapter taskItemAdapter;
 
-
+    Boolean isFirst = true;
+    Boolean isLoading = false;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_add_task, container, false);
+        view = inflater.inflate(R.layout.fragment_task_add, container, false);
         toolbarTitle = (TextView) getActivity().findViewById(R.id.text_title);
         sessionManagement = new SessionManagement(getContext());
+        backButton = (ImageButton) getActivity().findViewById(R.id.button_back);
         buttonAdd = (Button) view.findViewById(R.id.add_row);
-        statusSpin = (Spinner) view.findViewById(R.id.spinner_status);
         notif = (Button) getActivity().findViewById(R.id.button_general);
         dateTaskTxt = view.findViewById(R.id.date_task_txt);
         dateLayout = view.findViewById(R.id.date_layout);
         rvList = (RecyclerView) view.findViewById(R.id.layout_list);
-        rvList.setLayoutManager(new LinearLayoutManager(getContext()));
         linearLayoutManager = new LinearLayoutManager(getContext());
-        rvList.setLayoutManager(linearLayoutManager);
         taskItemAdapter = new TaskItemAdapter(getContext(), taskList);
+
+        rvList.setLayoutManager(linearLayoutManager);
+        rvList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvList.setAdapter(taskItemAdapter);
-        toolbarTitle.setText("Add Task");
+        toolbarTitle.setText("Program Kerja");
+        backButton.setVisibility(View.GONE);
         notif.setBackgroundResource(0);
         notif.setVisibility(View.VISIBLE);
         notif.setText("");
@@ -99,29 +98,17 @@ public class AddTaskFragment extends Fragment {
         notif.setWidth(24);
         notif.setHeight(24);
         dateTaskTxt.setText(simpleDateFormat.format(new Date()));
-        statusTask.add("Process");
-        statusTask.add("Finished");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, statusTask);
-        statusSpin.setAdapter(dataAdapter);
-        statusSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(parent.getContext(), "The planet is " + id, Toast.LENGTH_LONG).show();
-                parent.getItemAtPosition(position);
-                statusId = String.valueOf(parent.getItemIdAtPosition((int) id));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addView();
+            }
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTask();
             }
         });
         dateLayout.setOnClickListener(new View.OnClickListener() {
@@ -162,40 +149,94 @@ public class AddTaskFragment extends Fragment {
             }
         });
 
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                showTask();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+
+
+
+        if (getArguments() != null){
+            id = getArguments().getString("task_id");
+            makeDataRequestTask(id);
+            if (id != null){
+                dateLayout.setVisibility(View.GONE);
+            }
+        }
+
         return view;
     }
 
+
     private void addView() {
+        for(int i=0;i<taskList.size();i++){
+            TaskName taskModel = new TaskName();
+            taskModel.setTaskName(taskList.get(i).getTaskName());
+            taskList.set(i,taskModel);
+        }
         TaskName taskName1 = new TaskName();
         taskName1.setTaskName("");
         taskList.add(taskName1);
         taskItemAdapter.notifyDataSetChanged();
     }
 
-    private void addTaskName() {
+
+    private void makeDataRequestTask(String id) {
+        final ProgressDialog dialog = new ProgressDialog(getActivity());
+        dialog.setMessage("please wait..");
+        dialog.show();
+        String tag_json_obj = "json_data_task_req";
+        Map<String, String> params = new HashMap<>();
+        params.put("task_id", id);
+        CustomVolleyJsonRequest jsonRequest = new CustomVolleyJsonRequest(Request.Method.POST,
+                Config.DETAIL_TASK_URL, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                dialog.dismiss();
+                try {
+                    Boolean status = response.getBoolean("success");
+                    if (status){
+                        JSONObject jsonObject = response.getJSONObject("task");
+
+                        try {
+                            JSONArray jsonArray = jsonObject.getJSONArray("taskitem");
+                            for (int i = 0; i < jsonArray.length(); i++){
+                                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                TaskName taskName = new TaskName();
+                                taskName.setTaskName(jsonObject1.getString("task_name"));
+                                taskList.add(taskName);
+                            }
+
+                            if (taskItemAdapter == null){
+                                isFirst = false;
+                                taskItemAdapter = new TaskItemAdapter(getContext(), taskList);
+                                rvList.setAdapter(taskItemAdapter);
+                            }else {
+                                taskItemAdapter.notifyDataSetChanged();
+                            }
+                            isLoading = false;
+                        }catch (JSONException e){
+                            String error = response.getString("message");
+                            TastyToast.makeText(getActivity(), "" + error, TastyToast.LENGTH_LONG, TastyToast.CONFUSING).show();
+                        }
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonRequest, tag_json_obj);
 
     }
-
-    private void removeView(View view) {
-        rvList.removeView(view);
-    }
-
-//    private void taskAttemptData() {
-//
-//        if (rowView != null) {
-//            nameTask = (String) taskName.getText().toString().trim();
-//            if (TextUtils.isEmpty(taskName.getText().toString())){
-//                taskName.requestFocus();
-//                Toast.makeText(getContext(),"Isi kolom nama task",Toast.LENGTH_LONG).show();
-//            }else {
-//                Toast.makeText(getContext(), List.toString(),Toast.LENGTH_LONG).show();
-////                makeRequestSubmitTask();
-//            }
-//        }else {
-//            Toast.makeText(getContext(),"Tambahkan task",Toast.LENGTH_LONG).show();
-//        }
-//
-//    }
 
     private void makeRequestSubmitTask() {
         final ProgressDialog dialog = new ProgressDialog(getActivity());
@@ -217,12 +258,15 @@ public class AddTaskFragment extends Fragment {
             }
         }
         String userId = sessionManagement.getUserDetails().get(Config.KEY_ID);
-        params.put("tanggal", dateTaskTxt.getText().toString());
-        params.put("user_id", userId);
-        params.put("status_task", statusId);
-        params.put("task_name", nameTask.toString());
-        Log.i ("info infpo ", nameTask.toString());
-
+        if (id != null){
+            params.put("id", id);
+            params.put("user_id", userId);
+            params.put("task_name", nameTask.toString());
+        }else{
+            params.put("tanggal", dateTaskTxt.getText().toString());
+            params.put("user_id", userId);
+            params.put("task_name", nameTask.toString());
+        }
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 Config.ADD_TASK_URL, params, new Response.Listener<JSONObject>() {
             @Override
@@ -231,8 +275,8 @@ public class AddTaskFragment extends Fragment {
                 try {
                     Boolean status = response.getBoolean("success");
                     if (status) {
-                        String pesan = response.getString("message");
-                        TastyToast.makeText(getActivity(), "" + pesan, TastyToast.LENGTH_SHORT,TastyToast.SUCCESS).show();
+                        SuksesDialog suksesDialog = new SuksesDialog(AddTaskFragment.this);
+                        suksesDialog.show(getFragmentManager(),"");
 
                     } else {
                         String error = response.getString("message");
@@ -256,4 +300,14 @@ public class AddTaskFragment extends Fragment {
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
+
+    public void showTask() {
+        TaskFragment taskFragment = new TaskFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.m_frame, taskFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+    }
 }
+

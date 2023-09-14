@@ -88,7 +88,7 @@ public class NewProfileFragment extends Fragment {
     Spinner ptkpCmb;
     PtkpAdapter ptkpAdapter;
     List<Ptkp> ptkpList;
-    LinearLayout accountTxt, passwordTxt, taskTxt, slipTxt, peraturanTxt, privasiTxt, logoutTxt, emailTxt;
+    LinearLayout accountTxt, passwordTxt, taskTxt, slipTxt, perdinTxt, peraturanTxt, privasiTxt, logoutTxt, emailTxt;
     List<Karyawan> karyawanList = new ArrayList<>();
     KaryawanAdapter karyawanAdapter;
     EditText inputPasswordTxt, konfPasswordTxt;
@@ -111,6 +111,7 @@ public class NewProfileFragment extends Fragment {
         passwordTxt = (LinearLayout) view.findViewById(R.id.ganti_password_btn);
         taskTxt = (LinearLayout) view.findViewById(R.id.task_btn);
         slipTxt = (LinearLayout) view.findViewById(R.id.slip_gaji_btn);
+        perdinTxt = (LinearLayout) view.findViewById(R.id.perdin_btn);
         peraturanTxt = (LinearLayout) view.findViewById(R.id.peraturan_btn);
         privasiTxt = (LinearLayout) view.findViewById(R.id.privacy_policy_btn);
         logoutTxt = (LinearLayout) view.findViewById(R.id.logout_btn);
@@ -164,6 +165,13 @@ public class NewProfileFragment extends Fragment {
             }
         });
 
+        perdinTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPerdin();
+            }
+        });
+
         peraturanTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -209,6 +217,8 @@ public class NewProfileFragment extends Fragment {
 
     }
 
+
+
     //Peraturan
     private void showPeraturan() {
         PeraturanFragment peraturanFragment = new PeraturanFragment();
@@ -245,6 +255,16 @@ public class NewProfileFragment extends Fragment {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.m_frame, slipGajiFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+    }
+
+    //Perdin
+    private void showPerdin() {
+        PerdinFragment perdinFragment = new PerdinFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.m_frame, perdinFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
     }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:paddingEnd="0dp"
+        android:paddingStart="0dp"
+        >
+
+        <TextView
+            android:id="@+id/nama_gaji_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nama Gaji"
+            android:textColor="@color/graydark"
+
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rp. "
+                android:textStyle="bold"
+                android:textColor="@color/blacklight"/>
+
+            <TextView
+                android:id="@+id/jumlah_gaji_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textStyle="bold"
+                android:textColor="@color/blacklight"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

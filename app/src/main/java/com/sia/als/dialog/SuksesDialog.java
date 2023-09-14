@@ -17,7 +17,9 @@ import com.sia.als.fragment.AbsensiFragment;
 import com.sia.als.fragment.AccountFragment;
 import com.sia.als.fragment.AddIzinFragment;
 import com.sia.als.fragment.AddOfficeFragment;
+import com.sia.als.fragment.AddTaskFragment;
 import com.sia.als.fragment.AddTerlambatFragment;
+import com.sia.als.fragment.CompletionPerdinFragment;
 import com.sia.als.fragment.DetailNotifPengajuanAbsensiFragment;
 import com.sia.als.fragment.NotifyIzinFragment;
 
@@ -27,12 +29,14 @@ public class SuksesDialog extends DialogFragment {
     public TextView headerTxt,bodyTxt;
     Button okBtn;
     AddIzinFragment addIzinFragment;
+    AddTaskFragment addTaskFragment;
     NotifyIzinFragment notifyIzinFragment;
     ForgotActivity forgotActivity;
     AddOfficeFragment addOfficeFragment;
     AbsensiFragment absensiFragment;
     AddTerlambatFragment addTerlambatFragment;
     AccountFragment accountFragment;
+    CompletionPerdinFragment completionPerdinFragment;
 
     public SuksesDialog(AddIzinFragment addIzinFragment)
     {
@@ -62,6 +66,13 @@ public class SuksesDialog extends DialogFragment {
     public SuksesDialog(ForgotActivity forgotActivity)
     {
         this.forgotActivity = forgotActivity;
+    }
+
+    public SuksesDialog(AddTaskFragment addTaskFragment) {
+        this.addTaskFragment = addTaskFragment;
+    }
+    public SuksesDialog(CompletionPerdinFragment completionPerdinFragment) {
+        this.completionPerdinFragment = completionPerdinFragment;
     }
 
     @Override
@@ -97,6 +108,14 @@ public class SuksesDialog extends DialogFragment {
                 if(accountFragment != null)
                 {
                     accountFragment.showAccount();
+                }
+                if(addTaskFragment != null)
+                {
+                    addTaskFragment.showTask();
+                }
+                if(completionPerdinFragment != null)
+                {
+                    completionPerdinFragment.showTask();
                 }
                 SuksesDialog.this.dismiss();
             }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:text="Filter Tanggal"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                android:textColor="@color/teal_500"
+                android:textColor="@color/grey_60"
                 android:textStyle="bold"
                 app:fontFamily="serif" />
 
@@ -52,7 +52,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/teal_100" />
+        android:background="@color/graydark" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -100,6 +100,7 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/rect_gray_border"
                     android:orientation="horizontal"
+                    android:layout_marginHorizontal="@dimen/_6sdp"
                     android:padding="13dp">
 
                     <LinearLayout
@@ -150,19 +151,13 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/teal_100" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/entry_padding"
         android:paddingLeft="@dimen/entry_padding"
         android:paddingRight="@dimen/entry_padding"
-        android:paddingTop="@dimen/entry_padding">
+        android:paddingVertical="20dp">
 
 
         <Button
@@ -170,7 +165,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_button"
+            android:background="@drawable/button_rounded"
+            android:backgroundTint="@color/primary"
             android:text="Filter"
             android:textStyle="bold"
             android:textAllCaps="false"

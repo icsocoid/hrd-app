@@ -18,7 +18,6 @@ import com.sia.als.model.TaskName;
 import java.util.List;
 
 public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.MyViewHolder> {
-
     List<TaskName> modelList;
     Context context;
 
@@ -38,9 +37,15 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.MyView
     @Override
     public void onBindViewHolder(TaskItemAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final TaskName mList = modelList.get(position);
+        holder.namaTxt.setText(mList.getTaskName());
         holder.removeRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                for(int i=0;i<modelList.size();i++){
+                    TaskName taskModel = new TaskName();
+                    taskModel.setTaskName(modelList.get(i).getTaskName());
+                    modelList.set(i,taskModel);
+                }
                 modelList.remove(position);
                 notifyDataSetChanged();
             }
@@ -48,7 +53,6 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.MyView
         holder.namaTxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -79,5 +83,4 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.MyView
             removeRow = (ImageView) view.findViewById(R.id.remove_row);
         }
     }
-
 }

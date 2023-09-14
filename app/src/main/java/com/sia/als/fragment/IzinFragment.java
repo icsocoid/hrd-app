@@ -370,7 +370,6 @@ public class IzinFragment extends Fragment {
                     Boolean status = response.getBoolean("status");
                     if (status) {
                         statefulLayout.setState(StatefulLayout.State.CONTENT);
-                        //List<Pengajuan> data = new ArrayList<>();
                         try {
                             JSONArray Jarray = response.getJSONArray("izin");
                             for (int i = 0; i < Jarray.length(); i++) {
@@ -403,12 +402,8 @@ public class IzinFragment extends Fragment {
                                                 .commit();
                                     }
                                 });
-                                //isLoading = false;
-                                //statefulLayout.setState(Config.STATE_EMPTY);
-                                //emptyGroup.setVisibility(View.GONE);
                                 addIzinBtn.show();
                                 rvIzin.setAdapter(pengajuanAdapter);
-                                //rvIzin.refreshDrawableState();
                                 rvIzin.smoothScrollToPosition(0);
 
                             }else{

@@ -235,7 +235,6 @@ public class HomeFragment extends Fragment {
                                     izin.setNamaIzin(json_data.getString("nama_izin"));
                                     izin.setJumlah(json_data.getInt("jumlah_izin"));
                                     data.add(izin);
-
                                 }
                                 if(rekapHomeAdapter == null)
                                 {
