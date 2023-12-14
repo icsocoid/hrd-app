@@ -78,7 +78,7 @@ public class PerdinAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
         });
         Button editBtn = (Button) viewDialog.findViewById(R.id.edit_task_btn);
-        if (statusId.equals("0") || statusId.equals("1")){
+        if (statusId.equals("3")){
             editBtn.setVisibility(View.VISIBLE);
         }else {
             editBtn.setVisibility(View.GONE);
@@ -135,11 +135,10 @@ public class PerdinAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             final Perdin mList = modelList.get(position);
             myViewHolder.nomorPerdinTxt.setText(mList.getNomorPerdin());
             myViewHolder.tanggalTxt.setText(mList.getTanggal());
-//            myViewHolder.namaKlienTxt.setText(mList.getNamaKlien());
             bottomSheet = ((Activity)context).findViewById(R.id.bottom_sheet);
             mBehavior = BottomSheetBehavior.from(bottomSheet);
 
-            if (mList.getStatusId().equals("0")){
+            if (mList.getStatusId().equals("3")){
                 myViewHolder.statusTxt.setText("PROSES");
                 myViewHolder.statusTxt.setTextColor(context.getResources().getColor(R.color.md_orange_700));
                 myViewHolder.statusTxt.setBackground(context.getDrawable(R.drawable.bg_status_0));
@@ -150,7 +149,7 @@ public class PerdinAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         showBottomSheetDialog(mList.getId().toString(), mList.getStatusId().toString());
                     }
                 });
-            }else if (mList.getStatusId().equals("1")){
+            }else if (mList.getStatusId().equals("4")){
                 myViewHolder.statusTxt.setText("CHECKER");
                 myViewHolder.statusTxt.setTextColor(context.getResources().getColor(R.color.md_yellow_700));
                 myViewHolder.statusTxt.setBackground(context.getDrawable(R.drawable.bg_status_1));

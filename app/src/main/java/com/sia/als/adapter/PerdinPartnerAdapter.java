@@ -163,7 +163,7 @@ public class PerdinPartnerAdapter extends RecyclerView.Adapter<RecyclerView.View
                     }
                 });
             }else {
-                myViewHolder.statusTxt.setText("SELESAI");
+                myViewHolder.statusTxt.setText("APPROVE");
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -1,14 +1,12 @@
 package com.sia.als.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -28,10 +26,8 @@ import com.android.volley.VolleyError;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.sia.als.AppController;
 import com.sia.als.R;
-import com.sia.als.adapter.PerdinAdapter;
 import com.sia.als.adapter.PerdinPartnerAdapter;
 import com.sia.als.config.Config;
-import com.sia.als.model.Perdin;
 import com.sia.als.model.PerdinPartner;
 import com.sia.als.util.CustomVolleyJsonRequest;
 import com.sia.als.util.EndlessRecyclerViewScrollListener;
@@ -189,6 +185,13 @@ public class PerdinPartnerFragment extends Fragment {
                                 public void onItemClick(View view, PerdinPartner obj, int position) {
                                     Bundle bundle = new Bundle();
                                     bundle.putString("perdin_id", obj.getId());
+                                    DetailPerdinPartnerFragment detailPerdinPartnerFragment = new DetailPerdinPartnerFragment();
+                                    detailPerdinPartnerFragment.setArguments(bundle);
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    fragmentManager.beginTransaction()
+                                            .replace(R.id.m_frame, detailPerdinPartnerFragment)
+                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                            .commit();
                                 }
                             });
                             rvPerdinPartner.setAdapter(perdinPartnerAdapter);
