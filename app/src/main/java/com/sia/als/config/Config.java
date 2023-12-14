@@ -63,10 +63,11 @@ public class Config {
     public static String ADD_TASK_URL = BASE_URL + "api/task/save-data";
     public static String DETAIL_TASK_URL = BASE_URL + "api/task/detail";
     public static String PERDIN_URL = BASE_URL + "api/perdin/list-data";
+    public static String PERDIN_PARTNER_URL = BASE_URL + "api/perdin/list-data-partner";
     public static String DETAIL_PERDIN_URL = BASE_URL + "api/perdin/detail-data";
     public static String PENYELESAIAN_PERDIN_URL =  BASE_URL + "api/perdin/employee-complete";
-    public static String SLIP_GAJI_URL = BASE_URL + "api/payroll/list-payroll";
-    public static String DETAIL_SLIP_GAJI_URL = BASE_URL + "api/payroll/detail";
+    public static String SLIP_GAJI_URL = BASE_URL + "api/payroll/list-payroll-app";
+    public static String DETAIL_SLIP_GAJI_URL = BASE_URL + "api/payroll/detail-app";
 
 
     public static String ADMIN_HOME_URL = BASE_URL + "hrm/hrmapi/admin_home";

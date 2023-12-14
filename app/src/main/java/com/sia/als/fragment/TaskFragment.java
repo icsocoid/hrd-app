@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -204,7 +205,8 @@ public class TaskFragment extends Fragment {
                         statefulLayout.setState(StatefulLayout.State.CONTENT);
                         try {
                             JSONArray Jarray = response.getJSONArray("task");
-                            for (int i = 0; i < Jarray.length(); i++) {
+                            Log.i("task", Jarray.toString());
+                            for (int i = 0; i < Jarray.length(); i++){
                                 JSONObject json_data = Jarray.getJSONObject(i);
                                 Task task = new Task();
                                 task.setId(json_data.getString("id"));

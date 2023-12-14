@@ -34,6 +34,7 @@ import com.sia.als.adapter.PerdinAdapter;
 import com.sia.als.adapter.SlipGajiAdapter;
 import com.sia.als.adapter.TaskAdapter;
 import com.sia.als.config.Config;
+import com.sia.als.mail.asynTasks.Login;
 import com.sia.als.model.Pengajuan;
 import com.sia.als.model.Perdin;
 import com.sia.als.model.SlipGaji;
@@ -165,10 +166,9 @@ public class SlipGajiFragment extends Fragment {
                 Config.SLIP_GAJI_URL, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.i("Info info", response.toString());
                 swipeRefreshLayout.setRefreshing(false);
                 try {
-                    if (isFirst)
+                    if(isFirst)
                     {
                         statefulLayout.setState(Config.STATE_EMPTY);
                     }
@@ -181,7 +181,6 @@ public class SlipGajiFragment extends Fragment {
                                 JSONObject jsonObject = Jarray.getJSONObject(i);
                                 SlipGaji slipGaji = new SlipGaji();
                                 slipGaji.setId(jsonObject.getString("id"));
-                                slipGaji.setGajibersih(jsonObject.getString("gaji_bersih"));
                                 slipGaji.setPeriode(jsonObject.getString("nama_periode"));
                                 slipGaji.setRangeperiode(jsonObject.getString("range_periode"));
                                 data.add(slipGaji);
@@ -190,20 +189,18 @@ public class SlipGajiFragment extends Fragment {
                             {
                                 isFirst = false;
                                 slipGajiAdapter = new SlipGajiAdapter(getContext(), data);
-
-
                                 slipGajiAdapter.setOnDetailClickListener(new SlipGajiAdapter.OnDetailClickListener() {
                                     @Override
                                     public void onItemClick(View view, SlipGaji obj, int position) {
-                                            Bundle bundle = new Bundle();
-                                            bundle.putString("perdin_id", obj.getId());
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("slip_id", obj.getId());
                                         DetailSlipGajiFragment detailSlipGajiFragment = new DetailSlipGajiFragment();
                                         detailSlipGajiFragment.setArguments(bundle);
-                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                            fragmentManager.beginTransaction()
-                                                    .replace(R.id.m_frame, detailSlipGajiFragment)
-                                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                                    .commit();
+                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                        fragmentManager.beginTransaction()
+                                                .replace(R.id.m_frame, detailSlipGajiFragment)
+                                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                                .commit();
                                     }
                                 });
 
@@ -214,6 +211,7 @@ public class SlipGajiFragment extends Fragment {
                                 slipGajiAdapter.notifyDataSetChanged();
                             }
                             isLoading = false;
+
                         } catch (JSONException e) {
                             String error = response.getString("message");
                             TastyToast.makeText(getActivity(), "" + error, TastyToast.LENGTH_LONG, TastyToast.CONFUSING).show();
@@ -228,7 +226,6 @@ public class SlipGajiFragment extends Fragment {
                         {
                             isLoading = true;
                         }
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

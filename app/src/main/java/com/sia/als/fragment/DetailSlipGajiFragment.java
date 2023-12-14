@@ -63,7 +63,7 @@ import cz.kinst.jakub.view.StatefulLayout;
 
 public class DetailSlipGajiFragment extends Fragment {
     private View view;
-    TextView totalGajiTxt, rangePeriodeTxt, nomorSlipGajiTxt, jabatanTxt, gajiPokokTxt,totalPenghasilanTxt, totalPotonganTxt;
+    TextView totalGajiTxt, rangePeriodeTxt, nomorSlipGajiTxt, jabatanTxt, gajiPokokTxt,totalPenghasilanTxt, totalPotonganTxt, gajiPphTxt;
     StatefulLayout statefulLayout;
     TextView toolbarTitle, bonusLainTxt;
     ImageButton backButton;
@@ -75,7 +75,7 @@ public class DetailSlipGajiFragment extends Fragment {
     Locale localeID;
     NumberFormat numberFormat;
     Button notif;
-    LinearLayout layReport, layBonus, layPerdin, layGajiPokok, layTunjangan;
+    LinearLayout layReport, layBonus, layPerdin, layGajiPokok, layTunjangan, layPph;
 
     boolean isLoading = false;
     boolean isFirst = true;
@@ -97,6 +97,7 @@ public class DetailSlipGajiFragment extends Fragment {
         totalPenghasilanTxt = (TextView) view.findViewById(R.id.total_penghasilan_txt);
         totalPotonganTxt = (TextView) view.findViewById(R.id.total_potongan_txt);
         gajiPokokTxt = (TextView) view.findViewById(R.id.gaji_pokok_txt);
+        gajiPphTxt = (TextView) view.findViewById(R.id.gaji_pph_txt);
         statefulLayout = (StatefulLayout) view.findViewById(R.id.stateful_layout);
         localeID = new Locale("in", "ID");
         numberFormat = NumberFormat.getNumberInstance(localeID);
@@ -112,6 +113,7 @@ public class DetailSlipGajiFragment extends Fragment {
         layPerdin = (LinearLayout) view.findViewById(R.id.tunjangan_perdin_obj);
         layGajiPokok = (LinearLayout) view.findViewById(R.id.gaji_pokok_obj);
         layTunjangan = (LinearLayout) view.findViewById(R.id.tunjangan_obj);
+        layPph = (LinearLayout) view.findViewById(R.id.pph_obj);
 
         toolbarTitle.setText("Detail Slip Gaji");
         notif.setBackgroundResource(0);
@@ -130,7 +132,7 @@ public class DetailSlipGajiFragment extends Fragment {
         statefulLayout.setStateView(Config.STATE_EMPTY, LayoutInflater.from(getContext()).inflate(R.layout.activity_empty, null));
         statefulLayout.setStateView(Config.STATE_NO_CONNECTION, LayoutInflater.from(getContext()).inflate(R.layout.actvity_no_internet_connection, null));
         if (getArguments() != null){
-            id = getArguments().getString("perdin_id");
+            id = getArguments().getString("slip_id");
             makeDataRequest(id);
         }
         notif.setOnClickListener(new View.OnClickListener() {
@@ -223,39 +225,45 @@ public class DetailSlipGajiFragment extends Fragment {
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
 
-        CustomVolleyJsonRequest jsonRequest = new CustomVolleyJsonRequest(Request.Method.GET,
-                Config.DETAIL_SLIP_GAJI_URL+"?id="+id, params, new Response.Listener<JSONObject>() {
+        CustomVolleyJsonRequest jsonRequest = new CustomVolleyJsonRequest(Request.Method.POST,
+                Config.DETAIL_SLIP_GAJI_URL, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 dialog.dismiss();
-
-
                 try {
                     if (isFirst){
                         statefulLayout.setState(Config.STATE_EMPTY);
                     }
                     Boolean status = response.getBoolean("success");
                     if (status){
-                        JSONObject obj = response.getJSONObject("payroll");
-                        String gajiBersih = obj.getString("gaji_bersih");
+                        JSONObject obj = response.getJSONObject("data");
+                        JSONObject objSlip = response.getJSONObject("slip");
+                        String gajiBersih = objSlip.getString("gaji_bersih");
                         String noSlipGaji = obj.getString("no_ref");
                         String gajiPokok = obj.getString("gaji_pokok");
                         String rangePeriode = obj.getString("namaperiode");
                         String jabatan = obj.getString("jbt");
                         String jumlahPenghasilan = obj.getString("gaji_kotor");
-                        String jumlahPotongan = obj.getString("total_potongan");
+                        String jumlahPotongan = objSlip.getString("total_potongan");
                         String totalBonusLain = obj.getString("total_bonus_tambahan");
                         String totalBonus = obj.getString("total_bonus");
                         String totalTjPerdin = obj.getString("total_tunjangan_perdin");
                         String totalTunjangan = obj.getString("total_tunjangan");
+                        String gajiPph = objSlip.getString("pph");
 
-                        totalGajiTxt.setText(numberFormat.format(Double.parseDouble(gajiBersih)));
+
+                        jumlahPotongan = jumlahPotongan.replace(",",".");
+                        gajiBersih = gajiBersih.replace(",",".");
+                        gajiPph = gajiPph.replace(",",".");
+//                        totalGajiTxt.setText(numberFormat.format(Double.parseDouble(gajiBersih)));
+                        totalGajiTxt.setText(gajiBersih);
                         nomorSlipGajiTxt.setText(noSlipGaji);
                         gajiPokokTxt.setText(numberFormat.format(Double.parseDouble(gajiPokok)));
                         rangePeriodeTxt.setText(rangePeriode);
                         jabatanTxt.setText(jabatan);
                         totalPenghasilanTxt.setText(numberFormat.format(Double.parseDouble(jumlahPenghasilan)));
-                        totalPotonganTxt.setText(numberFormat.format(Double.parseDouble(jumlahPotongan)));
+                        totalPotonganTxt.setText(jumlahPotongan);
+                        gajiPphTxt.setText(gajiPph);
 
                         statefulLayout.setState(StatefulLayout.State.CONTENT);
 
@@ -279,6 +287,10 @@ public class DetailSlipGajiFragment extends Fragment {
                             layTunjangan.setVisibility(View.GONE);
                         } else {
                             layTunjangan.setVisibility(View.VISIBLE);
+                        }if (gajiPph.equals("0")) {
+                            layPph.setVisibility(View.GONE);
+                        } else {
+                            layPph.setVisibility(View.VISIBLE);
                         }
 
                         isLoading = false;

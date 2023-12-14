@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,7 +89,7 @@ public class NewProfileFragment extends Fragment {
     Spinner ptkpCmb;
     PtkpAdapter ptkpAdapter;
     List<Ptkp> ptkpList;
-    LinearLayout accountTxt, passwordTxt, taskTxt, slipTxt, perdinTxt, peraturanTxt, privasiTxt, logoutTxt, emailTxt;
+    LinearLayout accountTxt, passwordTxt, taskTxt, slipTxt, perdinTxt, perdinPartnerTxt, peraturanTxt, privasiTxt, logoutTxt, emailTxt;
     List<Karyawan> karyawanList = new ArrayList<>();
     KaryawanAdapter karyawanAdapter;
     EditText inputPasswordTxt, konfPasswordTxt;
@@ -112,6 +113,7 @@ public class NewProfileFragment extends Fragment {
         taskTxt = (LinearLayout) view.findViewById(R.id.task_btn);
         slipTxt = (LinearLayout) view.findViewById(R.id.slip_gaji_btn);
         perdinTxt = (LinearLayout) view.findViewById(R.id.perdin_btn);
+        perdinPartnerTxt = (LinearLayout) view.findViewById(R.id.perdin_partner_btn);
         peraturanTxt = (LinearLayout) view.findViewById(R.id.peraturan_btn);
         privasiTxt = (LinearLayout) view.findViewById(R.id.privacy_policy_btn);
         logoutTxt = (LinearLayout) view.findViewById(R.id.logout_btn);
@@ -172,6 +174,13 @@ public class NewProfileFragment extends Fragment {
             }
         });
 
+        perdinPartnerTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPerdinPartner();
+            }
+        });
+
         peraturanTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -216,6 +225,7 @@ public class NewProfileFragment extends Fragment {
         return view;
 
     }
+
 
 
 
@@ -265,6 +275,16 @@ public class NewProfileFragment extends Fragment {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.m_frame, perdinFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+    }
+
+    //Perdin Partner
+    private void showPerdinPartner() {
+        PerdinPartnerFragment perdinPartnerFragment = new PerdinPartnerFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.m_frame, perdinPartnerFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
     }
@@ -395,6 +415,7 @@ public class NewProfileFragment extends Fragment {
                                 JSONObject arr_jabatan = obj.getJSONObject("jabatan");
                                 String user_fullname = obj.getString("employee_name");
                                 String jabatan_user = arr_jabatan.getString("nama_jabatan");
+                                String jabatan_id = arr_jabatan.getString("id");
                                 String photo_user = obj.getString("photo");
                                 namaTxt.setText(user_fullname);
                                 if(jabatan_user.equals("null"))
@@ -408,6 +429,15 @@ public class NewProfileFragment extends Fragment {
 
                                 bitmap = ImageUtil.convert(photo_user);
                                 photoProfile.setImageBitmap(bitmap);
+
+                                Log.i("onResponse: Jabatan", jabatan_id.toString());
+
+                                if (jabatan_id.equals("14") || jabatan_id.equals("16") || jabatan_id.equals("45") || jabatan_id.equals("15") || jabatan_id.equals("46") || jabatan_id.equals("42")){
+                                    perdinPartnerTxt.setVisibility(View.VISIBLE);
+                                }else {
+                                    perdinPartnerTxt.setVisibility(View.GONE);
+
+                                }
                             }
                             else
                             {

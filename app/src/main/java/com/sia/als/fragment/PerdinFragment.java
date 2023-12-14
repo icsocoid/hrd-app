@@ -98,7 +98,6 @@ public class PerdinFragment extends Fragment {
         backButton = (ImageButton) getActivity().findViewById(R.id.button_back);
         notif = (Button) getActivity().findViewById(R.id.button_general);
 
-
         notif.setVisibility(View.GONE);
         backButton.setVisibility(View.GONE);
         rvPerdin.setLayoutManager(linearLayoutManager);
@@ -122,7 +121,6 @@ public class PerdinFragment extends Fragment {
         filterDialogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Info", "Button Pressed");
                 showFilterDialog();
             }
 
@@ -136,6 +134,7 @@ public class PerdinFragment extends Fragment {
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
         initScrollListener();
+
         return view;
     }
 

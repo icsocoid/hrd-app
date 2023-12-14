@@ -372,6 +372,7 @@ public class IzinFragment extends Fragment {
                         statefulLayout.setState(StatefulLayout.State.CONTENT);
                         try {
                             JSONArray Jarray = response.getJSONArray("izin");
+                            Log.i("izin", Jarray.toString());
                             for (int i = 0; i < Jarray.length(); i++) {
                                 JSONObject json_data = Jarray.getJSONObject(i);
                                 Pengajuan izin = new Pengajuan();
@@ -432,7 +433,6 @@ public class IzinFragment extends Fragment {
                         {
                             isLoading = true;
                         }
-
                     }
 
                 } catch (JSONException e) {

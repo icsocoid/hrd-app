@@ -73,8 +73,6 @@ public class SlipGajiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             final SlipGaji mList = modelList.get(position);
             myViewHolder.periodeTxt.setText(mList.getPeriode());
             myViewHolder.rangePeriodeTxt.setText(mList.getRangeperiode());
-            myViewHolder.gajiBersihTxt.setText(numberFormat.format(Double.parseDouble(mList.getGajibersih())));
-
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -93,13 +91,12 @@ public class SlipGajiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView periodeTxt,rangePeriodeTxt, gajiBersihTxt;
+        public TextView periodeTxt,rangePeriodeTxt;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             periodeTxt = (TextView) itemView.findViewById(R.id.periode_txt);
             rangePeriodeTxt = (TextView) itemView.findViewById(R.id.range_periode_txt);
-            gajiBersihTxt = (TextView) itemView.findViewById(R.id.gaji_bersih_txt);
 
         }
     }
