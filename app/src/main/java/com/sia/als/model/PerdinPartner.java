@@ -9,6 +9,10 @@ public class PerdinPartner {
     private String tanggalAwal;
     private String tanggalAkhir;
 
+    private String namaKaryawan;
+    private String totalPerdin;
+    private String totalBonSementara;
+
 
 
 
@@ -67,5 +71,29 @@ public class PerdinPartner {
 
     public void setTanggalAkhir(String tanggalAkhir) {
         this.tanggalAkhir = tanggalAkhir;
+    }
+
+    public String getNamaKaryawan() {
+        return namaKaryawan;
+    }
+
+    public void setNamaKaryawan(String namaKaryawan) {
+        this.namaKaryawan = namaKaryawan;
+    }
+
+    public String getTotalPerdin() {
+        return totalPerdin;
+    }
+
+    public void setTotalPerdin(String totalPerdin) {
+        this.totalPerdin = totalPerdin;
+    }
+
+    public String getTotalBonSementara() {
+        return totalBonSementara;
+    }
+
+    public void setTotalBonSementara(String totalBonSementara) {
+        this.totalBonSementara = totalBonSementara;
     }
 }

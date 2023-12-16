@@ -155,7 +155,7 @@ public class DetailPerdinFragment extends Fragment {
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
         params.put("user_id", userId);
-        Log.i("info info perdin", params.toString());
+        Log.i("info-info", params.toString());
 
         CustomVolleyJsonRequest jsonRequest = new CustomVolleyJsonRequest(Request.Method.POST,
                 Config.DETAIL_PERDIN_URL, params, new Response.Listener<JSONObject>() {
@@ -178,10 +178,7 @@ public class DetailPerdinFragment extends Fragment {
                             sdf.applyPattern(patternIzin);
                             tanggalPerdin = sdf.format(d);
                         }
-                        catch (ParseException p)
-                        {
-
-                        }
+                        catch (ParseException p) {}
 
                         namaKlienTxt.setText(namaKlien);
                         nomorPerdinTxt.setText(nomorPerdin);
@@ -192,7 +189,6 @@ public class DetailPerdinFragment extends Fragment {
                         statefulLayout.setState(StatefulLayout.State.CONTENT);
                         try {
                             JSONArray jArray = obj.getJSONArray("detailcomplete");
-                            Log.i("info-info", jArray.toString());
 
                             for (int i = 0; i < jArray.length(); i++){
                                 JSONObject jObject = jArray.getJSONObject(i);

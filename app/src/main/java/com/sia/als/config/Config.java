@@ -12,6 +12,7 @@ public class Config {
 
     public static String NAMADOMAIN = "icso.biz.id";
     public static String BASE_URL = "https://"+ SessionManagement.getNamaSubdomain() +"."+NAMADOMAIN+"/public/";
+    public static String BASE_PERDIN_URL = "https://hrdperdinapi/public/";
     public static final String PREFS_NAME = "AlsKaryawanData";
     public static final String IS_LOGIN = "isLogin";
     public static final String KEY_NAME = "user_fullname";
@@ -65,6 +66,8 @@ public class Config {
     public static String PERDIN_URL = BASE_URL + "api/perdin/list-data";
     public static String PERDIN_PARTNER_URL = BASE_URL + "api/perdin/list-data-partner";
     public static String DETAIL_PERDIN_URL = BASE_URL + "api/perdin/detail-data";
+    public static String DETAIL_PERDIN_PARTNER_URL = BASE_URL + "api/perdin/detail-data-partner";
+    public static String APPROVE_PERDIN_PARTNER_URL = BASE_URL + "api/perdin/approve-partner";
     public static String PENYELESAIAN_PERDIN_URL =  BASE_URL + "api/perdin/employee-complete";
     public static String SLIP_GAJI_URL = BASE_URL + "api/payroll/list-payroll-app";
     public static String DETAIL_SLIP_GAJI_URL = BASE_URL + "api/payroll/detail-app";

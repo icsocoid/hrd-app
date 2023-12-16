@@ -21,6 +21,7 @@ import com.sia.als.fragment.AddTaskFragment;
 import com.sia.als.fragment.AddTerlambatFragment;
 import com.sia.als.fragment.CompletionPerdinFragment;
 import com.sia.als.fragment.DetailNotifPengajuanAbsensiFragment;
+import com.sia.als.fragment.DetailPerdinPartnerFragment;
 import com.sia.als.fragment.NotifyIzinFragment;
 
 @SuppressLint("ValidFragment")
@@ -37,6 +38,7 @@ public class SuksesDialog extends DialogFragment {
     AddTerlambatFragment addTerlambatFragment;
     AccountFragment accountFragment;
     CompletionPerdinFragment completionPerdinFragment;
+    DetailPerdinPartnerFragment detailPerdinPartnerFragment;
 
     public SuksesDialog(AddIzinFragment addIzinFragment)
     {
@@ -73,6 +75,9 @@ public class SuksesDialog extends DialogFragment {
     }
     public SuksesDialog(CompletionPerdinFragment completionPerdinFragment) {
         this.completionPerdinFragment = completionPerdinFragment;
+    }
+    public SuksesDialog(DetailPerdinPartnerFragment detailPerdinPartnerFragment) {
+        this.detailPerdinPartnerFragment = detailPerdinPartnerFragment;
     }
 
     @Override
@@ -116,6 +121,9 @@ public class SuksesDialog extends DialogFragment {
                 if(completionPerdinFragment != null)
                 {
                     completionPerdinFragment.showTask();
+                }if(detailPerdinPartnerFragment != null)
+                {
+                    detailPerdinPartnerFragment.showTask();
                 }
                 SuksesDialog.this.dismiss();
             }
